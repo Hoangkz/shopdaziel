@@ -19,7 +19,7 @@
 const express = require('express');
 const router = express.Router();
 
-const meController = require('../controllers/MeController');
+const meController = require('../app/controllers/MeController');
 
 //newcontroller.index
 router.get('/', meController.show);
