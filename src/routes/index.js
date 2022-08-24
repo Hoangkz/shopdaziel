@@ -1,13 +1,13 @@
-const newsRouter =require("./news")
-const getUser = require("../app/controllers/checkuser")
-const itemsRouter =require("./items")
-const authRouter =require("./auth")
+// const newsRouter =require("./news")
+// const getUser = require("../app/controllers/checkuser")
+// const itemsRouter =require("./items")
+// const authRouter =require("./auth")
 
-const siteRouter =require("./site")
+// const siteRouter =require("./site")
 
-const meRouter =require("./me")
+// const meRouter =require("./me")
 
-function route(app){
+// function route(app){
 
     // app.get('/news', (req, res) => {
     //     // console.log(req.query.q);
@@ -18,7 +18,6 @@ function route(app){
     //     res.render('search');
     // })
     // app.use('/news', newsRouter);
-    app.use('/', meRouter);
 
     // app.use('/me', meRouter);
     // app.use('/auth', authRouter);
@@ -42,5 +41,13 @@ function route(app){
     //     console.log(req.body.gender);
     //     res.send('');
     // })
+// }
+// module.exports = route;
+
+
+const meRouter =require("./me")
+
+function route(app){
+    app.use('/', meRouter);
 }
 module.exports = route;
