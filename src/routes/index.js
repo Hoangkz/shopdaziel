@@ -1,8 +1,8 @@
-const newsRouter =require("./news")
-const itemsRouter =require("./items")
-const authRouter =require("./auth")
+// const newsRouter =require("./news")
+// const itemsRouter =require("./items")
+// const authRouter =require("./auth")
 
-const siteRouter =require("./site")
+// const siteRouter =require("./site")
 
 // const meRouter =require("./me")
 
