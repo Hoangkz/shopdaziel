@@ -1,22 +1,21 @@
-// const newsRouter =require("./news")
-// const getUser = require("../app/controllers/checkuser")
-// const itemsRouter =require("./items")
-// const authRouter =require("./auth")
+const newsRouter =require("./news")
+const itemsRouter =require("./items")
+const authRouter =require("./auth")
 
-// const siteRouter =require("./site")
+const siteRouter =require("./site")
 
 // const meRouter =require("./me")
 
-// function route(app){
+const getUser = require("../app/controllers/checkuser")
+const meRouter =require("./me")
 
-    // app.get('/news', (req, res) => {
-    //     // console.log(req.query.q);
-    //     res.render('news');
-    // })
-    // =>
-    // app.get('/search', (req, res) => {
-    //     res.render('search');
-    // })
+function route(app){
+    app.use('/', meRouter);
+}
+module.exports = route;
+
+
+// function route(app){
     // app.use('/news', newsRouter);
 
     // app.use('/me', meRouter);
@@ -27,6 +26,17 @@
     // app.use('/danhsachItem', itemsRouter);
     // app.use('/items', itemsRouter);
     // app.use('/',getUser.getuser, siteRouter);
+
+
+
+    // app.get('/news', (req, res) => {
+    //     // console.log(req.query.q);
+    //     res.render('news');
+    // })
+    // =>
+    // app.get('/search', (req, res) => {
+    //     res.render('search');
+    // })
 
     // app.get('/', (req, res) => {
     //     // console.log(req.query.q);
@@ -44,10 +54,3 @@
 // }
 // module.exports = route;
 
-
-const meRouter =require("./me")
-
-function route(app){
-    app.use('/', meRouter);
-}
-module.exports = route;
