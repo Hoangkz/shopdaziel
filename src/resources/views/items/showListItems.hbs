@@ -1,0 +1,30 @@
+<div class="mt-5 mb-5"style="max-width:99.9%; ">
+    <div>
+        <a href="/" class="mt-1 ml-2" style="color: #fe6433;">Home</a>
+        <i class="fa-solid fa-chevron-right"></i>
+        <h>Danh sách</h>
+    </div>
+    <div class="card card-courses-item "style="min-height:300px ">
+        <h5 class="mt-3 mr-3 ml-3 mb-4" style="color: rgb(149, 147, 147);">DANH SÁCH SẢN PHẨM</h5>
+        <div class="row m-0">
+            {{#each item}}
+            <div class="col-1 p-0 m-0 "style="max-width:100%; ">
+                <a href="/items/{{this.name}}" style="color:black;text-decoration:none" class="gia">
+                    <div class="card sanphamhover" style="width:189px;height:300px;align-items:center;text-align:center">
+                        <img class="card-img-top"style="width:185px;height:180px; "src="{{this.img}}" alt="Card image cap">
+                        <div class="card-body pl-2 pr-1 pb-2 pt-0" >
+                            <h5 class="card-para mt-2"> {{this.name}} </h5>
+                            <p style="color: rgb(142, 138, 138);">{{this.description}}</p>
+                            <h6 class="gia" style="margin-top: 14px; text-align:center">Giá: {{this.gia}}đ</h6>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            {{else}}
+                <h4 class="text-center" style="margin-left: 400px; margin-top:50px">
+                  Chưa có sản phẩm nào được đăng
+                </h4>
+            {{/each}}
+        </div>
+    </div>
+</div>

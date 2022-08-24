@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Dalziel</title>
+    <link rel="stylesheet" href="/css/app.css">
+    <link rel="stylesheet" href="/css/base.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/fonts/css/all.min.css">
+
+</head> 
+<body>
+     {{!-- login/resinger  --}}
+         <div class="modal">
+            <div class="modal__overlay">
+            </div>
+            <div class="modal__body">
+
+                 {{!-- resinger form   --}}
+                 <div class="auth-form">
+                    <div class="auth-form__container">
+                        <div class="container d-flex"  style="align-items: center;text-align: center;margin-bottom:16px">
+                            <a href="/" class="auth-link-home" style="text-decoration: none;">
+                                <i class="fa-solid fa-bag-shopping" style="color: #fe6433; font-size:48px"></i>
+                                <h1 class="auth-header" style="color: #fe6433;">Dalziel</h1>
+                            </a>                   
+                        </div>
+                        <div class="auth-form-form">
+                            <div class="auth-form__header">
+                                <h3 class="auth-form__heading">
+                                    Đăng ký
+                                </h3>
+                                <a href="/auth/login" class="auth-link para-text">
+                                    <span class="auth-form__switch-btn">Đăng nhập</span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="auth-form__form">
+                            <div class="auth-form__group">
+                                <input type="email" id="email" class="auth-form__input" name="email"placeholder="Tên Email"pattern=".+@globex\.com" size="30" >
+                            </div>
+                            <div class="auth-form__group">
+                                <input class="auth-form__input" placeholder="Mật khẩu" type="password">
+                            </div>
+                            <div class="auth-form__group">
+                                <input class="auth-form__input" placeholder="Nhập lại mật khẩu"type="password">
+                            </div>
+                        </div>
+    
+                        <div class="auth-form__aside">
+                            <p class="auth-form__policy-text">
+                                Bằng việc đăng ký, bạn đã đồng ý với Dalziel về
+                                <a href="" class="auth-form__policy-link para-text">Điều khoản dịch vụ</a>
+                                &
+                                <a href="" class="auth-form__policy-link para-text">Chính cách bảo mật</a>
+                            </p>
+                        </div>
+                        <div class="auth-form__controls">
+                            <button id="goBack" class="btn btn--normal auth-form__controls--back" >Trở lại</button>
+                            <button class="btn btn--primary para-text"id="signup">Đăng ký</button>
+                        </div>
+                    </div>
+    
+                    <div class="auth-form__socials">
+                        <a href="http://facebook.com" class="para-text btn auth-form__socials--facebook btn--size-s btn--with-icon">
+                            <i class="fa-brands fa-facebook auth-form__socials-icon"></i>
+                            <span class="auth-form__socials--title">
+                                Kết nối với facebook    
+                            </span>
+                        </a>
+                        <a href="http://google.com" class="para-text auth-form__socials--google btn btn--size-s btn--with-icon">
+                            <i class="fa-brands fa-google auth-form__socials-icon"></i>
+                            <span class="auth-form__socials--title">
+                                Kết nối với google    
+                            </span>
+                        </a>
+                    </div>
+                </div> 
+</body>
+</html>
+
+<script>
+    let signup = document.getElementById("signup");
+    signup.onclick = function(e){
+        let signup_get = document.getElementById("signup_get");
+    }
+</script>
+
+<form method="GET" id="home"></form>
+<form method="GET" id="signup_get"></form>
+
+<script>
+    let goback = document.getElementById("goBack");
+    let home = document.getElementById("home")
+    goback.submit =function(e) {
+        home.action = '/'
+        home.submit()
+    };
+</script>

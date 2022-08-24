@@ -1,0 +1,53 @@
+<body>
+    <div class="mt-5 mb-5">
+        <div class="card card-courses-item "> 
+            <div>
+                <div style="margin:24px;"> 
+                        <h5 style="text-align: left; margin:24px 24px 0; font-weight: 400;">Hồ sơ của tôi</h5> 
+                        <p style="margin-left: 24px ;font-weight: 400;font-size: 14px">Quản lý thông tin hồ sơ để bảo mật tài khoản</p>
+                        <div style="width:80%; height:0.6px;background-color:rgb(234, 222, 222);margin-left:9%"></div>
+                </div>
+            </div>
+            <div class="row m-0 " >
+                <div class="col p-0 m-0 " style="background-color:rgb(255, 250, 250);">     
+                    <div style="margin:24px 0 24px;"> 
+                        <div class="d-flex flex-row-reverse ">
+                            <p class="mt-2 " style="font-weight:500;margin-right:0 margin-right:2rem;color: rgba(0, 0, 0, 0.553);">Tên đăng nhập</p >
+                        </div>
+                        <div class="d-flex flex-row-reverse">
+                            <p class="" style="font-weight:500;margin-right:0 margin-right:2rem;color: rgba(0, 0, 0, 0.553);">Họ và tên</p >
+                        </div>
+                        <div class="d-flex flex-row-reverse">
+                            <p class="  " style="font-weight:500;margin-right:0 margin-right:2rem;color: rgba(0, 0, 0, 0.553);">Email</p >
+                        </div>
+                        <div class="d-flex flex-row-reverse">
+                            <p class="  " style="font-weight:500;margin-right:0 margin-right:2rem;color: rgba(0, 0, 0, 0.553);">Số điện thoại</p >
+                        </div>
+                    </div>           
+                </div>
+                <div class="col-9 p-0 m-0 " style="background-color:rgb(255, 250, 250);">     
+                    <div style="margin:24px;"> 
+                        <div class="d-flex">
+                            <h5 style="color: rgb(62, 56, 56);font-size:16px;margin-top:9px">{{data.username}}</h5>          
+                        </div>
+                        <div class="d-flex">
+                            <input class="inputFocusUser mt-2" name="hovaten" type="text"required style="color: rgb(62, 56, 56); margin-top:3px;height: 30px; width:60%" placeholder="Họ và tên">
+                        </div>
+                        <div class="d-flex">
+                            <input class=" inputFocusUser mt-2" name="extname" type="email"required style="color: rgb(62, 56, 56); margin-top:3px;height: 30px; width:60%" placeholder="Email">
+                        </div>
+                        <div class="d-flex">
+                            <input class=" inputFocusUser mt-2" name="tell" type="text"required style="color: rgb(62, 56, 56); margin-top:3px;height: 30px; width:60%" placeholder="Số điện thoại">
+                        </div>
+                    </div> 
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+<style>
+    .inputFocusUser:focus{
+        outline: none;
+    }
+</style>
