@@ -1,31 +1,31 @@
 // const {MongooseToObject, mutipleMongooseToObject} = require('../../util/mongoose');
-const bodyParser = require('body-parser')
+// const bodyParser = require('body-parser')
 const jwt = require('jsonwebtoken');
 const user = require('../modals/user')
 const cookieParser = require('cookie-parser')
 
-let checkLogin = function(req, res, next) {
-    try {
-        let token = req.cookies.token
-        let idUser = jwt.verify(token,"mk")
-        user.findOne({_id: idUser})
-        .then(data => {
-            if(data){
-                console.log(data);
-                req.data =data;
-                next()
-            }
-            else{
-                res.json("a")
-            }
-        })
-        .catch(error=>{
-            res.json("sai")
-        })
-    } catch (error) {
-        res.status(500).json("token không hợp lệ")
-    }
-}
+// let checkLogin = function(req, res, next) {
+//     try {
+//         let token = req.cookies.token
+//         let idUser = jwt.verify(token,"mk")
+//         user.findOne({_id: idUser})
+//         .then(data => {
+//             if(data){
+//                 console.log(data);
+//                 req.data =data;
+//                 next()
+//             }
+//             else{
+//                 res.json("a")
+//             }
+//         })
+//         .catch(error=>{
+//             res.json("sai")
+//         })
+//     } catch (error) {
+//         res.status(500).json("token không hợp lệ")
+//     }
+// }
 
 
 class AuthController{
