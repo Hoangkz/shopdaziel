@@ -21,7 +21,7 @@ class getUser{
                             tell: data.tell,
                             extname: data.email,
                         }
-                        res.data =data        
+                        // res.data =data        
                 }
                 else{
                     return data;

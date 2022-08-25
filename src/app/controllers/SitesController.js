@@ -12,7 +12,7 @@ class SitesController{
             .then(items =>{
                 res.render("home",{
                     items: mutipleMongooseToObject(items),
-                    // data: res.data
+                    data: res.data
                 })
             })
             .catch(next);
