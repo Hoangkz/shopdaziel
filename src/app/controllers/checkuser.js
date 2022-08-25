@@ -17,9 +17,9 @@ class getUser{
                     data={
                             username: data.username,
                             role: data.role,
-                            avatar: data.avatar,
-                            tell: data.tell,
-                            extname: data.email,
+                            // avatar: data.avatar,
+                            // tell: data.tell,
+                            // extname: data.email,
                         }
                         res.data =data        
                 }
