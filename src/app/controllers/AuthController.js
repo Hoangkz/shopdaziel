@@ -2,30 +2,30 @@
 const bodyParser = require('body-parser')
 const jwt = require('jsonwebtoken');
 const user = require('../modals/user')
-// const cookieParser = require('cookie-parser')
+const cookieParser = require('cookie-parser')
 
-// let checkLogin = function(req, res, next) {
-//     try {
-//         let token = req.cookies.token
-//         let idUser = jwt.verify(token,"mk")
-//         user.findOne({_id: idUser})
-//         .then(data => {
-//             if(data){
-//                 console.log(data);
-//                 req.data =data;
-//                 next()
-//             }
-//             else{
-//                 res.json("a")
-//             }
-//         })
-//         .catch(error=>{
-//             res.json("sai")
-//         })
-//     } catch (error) {
-//         res.status(500).json("token không hợp lệ")
-//     }
-// }
+let checkLogin = function(req, res, next) {
+    try {
+        let token = req.cookies.token
+        let idUser = jwt.verify(token,"mk")
+        user.findOne({_id: idUser})
+        .then(data => {
+            if(data){
+                console.log(data);
+                req.data =data;
+                next()
+            }
+            else{
+                res.json("a")
+            }
+        })
+        .catch(error=>{
+            res.json("sai")
+        })
+    } catch (error) {
+        res.status(500).json("token không hợp lệ")
+    }
+}
 
 
 class AuthController{
@@ -46,7 +46,7 @@ class AuthController{
     setLogin(req,res,next){
         let username = req.body.username;
         let password = req.body.password;
-        console.log("username: ",userame,"password: ",password);
+        console.log("username: ",username,"password: ",password);
         user.findOne({ username: username, password: password })
             .then(data=>{
                 console.log(data)
