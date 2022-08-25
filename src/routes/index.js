@@ -1,8 +1,8 @@
-// const newsRouter =require("./news")
+const newsRouter =require("./news")
 // const itemsRouter =require("./items")
 const authRouter =require("./auth")
 
-const siteRouter =require("./site")
+// const siteRouter =require("./site")
 
 // const meRouter =require("./me")
 
@@ -10,9 +10,9 @@ const siteRouter =require("./site")
 const meRouter =require("./me")
 
 function route(app){
-    // app.use('/news', newsRouter);
+    app.use('/news', newsRouter);
     app.use('/auth', authRouter);
-    app.use('/', siteRouter);
+    app.use('/', meRouter);
 
 }
 module.exports = route;
