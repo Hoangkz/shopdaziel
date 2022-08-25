@@ -11,10 +11,10 @@ function route(app){
     app.use('/', getUser.getuser,siteRouter);
     app.use('/news', newsRouter);
     app.use('/auth', authRouter);
-    // app.use('/',meRouter);
-    // app.use('/me', meRouter);
-    // app.use('/listItems', itemsRouter);
-    // app.use('/search', itemsRouter);
+    app.use('/',meRouter);
+    app.use('/me', meRouter);
+    app.use('/listItems', itemsRouter);
+    app.use('/search', itemsRouter);
     app.use('/danhsachItem', itemsRouter);
     app.use('/items', itemsRouter);
 

@@ -4,11 +4,10 @@
 const express = require('express');
 const router = express.Router();
 
-const sitescontroller2 = require('../app/controllers/SitesController');
+const sitescontroller = require('../app/controllers/SitesController');
 
 
-// // router.get("/",sitescontroller.home);
-router.get("/", sitescontroller2.index);
+router.get("/", sitescontroller.index);
 
 module.exports = router;
 
