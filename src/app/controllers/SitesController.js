@@ -11,8 +11,8 @@ class SitesController{
         Item.find({})
             .then(items =>{
                 res.render("home",{
-                    items: mutipleMongooseToObject(items),
-                    data: res.data
+                    // items: mutipleMongooseToObject(items),
+                    // data: res.data
                 })
             })
             .catch(next);
