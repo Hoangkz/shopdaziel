@@ -2,7 +2,7 @@
 // const bodyParser = require('body-parser')
 const jwt = require('jsonwebtoken');
 const user = require('../modals/user')
-// const cookieParser = require('cookie-parser')
+const cookieParser = require('cookie-parser')
 
 
 class getUser{
