@@ -1,5 +1,5 @@
 // const {MongooseToObject, mutipleMongooseToObject} = require('../../util/mongoose');
-// const bodyParser = require('body-parser')
+const bodyParser = require('body-parser')
 const jwt = require('jsonwebtoken');
 const user = require('../modals/user')
 // const cookieParser = require('cookie-parser')
@@ -46,7 +46,7 @@ class AuthController{
     setLogin(req,res,next){
         let username = req.body.username;
         let password = req.body.password;
-        console.log("username: ",username,"password: ",password);
+        console.log("username: ",userame,"password: ",password);
         user.findOne({ username: username, password: password })
             .then(data=>{
                 console.log(data)
