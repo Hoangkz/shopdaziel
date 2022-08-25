@@ -9,7 +9,7 @@ const bodyParser = require('body-parser')
 // const favicon = require('favicon');
 // 
 const methodOverride = require('method-Override')
-const jwt = require('jsonwebtoken');
+// const jwt = require('jsonwebtoken');
 const cookieParser = require('cookie-parser') 
 
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -56,7 +56,7 @@ app.use(methodOverride('_method'))
 
     // khởi tạo tuyến đường
 const route = require('./routes');
-const { homedir } = require('os');
+// const { homedir } = require('os');
 route(app);
 // home, search, contact các file chung để vào file site
 
