@@ -13,7 +13,8 @@ class MeController{
             .then(([courses, deleteCount]) =>
                 res.render("me",{
                     deleteCount,
-                    courses: mutipleMongooseToObject(courses)
+                    courses: mutipleMongooseToObject(courses),
+                    data:res.data
                 })
             )
             .catch(next);
@@ -38,7 +39,9 @@ class MeController{
         Course.findDeleted({})
             // render ra file trash-courses.hbs
             .then((courses)=> res.render('trash-courses',{
-                courses: mutipleMongooseToObject(courses)
+                courses: mutipleMongooseToObject(courses),
+                data:res.data
+
             }))
             .catch(next)
     }
