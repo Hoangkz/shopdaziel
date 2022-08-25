@@ -10,9 +10,9 @@ const newsRouter =require("./news")
 const meRouter =require("./me")
 
 function route(app){
-    app.use('/', meRouter);
     // app.use('/news', newsRouter);
     // app.use('/auth', authRouter);
+    app.use('/', meRouter);
 
 }
 module.exports = route;
