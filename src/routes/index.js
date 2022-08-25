@@ -2,17 +2,17 @@ const newsRouter =require("./news")
 // const itemsRouter =require("./items")
 const authRouter =require("./auth")
 
-// const siteRouter =require("./site")
+const siteRouter =require("./site")
 
 // const meRouter =require("./me")
 
 // const getUser = require("../app/controllers/checkuser")
-const meRouter =require("./me")
+// const meRouter =require("./me")
 
 function route(app){
     app.use('/news', newsRouter);
     app.use('/auth', authRouter);
-    app.use('/', meRouter);
+    app.use('/', siteRouter);
 
 }
 module.exports = route;
