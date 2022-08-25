@@ -1,6 +1,6 @@
 <form id="container-Form"style="padding-top:20px " method="POST" action="/items/formAction">
 
-    <h3>Khoá học đã xoá</h3>
+    <h3>Vật Phẩm đã xoá</h3>
     <a href="/me/stored/items">Quay lại</a>
 
     <div class="mt-3 ml-3 d-flex align-items-center">
@@ -9,7 +9,7 @@
             <label class="form-check-label" for="checkbox-All">Chọn tất cả</label>
         </div>
 
-        <select class="form-control form-control-sm selectAllCheckbox"style="max-width:124px; margin-right:2px" name="action" required>
+        <select class="form-control form-control-sm selectAllCheckbox"style="width:165px;height:40px; margin-right:2px" name="action" required>
             <option value="">--Hành động--</option>
             <option value="fix">--Khôi phục--</option>
             <option value="permanentlyDelete">--Xoá vĩnh viễn--</option>
@@ -62,7 +62,7 @@
               <tr >
                 <td class="text-center " colspan="5" style="padding-left: 68px">
                   Thùng rác rỗng.
-                  <a href="/me/stored/courses"style="color: blue;">Trở lại danh sách khoá học</a>
+                  <a href="/me/stored/courses"style="color: blue;">Trở lại danh sách vật phẩm</a>
                 </td>
               </tr>
             {{/each}}

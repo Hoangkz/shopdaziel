@@ -1,6 +1,6 @@
 <form name="container-form" style="padding-top:20px; min-height:300px;" method="POST" action="/items/formAction">
     <div class="d-flex flex-end d-flex justify-content-between" >
-        <h3>Khoá học của tôi</h3>
+        <h3>Vật phẩm của tôi</h3>
         <a class="btn btn-primary" href="/items/create" role="button">Đăng vật phẩm</a>
     </div>
     
@@ -18,7 +18,7 @@
             <label class="form-check-label"for="checkbox-All">Chọn tất cả</label>
         </div>
 
-        <select class="form-control form-control-sm selectAllCheckbox"style="max-width:124px; margin-right:2px" name="action" required>
+        <select class="form-control form-control-sm selectAllCheckbox"style="width:165px;height:40px; margin-right:2px" name="action" required>
             <option value="">--Hành động--</option>
             <option value="mua">--Đặt hàng--</option>
             <option value="delete">--Xoá--</option>
@@ -74,8 +74,8 @@
             {{else}}
               <tr>
                 <td class="text-center" colspan="5">
-                  Bạn chưa có khoá học nào.
-                  <a href="/items/create"style="color: blue;">Đăng khoá học</a>
+                  Bạn chưa có vật phẩm nào.
+                  <a href="/items/create"style="color: blue;">Đăng vật phẩm</a>
                 </td>
               </tr>
             {{/each}}
