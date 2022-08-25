@@ -46,7 +46,7 @@ const route = require('./routes');
 route(app);
 
 const db = require('./config/db')
-
+require('dotenv').config()
 db.connect();
 
 app.listen(port, () => {
