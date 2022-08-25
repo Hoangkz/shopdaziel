@@ -45,6 +45,10 @@ const route = require('./routes');
 
 route(app);
 
+const db = require('./config/db')
+
+db.connect();
+
 app.listen(port, () => {
   console.log(`App listening on http://localhost:${port}`)
 })
