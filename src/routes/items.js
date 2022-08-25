@@ -1,11 +1,11 @@
 
 // // cấu hình itemController
 
-// const express = require('express');
-// const router = express.Router();
-// const getUser = require("../app/controllers/checkuser")
+const express = require('express');
+const router = express.Router();
+const getUser = require("../app/controllers/checkuser")
 
-// const itemController = require('../app/controllers/ItemController');
+const itemController = require('../app/controllers/ItemController');
 
 
 // //newcontroller.index
@@ -23,11 +23,11 @@
 // router.delete('/:id', itemController.delete);
 
 
-// router.get('/danhsachItem/items',getUser.getuser, itemController.listItems);
+router.get('/danhsachItem/items', itemController.listItems);
 
 
 // router.get('/:loai/show',getUser.getuser, itemController.showList);
-// router.get('/:id',getUser.getuser, itemController.show);
+router.get('/:id',getUser.getuser, itemController.show);
 
-// module.exports = router;
+module.exports = router;
 

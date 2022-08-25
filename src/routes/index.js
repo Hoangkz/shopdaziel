@@ -1,5 +1,5 @@
 const newsRouter =require("./news")
-// const itemsRouter =require("./items")
+const itemsRouter =require("./items")
 const authRouter =require("./auth")
 
 // const siteRouter =require("./site")
@@ -12,22 +12,19 @@ function route(app){
     app.use('/auth', authRouter);
     // app.use('/', getUser.getuser,siteRouter);
     app.use('/',meRouter);
+    // app.use('/me', meRouter);
+    // app.use('/listItems', itemsRouter);
+    // app.use('/search', itemsRouter);
+    app.use('/danhsachItem', itemsRouter);
+    app.use('/items', itemsRouter);
 
 }
 module.exports = route;
 
 
 // function route(app){
-    // app.use('/news', newsRouter);
 
-    // app.use('/me', meRouter);
-    // app.use('/auth', authRouter);
-
-    // app.use('/listItems', itemsRouter);
-    // app.use('/search', itemsRouter);
-    // app.use('/danhsachItem', itemsRouter);
-    // app.use('/items', itemsRouter);
-    // app.use('/',getUser.getuser, siteRouter);
+    
 
 
 
