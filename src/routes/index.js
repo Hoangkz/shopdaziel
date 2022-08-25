@@ -6,13 +6,13 @@ const siteRouter =require("./site")
 
 // const meRouter =require("./me")
 
-// const getUser = require("../app/controllers/checkuser")
+const getUser = require("../app/controllers/checkuser")
 // const meRouter =require("./me")
 
 function route(app){
     app.use('/news', newsRouter);
     app.use('/auth', authRouter);
-    app.use('/', siteRouter);
+    app.use('/', getUser.getuser,siteRouter);
 
 }
 module.exports = route;
