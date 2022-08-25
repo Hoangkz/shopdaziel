@@ -11,7 +11,7 @@ const meRouter =require("./me")
 
 function route(app){
     // app.use('/news', newsRouter);
-    // app.use('/auth', authRouter);
+    app.use('/auth', authRouter);
     app.use('/', meRouter);
 
 }
