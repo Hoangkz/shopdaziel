@@ -35,30 +35,32 @@
                                 </a>
                             </div>
                         </div>
-                        <div class="auth-form__form">
-                            <div class="auth-form__group">
-                                <input type="email" id="email" class="auth-form__input" name="email"placeholder="Tên Email"pattern=".+@globex\.com" size="30" >
+                        <form id="authFormSign" >
+                            <div class="auth-form__form">
+                                    <div class="auth-form__group">
+                                        <input id="emailSignup" class="auth-form__input" value=""  type="text"  name="username" placeholder="Tên đăng nhập" size="30" >
+                                    </div>
+                                    <div class="auth-form__group">
+                                        <input id="passwordSignup1" class="auth-form__input paswordInput" name="password" placeholder="Mật khẩu" type="password">
+                                    </div>
+                                <div class="auth-form__group">
+                                    <input id="passwordSignup2" class="auth-form__input paswordInput" placeholder="Nhập lại mật khẩu"type="password">
+                                </div>
                             </div>
-                            <div class="auth-form__group">
-                                <input class="auth-form__input" placeholder="Mật khẩu" type="password">
+        
+                            <div class="auth-form__aside">
+                                <p class="auth-form__policy-text">
+                                    Bằng việc đăng ký, bạn đã đồng ý với Dalziel về
+                                    <a href="" class="auth-form__policy-link para-text">Điều khoản dịch vụ</a>
+                                    &
+                                    <a href="" class="auth-form__policy-link para-text">Chính cách bảo mật</a>
+                                </p>
                             </div>
-                            <div class="auth-form__group">
-                                <input class="auth-form__input" placeholder="Nhập lại mật khẩu"type="password">
+                            <div class="auth-form__controls">
+                                <a id="goBack" onclick="goback()" class="btn btn--normal auth-form__controls--back" style="color: black" type="submit">Trở lại</a>
+                                <button class="btn btn--primary para-text"id="signup">Đăng ký</button>
                             </div>
-                        </div>
-    
-                        <div class="auth-form__aside">
-                            <p class="auth-form__policy-text">
-                                Bằng việc đăng ký, bạn đã đồng ý với Dalziel về
-                                <a href="" class="auth-form__policy-link para-text">Điều khoản dịch vụ</a>
-                                &
-                                <a href="" class="auth-form__policy-link para-text">Chính cách bảo mật</a>
-                            </p>
-                        </div>
-                        <div class="auth-form__controls">
-                            <button id="goBack" class="btn btn--normal auth-form__controls--back" >Trở lại</button>
-                            <button class="btn btn--primary para-text"id="signup">Đăng ký</button>
-                        </div>
+                        </form>
                     </div>
     
                     <div class="auth-form__socials">
@@ -80,20 +82,49 @@
 </html>
 
 <script>
-    let signup = document.getElementById("signup");
-    signup.onclick = function(e){
-        let signup_get = document.getElementById("signup_get");
+    function goback(){
+        location.replace("/");
     }
 </script>
 
-<form method="GET" id="home"></form>
-<form method="GET" id="signup_get"></form>
-
 <script>
-    let goback = document.getElementById("goBack");
-    let home = document.getElementById("home")
-    goback.submit =function(e) {
-        home.action = '/'
-        home.submit()
-    };
+    let passwordSignup1 = document.getElementById("passwordSignup1");
+    let passwordSignup2 = document.getElementById("passwordSignup2");
+    let signup = document.getElementById("signup");
+    let emailSignup = document.getElementById("emailSignup");
+    let hasClass=false;
+    emailSignup.addEventListener("keyup", function(e) {
+
+        if(emailSignup.value.length<6||emailSignup.value.length>30){
+            signup.classList.remove("btn--primary");
+            signup.classList.add("error");
+        }
+        else{
+            signup.classList.add("btn--primary");
+            signup.classList.remove("error");
+        }
+        hasClass=signup.classList.contains("error");
+    })
+    
+    signup.addEventListener("click", function(e) {
+        if(passwordSignup1.value === passwordSignup2.value && passwordSignup1.value &&passwordSignup2.value&&!hasClass){
+            console.log("true");
+            let authFormSign = document.getElementById("authFormSign");
+            authFormSign.action = '/auth/signup'  + '?_method=POST'
+            authFormSign.submit()
+        }
+        else{
+            console.log("false");
+        }
+    })
 </script>
+
+<style>
+    .error{
+        background-color: rgb(119, 109, 109);
+        cursor: default;
+    }
+    .error:hover{
+        opacity: 1;
+    }
+</style>
