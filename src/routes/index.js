@@ -23,11 +23,7 @@ module.exports = route;
 
 
 // function route(app){
-
     
-
-
-
     // app.get('/news', (req, res) => {
     //     // console.log(req.query.q);
     //     res.render('news');

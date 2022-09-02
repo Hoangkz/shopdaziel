@@ -13,15 +13,17 @@ class getUser{
             user.findOne({_id: idUser})
             .then(data => {
                 if(data){
-                    // console.log(data);
-                    data={
-                            username: data.username,
-                            role: data.role,
-                            avatar: data.avatar,
-                            tell: data.tell,
-                            extname: data.email,
-                        }
-                        res.data =data        
+                    console.log(data);
+                    let dataNew ={
+                        username: data.username,
+                        role: data.role,
+                        extname: data.extname,
+                        fullname: data.fullname,
+                        avatar: data.avatar,
+                        tell: data.tell,
+                    }
+                    res.data =dataNew
+                    console.log(res.data);    
                 }
                 else{
                     return data;
@@ -34,6 +36,23 @@ class getUser{
         } catch (error) {
             // res.json("sai")
             next()
+        }   
+    }
+
+    checklogin(req, res, next) {
+        try {
+            let token = req.cookies.token
+            let idUser = jwt.verify(token,"mk")
+            user.findOne({_id: idUser})
+            .then(data => {
+                next();
+            })
+            .catch(error=>{
+                res.json("sai")
+            })  
+        } catch (error) {
+            // res.json("sai")
+            res.redirect("/auth/login")
         }   
     }
 }
