@@ -22,6 +22,8 @@ class getUser{
                         avatar: data.avatar,
                         tell: data.tell,
                         gender: data.gender,
+                        birthday: data.birthday,
+                        address: data.address
                     }
                     res.data =dataNew
                     console.log(res.data);    

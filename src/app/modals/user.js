@@ -15,6 +15,9 @@ const User = new Schema({
   tell :{type: Number},  
   gender :{type: String,default: 'khác'},
   role: {type: Number, default:1},
+  birthday: {type: String},
+  address: {type: String}
+
 },{
   timestamps: true,
 });

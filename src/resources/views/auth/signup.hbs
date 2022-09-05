@@ -108,13 +108,13 @@
     
     signup.addEventListener("click", function(e) {
         if(passwordSignup1.value === passwordSignup2.value && passwordSignup1.value &&passwordSignup2.value&&!hasClass){
-            console.log("true");
+            {{!-- console.log("true"); --}}
             let authFormSign = document.getElementById("authFormSign");
             authFormSign.action = '/auth/signup'  + '?_method=POST'
             authFormSign.submit()
         }
         else{
-            console.log("false");
+            {{!-- console.log("false"); --}}
         }
     })
 </script>

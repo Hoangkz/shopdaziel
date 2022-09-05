@@ -8,8 +8,8 @@ const meController = require('../app/controllers/MeController');
 
 
 //newcontroller.index
-router.get('/trash/items',checkUser.getuser,checkUser.checkAdmin, meController.trashCourse);
+router.get('/trash/items',checkUser.getuser,checkUser.checkAdmin, meController.trashItem);
 
-router.get('/stored/items',checkUser.getuser,checkUser.checkAdmin, meController.storedCourses);
+router.get('/stored/items',checkUser.getuser,checkUser.checkAdmin, meController.storedItem);
 module.exports = router;
 

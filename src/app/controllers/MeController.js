@@ -1,5 +1,5 @@
 
-const Course = require('../modals/Item');
+const Item = require('../modals/Item');
 const {mutipleMongooseToObject} = require('../../util/mongoose');
 // const jwt = require('jsonwebtoken');
 // const user = require('../modals/user')
@@ -7,13 +7,13 @@ class MeController{
 
     // [get] /me/stored/courses /: slug
     //deletedAt = null là điều kiện khi xoá xẽ không xoá hẳn trong database
-    storedCourses(req,res, next){
+    storedItem(req,res, next){
 
-        Promise.all([Course.find({}),Course.countDocumentsDeleted()])
-            .then(([courses, deleteCount]) =>
+        Promise.all([Item.find({}),Item.countDocumentsDeleted()])
+            .then(([items, deleteCount]) =>
                 res.render("me",{
                     deleteCount,
-                    courses: mutipleMongooseToObject(courses),
+                    items: mutipleMongooseToObject(items),
                     data:res.data
                 })
             )
@@ -35,11 +35,11 @@ class MeController{
         //     .catch(next)
     }
 
-    trashCourse(req,res,next){
-        Course.findDeleted({})
+    trashItem(req,res,next){
+        Item.findDeleted({})
             // render ra file trash-courses.hbs
-            .then((courses)=> res.render('trash-courses',{
-                courses: mutipleMongooseToObject(courses),
+            .then((items)=> res.render('trash-items',{
+                items: mutipleMongooseToObject(items),
                 data:res.data
 
             }))

@@ -52,7 +52,7 @@ class AuthController{
                 console.log(data)
                 if(data){
                     let token = jwt.sign({_id:data._id},"mk")
-                    res.cookie("token",token,{ maxAge: 900000, httpOnly: true })
+                    res.cookie("token",token,{ maxAge: 9000000, httpOnly: true })
                     // return res.redirect("/private")
                     return res.redirect("/")
                     // return res.json({

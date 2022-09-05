@@ -2,6 +2,8 @@
 
 module.exports = {
     mutipleMongooseToObject: function(mongooses) {
+        console.log(mongooses,"anama")
+
         return mongooses.map(mongoose=>mongoose.toObject())
     },
     MongooseToObject: function(mongoose) {

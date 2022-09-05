@@ -58,10 +58,10 @@
                                 <p style="margin-top:10px">Khác</p>
                             </div>
                             <div class="d-flex">
-                                <input class=" inputFocusUser mt-2" name="date" type="date" value="{{data.date}}" style="color: rgb(62, 56, 56); margin-top:3px;height: 30px; width:20%">
+                                <input id="daten" class=" inputFocusUser mt-2" name="birthday" type="date"min="1900-01-01" max="2060-01-01" value="{{data.birthday}}" style="color: rgb(62, 56, 56); margin-top:3px;height: 30px; width:20%">
                             </div>
                             <div class="d-flex">
-                                <input class=" inputFocusUser mt-2" name="address" type="text" value="{{data.address}}" style="color: rgb(62, 56, 56); margin-top:8px;height: 30px; width:80%" required>
+                                <input class=" inputFocusUser mt-2" name="address" type="text" value="{{data.address}}" style="color: rgb(62, 56, 56); margin-top:8px;height: 30px; width:80%" required placeholder="Số nhà, tên đường, thôn/ấp, xã huyện, thành phố">
                             </div>
                         </div> 
                         <button type="submit" class="btn btn-outline-Save" style="margin-left: 24px;margin-bottom: 50px;">Lưu lại</button>
