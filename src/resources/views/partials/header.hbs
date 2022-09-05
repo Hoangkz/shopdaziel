@@ -39,8 +39,8 @@
                                                                         </li>`
                             }
                             else{
-                                navUser.innerHTML = navUser.innerHTML+`<li id="liUserName" class="nav-item active " >
-                                                                            <a id="aUserName" class="hover" href="/">{{data.username}}</a>
+                                navUser.innerHTML = navUser.innerHTML+`<li class=" nav-item active liUserName " >
+                                                                            <a class="aUserName hover" href="/">{{data.username}}</a>
                                                                             <div id="headerUserName" class="header__notify"></div>
                                                                         </li>`
                             }
@@ -57,23 +57,35 @@
                 <h1 class="mt-1 mb-1 ml-3" style="color: #fff;">Dalziel</h1>
             </a>
             <form class="form-inline collapsenavbar-collapse w-100 mt-1 ml-5 mb-3" action="/search" method="GET" >
-                <input id="id-form-search" name ="q" class="form-control collapsenavbar-collapse w-75"style=" height: 45px;font-size:1.2rem"autocomplete="off"  type="text" placeholder="Search" aria-label="Search">
-                <button type="submit" id="button-search" class="btn btn-outline-danger border border-white ml-2"style="border: 2px;height: 45px; color: #fff; font-size: 1.2rem">Search</button>
+                <input id="id-form-search" name ="q" class="form-control collapsenavbar-collapse w-75"style=" height: 40px;font-size:1.1rem;"autocomplete="off"  type="text" placeholder="Search" aria-label="Search">
+                <button type="submit" id="button-search" class="btn btn-outline-danger border border-white ml-2"style="border: 2px;height: 40px; color: #fff; font-size: 0.8rem">Search</button>
             </form>
             <div class="mt-3 d-flex justify-content-between">
                 <a href="" class="font-buy hover  mr-3">
                     <i class="fa-solid fa-cart-shopping ml-3" style="font-size: 1.6rem"></i>
                 </a>
                 <div id="font_user" class="font-buy ml-1"style="cursor: pointer; ">
-                    <i class="fa-regular fa-user" style="font-size: 1.6rem"></i> 
-                    <div id="font_user--header" class="header__notify"></div>           
+                     
+                    <div id="font_user--header" class="header__notify"></div>  
+                    <script>
+                            let font_User =document.getElementById("font_user")
+                            let UserName = "{{data.username}}"
+                            if(aUserName ==="false"){
+                                font_User.innerHTML = font_User.innerHTML+`<li class="nav-item active nav-link hover">
+                                                                            <i class="fa-regular fa-user" style="font-size: 1.6rem;margin-top:-12px"></i>
+                                                                        </li>
+                                                                        `
+                            }
+                            else{
+                                font_User.innerHTML = font_User.innerHTML+`<li class="nav-item active liUserName"style="margin-top:-2px">
+                                                                                <a class="hover aUserName " >{{data.username}}</a>
+                                                                                <div id="font_user--header" class="header__notify"></div>
+                                                                            </li>`
+                            }
+                        </script>         
                 </div>
                 <style>
-                    @media (min-width:992px) {
-                        #font_user{
-                            display: none;
-                        }
-                    }
+                    
                 </style>
             </div>
         </div>
@@ -86,33 +98,41 @@
     </div>      
 </header>
 <style>
-    .header__notify{
-        position: absolute;
-        width: 200px;
-        right: 0%;
-        top: 80%;
-        background-color: white;
-        border: 1px solid #d3d3d3;
-        transform-origin:  calc(100% - 30px) top ;
-        -moz-animation: headerNotifyGrowth ease-in .25s;
-        -o-animation: headerNotifyGrowth ease-in .25s;
-        -ms-animation: headerNotifyGrowth ease-in .25s;
-        -webkit-animation: headerNotifyGrowth ease-in .25s;
-        animation: headerNotifyGrowth ease-in .25s;
-        will-change: opacity, transform;
-        display: none;
-        padding: 0;
+    
+    @media only screen and (min-width:992px) {
+        #font_user{
+            display: none;
+        }
+        .header__notify{
+            right: 4%;
+        }
     }
+
+    .header__notify{
+            position: absolute;
+            width: 200px;
+            top: 80%;
+            background-color: white;
+            border: 1px solid #d3d3d3;
+            transform-origin:  calc(100% - 30px) top ;
+            -moz-animation: headerNotifyGrowth ease-in .25s;
+            -o-animation: headerNotifyGrowth ease-in .25s;
+            -ms-animation: headerNotifyGrowth ease-in .25s;
+            -webkit-animation: headerNotifyGrowth ease-in .25s;
+            animation: headerNotifyGrowth ease-in .25s;
+            will-change: opacity, transform;
+            display: none;
+            padding: 0;
+        }
     .header__notify-list{
         padding: 0;
         margin: 0;
     }
-    #aUserName:first-letter {
+    .aUserName:first-letter {
         text-transform: capitalize
     }
-    #aUserName{
+    .aUserName{
         text-decoration: none;
-
     }
 
     .header__notify::before{
@@ -151,7 +171,7 @@
             transform: scale(1);
         }
     }
-    #font_user:hover .header__notify,#liUserName:hover .header__notify{
+    #font_user:hover .header__notify,.liUserName:hover .header__notify{
         display: block;
     }
     .header__notify-link{
@@ -178,19 +198,27 @@
         display: none;
     }
     
-    #aUserName{
+    .aUserName{
         font-weight: 700;
         font-size: 100%;
         margin: 0px 24px;
         padding:0px;
         cursor: pointer;
+        text-decoration: none;
     }
-    #liUserName::first-letter{
+    .liUserName::first-letter{
         
-        text-transform: capitalize
+        text-transform: capitalize;
+
     }
-    #liUserName{
+    #liUserName2::first-letter{
+        
+        text-transform: capitalize;
+
+    }
+    .liUserName{
         margin-top: 6px;
+
     }
 </style>
 
