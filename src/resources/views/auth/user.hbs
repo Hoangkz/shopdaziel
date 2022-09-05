@@ -12,46 +12,60 @@
                 <div class="col p-0 m-0 " style="background-color:rgb(255, 250, 250);">     
                     <div style="margin:24px 0 24px;"> 
                         <div class="d-flex flex-row-reverse ">
-                            <p class="mt-2 " style="font-weight:500;margin-right:0 margin-right:2rem;color: rgba(0, 0, 0, 0.553);">Tên đăng nhập</p >
+                            <p class="mt-2 " style="font-weight:500;color: rgba(0, 0, 0, 0.553);">Tên đăng nhập</p >
                         </div>
                         <div class="d-flex flex-row-reverse">
-                            <p class="" style="font-weight:500;margin-right:0 margin-right:2rem;color: rgba(0, 0, 0, 0.553);" >Họ và tên</p >
+                            <p class="" style="font-weight:500;color: rgba(0, 0, 0, 0.553);" >Họ và tên</p >
                         </div>
                         <div class="d-flex flex-row-reverse">
-                            <p class="  " style="font-weight:500;margin-right:0 margin-right:2rem;color: rgba(0, 0, 0, 0.553);">Email</p >
+                            <p class="  " style="font-weight:500;color: rgba(0, 0, 0, 0.553);">Email</p >
                         </div>
                         <div class="d-flex flex-row-reverse">
-                            <p class="  " style="font-weight:500;margin-right:0 margin-right:2rem;color: rgba(0, 0, 0, 0.553);">Số điện thoại</p >
+                            <p class="  " style="font-weight:500;color: rgba(0, 0, 0, 0.553);">Số điện thoại</p >
                         </div>
                         <div class="d-flex flex-row-reverse">
-                            <p class="  " style="font-weight:500;margin-right:0 margin-right:2rem;color: rgba(0, 0, 0, 0.553);">Giới tính</p >
+                            <p class="  " style="font-weight:500;color: rgba(0, 0, 0, 0.553);">Giới tính</p >
+                        </div>
+                        <div class="d-flex flex-row-reverse">
+                            <p class="  " style="font-weight:500;margin-top:18px;color: rgba(0, 0, 0, 0.553);">Ngày sinh</p >
+                        </div>
+                        <div class="d-flex flex-row-reverse">
+                            <p class="  " style="font-weight:500;margin-top:-3px;color: rgba(0, 0, 0, 0.553);">Địa chỉ</p >
                         </div>
                     </div>           
                 </div>
                 <div class="col-9 p-0 m-0 " style="background-color:rgb(255, 250, 250);">     
-                    <div style="margin:24px;"> 
-                        <div class="d-flex">
-                            <h5 style="color: rgb(62, 56, 56);font-size:16px;margin-top:9px">{{data.username}}</h5>          
-                        </div>
-                        <div class="d-flex">
-                            <input class="inputFocusUser mt-2" name="fullname"value="{{data.fullname}}" type="text"required style="color: rgb(62, 56, 56); margin-top:3px;height: 30px; width:60%" placeholder="Họ và tên">
-                        </div>
-                        <div class="d-flex">
-                            <input class=" inputFocusUser mt-2" name="extname"value="{{data.extname}}" type="email"required style="color: rgb(62, 56, 56); margin-top:3px;height: 30px; width:60%" placeholder="Email">
-                        </div>
-                        <div class="d-flex">
-                            <input class=" inputFocusUser mt-2" name="tell"value="0{{data.tell}}" type="text"required style="color: rgb(62, 56, 56); margin-top:3px;height: 30px; width:60%" placeholder="Số điện thoại">
-                        </div>
-                        <div class="d-flex" style="padding-top:8px;">
-                            <input class=" inputFocusUser mt-2" name="gioitinh"value="{{data.gioitinh}}" type="radio" style="color: rgb(62, 56, 56);height: 24px; width:10%">
-                            <p style="margin-top:10px">Nam</p>
-                            <input class=" inputFocusUser mt-2" name="gioitinh"value="{{data.gioitinh}}" type="radio" style="color: rgb(62, 56, 56);height: 24px; width:10%">
-                            <p style="margin-top:10px">Nữ</p>
-                            <input class=" inputFocusUser mt-2" name="gioitinh"value="{{data.gioitinh}}" type="radio" style="color: rgb(62, 56, 56);height: 24px; width:10%">
-                            <p style="margin-top:10px">Khác</p>
-
-                        </div>
-                    </div> 
+                    <form action="" method="POST">
+                        <div style="margin:24px;"> 
+                            <div class="d-flex">
+                                <h5 style="color: rgb(62, 56, 56);font-size:16px;margin-top:9px">{{data.username}}</h5>          
+                            </div>
+                            <div class="d-flex">
+                                <input class="inputFocusUser mt-2" name="fullname"value="{{data.fullname}}" type="text"required style="color: rgb(62, 56, 56); margin-top:3px;height: 30px; width:60%" placeholder="Họ và tên">
+                            </div>
+                            <div class="d-flex">
+                                <input class=" inputFocusUser mt-2" name="extname"value="{{data.extname}}" type="email"required style="color: rgb(62, 56, 56); margin-top:3px;height: 30px; width:60%" placeholder="Email">
+                            </div>
+                            <div class="d-flex">
+                                <input class=" inputFocusUser mt-2" name="tell"value="0{{data.tell}}" type="text"required style="color: rgb(62, 56, 56); margin-top:3px;height: 30px; width:60%" placeholder="Số điện thoại">
+                            </div>
+                            <div class="d-flex" style="padding-top:8px;">
+                                <input class="checkGender inputFocusUser mt-2" name="gioitinh"value="nam" type="radio" style="color: rgb(62, 56, 56);height: 24px; width:10%">
+                                <p style="margin-top:10px">Nam</p>
+                                <input class="checkGender inputFocusUser mt-2" name="gioitinh"value="nữ" type="radio" style="color: rgb(62, 56, 56);height: 24px; width:10%">
+                                <p style="margin-top:10px">Nữ</p>
+                                <input class="checkGender inputFocusUser mt-2" name="gioitinh"value="khác" type="radio" style="color: rgb(62, 56, 56);height: 24px; width:10%">
+                                <p style="margin-top:10px">Khác</p>
+                            </div>
+                            <div class="d-flex">
+                                <input class=" inputFocusUser mt-2" name="date" type="date" value="{{data.date}}" style="color: rgb(62, 56, 56); margin-top:3px;height: 30px; width:20%">
+                            </div>
+                            <div class="d-flex">
+                                <input class=" inputFocusUser mt-2" name="address" type="text" value="{{data.address}}" style="color: rgb(62, 56, 56); margin-top:8px;height: 30px; width:80%" required>
+                            </div>
+                        </div> 
+                        <button type="submit" class="btn btn-outline-Save" style="margin-left: 24px;margin-bottom: 50px;">Lưu lại</button>
+                    </form>
                 </div>
             </div>
         </div>
@@ -61,5 +75,48 @@
 <style>
     .inputFocusUser:focus{
         outline: none;
+        border: 2px solid red;
+    }
+    .btn-outline-Save {
+        color: #fe6433;
+        background-color: transparent;
+        background-image: none;
+        border-color: #fe6433;
+    }
+    .btn-outline-Save:hover {
+        color: #fff;
+        background-color: #fe6433;
+        border-color: #fe6433;
+    }
+
+    .btn-outline-Save:focus, .btn-outline-Save.focus {
+        box-shadow: 0 0 0 0.2rem #fe62338d;
+    }
+
+    .btn-outline-Save.disabled, .btn-outline-Save:disabled {
+        color: #fe6433;
+        background-color: transparent;
+    }
+
+    .btn-outline-Save:not(:disabled):not(.disabled):active, .btn-outline-Save:not(:disabled):not(.disabled).active,
+    .show > .btn-outline-Save.dropdown-toggle {
+        color: #fff;
+        background-color: #fe6433;
+        border-color: #fe6433;
+    }
+
+    .btn-outline-Save:not(:disabled):not(.disabled):active:focus, .btn-outline-Save:not(:disabled):not(.disabled).active:focus,
+    .show > .btn-outline-Save.dropdown-toggle:focus {
+        box-shadow: 0 0 0 0.2rem #fe62338d;
     }
 </style>
+<script>
+    let checkGender="{{data.gender}}";
+    let isCheckGender = document.getElementsByClassName("checkGender")
+    for (let key in isCheckGender){
+        if(isCheckGender[key].value===checkGender){
+            isCheckGender[key].setAttribute("checked",true)
+        }
+    }
+</script>
+

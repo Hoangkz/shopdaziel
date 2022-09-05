@@ -21,6 +21,7 @@ class getUser{
                         fullname: data.fullname,
                         avatar: data.avatar,
                         tell: data.tell,
+                        gender: data.gender,
                     }
                     res.data =dataNew
                     console.log(res.data);    
@@ -37,6 +38,20 @@ class getUser{
             // res.json("sai")
             next()
         }   
+    }
+    checkAdmin(req,res,next){
+        try {
+            let role = res.data.role;
+            if(role===3){
+                next();
+            }
+            else{
+                res.redirect("back");
+            }
+        } catch (error) {
+            res.redirect("back");
+        }
+        
     }
 
     checklogin(req, res, next) {

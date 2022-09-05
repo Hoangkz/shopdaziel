@@ -3,15 +3,13 @@ const itemsRouter =require("./items")
 const authRouter =require("./auth")
 
 const siteRouter =require("./siteRouter")
-
-const getUser = require("../app/controllers/checkuser")
+const checkUser = require("../app/controllers/checkuser")
 const meRouter =require("./me")
 
 function route(app){
-    app.use('/', getUser.getuser,siteRouter);
+    app.use('/', checkUser.getuser,siteRouter);
     app.use('/news', newsRouter);
     app.use('/auth', authRouter);
-    app.use('/',meRouter);
     app.use('/me', meRouter);
     app.use('/listItems', itemsRouter);
     app.use('/search', itemsRouter);

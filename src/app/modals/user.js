@@ -12,7 +12,8 @@ const User = new Schema({
   extname: {type: String},
   fullname: {type: String},
   avatar : {type: String},
-  tell :{type: Number},
+  tell :{type: Number},  
+  gender :{type: String,default: 'khác'},
   role: {type: Number, default:1},
 },{
   timestamps: true,
