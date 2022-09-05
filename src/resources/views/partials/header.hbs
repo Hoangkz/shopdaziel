@@ -25,13 +25,7 @@
                             <a class="nav-link hover" href="/">Thông báo <span class="sr-only">(current)</span></a>
                         </li>
                         <li class="nav-item active nav-link hover">Hỗ trợ</li>
-                        <li id="liUserName" class="nav-item active displayNone" >
-                            <a id="aUserName" class="hover" href="/">{{data.username}}</a>
-                            <div id="headerUserName" class="header__notify">
-
-                            </div>
-                            <a id="aRole" class="displayNone" href="/">{{data.role}}</a>
-                        </li>
+                        
                     </ul>
                 </div>
             </nav>
@@ -244,14 +238,22 @@
 </style>
 <script>
     let navUser =document.getElementById("navUser")
-    let liUserName =document.getElementById("liUserName")
-    let aUserName =document.getElementById("aUserName")
-    if(aUserName.innerText===""){
-        liUserName.classList.add("displayNone")
-        navUser.innerHTML = navUser.innerHTML+'<li class="nav-item active nav-link hover"><a class="" href="/auth/signup">Đăng ký</a></li><li class="nav-item active nav-link hover"><a class="" href="/auth/login">Đăng nhập</a></li>'
+    {{!-- let aUserName =document.getElementById("aUserName") --}}
+    let aUserName = "{{data.username}}"
+    if(aUserName ==="false"){
+        navUser.innerHTML = navUser.innerHTML+`<li class="nav-item active nav-link hover">
+                                                    <a class="" href="/auth/signup">Đăng ký</a>
+                                                </li>
+                                                <li class="nav-item active nav-link hover">
+                                                    <a class="" href="/auth/login">Đăng nhập</a>
+                                                </li>`
     }
     else{
-        liUserName.classList.remove("displayNone")
+        navUser.innerHTML = navUser.innerHTML+`<li id="liUserName" class="nav-item active " >
+                                                    <a id="aUserName" class="hover" href="/">{{data.username}}</a>
+                                                    <div id="headerUserName" class="header__notify"></div>
+                                                    <a id="aRole" class="displayNone" href="/">{{data.role}}</a>
+                                                </li>`
     }
     
 </script>

@@ -12,25 +12,19 @@ class getUser{
             let idUser = jwt.verify(token,"mk")
             user.findOne({_id: idUser})
             .then(data => {
-                if(data){
-                    // console.log(data);
-                    let dataNew ={
-                        username: data.username,
-                        role: data.role,
-                        extname: data.extname,
-                        fullname: data.fullname,
-                        avatar: data.avatar,
-                        tell: data.tell,
-                        gender: data.gender,
-                        birthday: data.birthday,
-                        address: data.address
-                    }
-                    res.data =dataNew
-                    // console.log(res.data);    
+                console.log(data)
+                let data1 ={
+                    username: data.username,
+                    role: data.role,
+                    extname: data.extname,
+                    fullname: data.fullname,
+                    avatar: data.avatar,
+                    tell: data.tell,
+                    gender: data.gender,
+                    birthday: data.birthday,
+                    address: data.address
                 }
-                else{
-                    return data;
-                }
+                res.data =data1
                 next();
             })
             .catch(error=>{
@@ -38,6 +32,11 @@ class getUser{
             })  
         } catch (error) {
             // res.json("sai")
+            let data2 ={
+                username: false,
+                role: 0,
+            }
+            res.data =data2
             next()
         }   
     }

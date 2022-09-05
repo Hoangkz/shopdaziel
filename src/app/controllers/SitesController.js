@@ -10,6 +10,7 @@ class SitesController{
         //promise
         Item.find({})
             .then(items =>{
+                console.log(res.data);
                 res.render("home",{
                     items: mutipleMongooseToObject(items),
                     data: res.data
