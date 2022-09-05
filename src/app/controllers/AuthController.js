@@ -46,10 +46,10 @@ class AuthController{
     setLogin(req,res,next){
         let username = req.body.username;
         let password = req.body.password;
-        console.log("username: ",username,"password: ",password);
+        // console.log("username: ",username,"password: ",password);
         user.findOne({ username: username, password: password })
             .then(data=>{
-                console.log(data)
+                // console.log(data)
                 if(data){
                     let token = jwt.sign({_id:data._id},"mk")
                     res.cookie("token",token,{ maxAge: 9000000, httpOnly: true })

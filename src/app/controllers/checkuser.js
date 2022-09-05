@@ -13,7 +13,7 @@ class getUser{
             user.findOne({_id: idUser})
             .then(data => {
                 if(data){
-                    console.log(data);
+                    // console.log(data);
                     let dataNew ={
                         username: data.username,
                         role: data.role,
@@ -26,7 +26,7 @@ class getUser{
                         address: data.address
                     }
                     res.data =dataNew
-                    console.log(res.data);    
+                    // console.log(res.data);    
                 }
                 else{
                     return data;
