@@ -81,6 +81,14 @@
                                     <a href="" class="auth-form__policy-link para-text">Chính cách bảo mật</a>
                                 </p>
                             </div>
+                            <div id="text_logout" class="auth-form__aside text-logout-none">
+                                <p class="auth-form__policy-text" style="color:red;margin:0; text-align:left">
+                                    Tên tài khoản phải có 5-30 ký tự,
+                                </p>
+                                 <p class="auth-form__policy-text" style="color:red;margin:0; text-align:left">
+                                    Mật khẩu của bạn phải dài trên 5 ký tự
+                                </p>
+                            </div>
                             <div class="auth-form__controls">
                                 <a id="goBack" onclick="goback()" class="btn btn--normal auth-form__controls--back" style="color: black" type="submit">Trở lại</a>
                                 <button class="btn btn--primary para-text"id="signup">Đăng ký</button>
@@ -117,17 +125,17 @@
     let passwordSignup2 = document.getElementById("passwordSignup2");
     let signup = document.getElementById("signup");
     let emailSignup = document.getElementById("emailSignup");
+    let text_logout = document.getElementById("text_logout");
 
-    
         emailSignup.addEventListener("keyup", function(e) {
 
-            if(emailSignup.value.length<5||emailSignup.value.length>30){
+            if(emailSignup.value.length<5||emailSignup.value.length>15){
                 signup.classList.remove("btn--primary");
                 signup.classList.add("error");
                 signup.disabled=true;
             }
             else{
-                if (passwordSignup1.value !== passwordSignup2.value||passwordSignup1.value==""||passwordSignup2.value=="") {
+                if (passwordSignup1.value !== passwordSignup2.value||passwordSignup1.value==""||passwordSignup2.value==""||passwordSignup1.value.length<5||passwordSignup2.value.length<5) {
                     signup.classList.remove("btn--primary");
                     signup.classList.add("error");
                     signup.disabled=true;
@@ -138,16 +146,25 @@
                     signup.disabled=false;   
                 }   
             }
+
+            if(signup.disabled){
+                console.log("true");
+                text_logout.classList.remove("text-logout-none")
+            }
+            else{
+                console.log("false");
+                text_logout.classList.add("text-logout-none")
+            }
         })   
 
         passwordSignup1.addEventListener("keyup", function(e) {
-            if (passwordSignup1.value !== passwordSignup2.value||passwordSignup1.value==""||passwordSignup2.value=="") {
+            if (passwordSignup1.value !== passwordSignup2.value||passwordSignup1.value==""||passwordSignup2.value==""||passwordSignup1.value.length<5||passwordSignup2.value.length<5) {
                     signup.classList.remove("btn--primary");
                     signup.classList.add("error");
                     signup.disabled=true;
                 }
             else{
-                if(emailSignup.value.length<5||emailSignup.value.length>30){
+                if(emailSignup.value.length<5||emailSignup.value.length>15){
                     signup.classList.remove("btn--primary");
                     signup.classList.add("error");
                     signup.disabled=true;
@@ -157,16 +174,24 @@
                     signup.classList.remove("error");
                     signup.disabled=false;   
                 }   
-            }   
+            } 
+            if(signup.disabled){
+                console.log("true");
+                text_logout.classList.remove("text-logout-none")
+            }
+            else{
+                console.log("false");
+                text_logout.classList.add("text-logout-none")
+            }  
         })
         passwordSignup2.addEventListener("keyup", function(e) {
-            if (passwordSignup1.value !== passwordSignup2.value||passwordSignup1.value==""||passwordSignup2.value=="") {
+            if (passwordSignup1.value !== passwordSignup2.value||passwordSignup1.value==""||passwordSignup2.value==""||passwordSignup1.value.length<5||passwordSignup2.value.length<5) {
                     signup.classList.remove("btn--primary");
                     signup.classList.add("error");
                     signup.disabled=true;
                 }
             else{
-                if(emailSignup.value.length<5||emailSignup.value.length>30){
+                if(emailSignup.value.length<5||emailSignup.value.length>15){
                     signup.classList.remove("btn--primary");
                     signup.classList.add("error");
                     signup.disabled=true;
@@ -176,8 +201,17 @@
                     signup.classList.remove("error");
                     signup.disabled=false;   
                 }   
-            }   
+            }
+            if(signup.disabled){
+                console.log("true");
+                text_logout.classList.remove("text-logout-none")
+            }
+            else{
+                console.log("false");
+                text_logout.classList.add("text-logout-none")
+            }     
         })
+
     
     signup.addEventListener("click", function(e) {
         if(passwordSignup1.value === passwordSignup2.value && passwordSignup1.value &&passwordSignup2.value){
@@ -185,8 +219,9 @@
             authFormSign.action = '/auth/signup'  + '?_method=POST'
             authFormSign.submit()
         }
-    }
-    )
+    })
+
+
 </script>
 
 <style>
@@ -196,5 +231,8 @@
     }
     .error:hover{
         opacity: 1;
+    }
+    .text-logout-none{
+        display: none;
     }
 </style>

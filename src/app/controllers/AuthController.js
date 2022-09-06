@@ -4,30 +4,6 @@ const jwt = require('jsonwebtoken');
 const user = require('../modals/user')
 const cookieParser = require('cookie-parser')
 
-// let checkLogin = function(req, res, next) {
-//     try {
-//         let token = req.cookies.token
-//         let idUser = jwt.verify(token,"mk")
-//         user.findOne({_id: idUser})
-//         .then(data => {
-//             if(data){
-//                 console.log(data);
-//                 req.data =data;
-//                 next()
-//             }
-//             else{
-//                 res.json("a")
-//             }
-//         })
-//         .catch(error=>{
-//             res.json("sai")
-//         })
-//     } catch (error) {
-//         res.status(500).json("token không hợp lệ")
-//     }
-// }
-
-
 class AuthController{
     login(req,res,next){
         res.render("auth/login",{
@@ -41,6 +17,13 @@ class AuthController{
     }
     signup(req,res,next){
         res.render("auth/signup",{layout:false});
+    }
+
+    saveAccount(req,res,next){
+        const user = new User(req.body);
+        user.save()
+            .then(()=>res.redirect('/auth/login'))
+            .catch(next)
     }
 
     setLogin(req,res,next){
