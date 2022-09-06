@@ -25,9 +25,10 @@ class AuthController{
 
     saveAccount(req,res,next){
         const newUser = new user(req.body);
-        user.findOne({username:req.body.username})
+        let username = req.body.username.toLowerCase();
+        let password = req.body.password
+        user.findOne({username:username})
         .then(data =>{
-            console.log(data)
             if(data==null){
                 newUser.save()
                 .then(()=>res.redirect('/auth/login'))
@@ -37,7 +38,9 @@ class AuthController{
 
                 res.render('auth/signup',{
                     layout:false,
-                    data:false
+                    data:false,
+                    password:password,
+                    username:username
                 })
             }
         })
