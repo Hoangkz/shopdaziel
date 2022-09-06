@@ -83,12 +83,7 @@
                             </div>
                             <div style="position: absolute;">
                                 <div id="text_logout" class="auth-form__aside text-logout-none">
-                                    <p class="auth-form__policy-text" style="color:red;margin:0; text-align:left">
-                                        Tên tài khoản phải có 5-30 ký tự,
-                                    </p>
-                                    <p class="auth-form__policy-text" style="color:red;margin:0; text-align:left">
-                                        Mật khẩu của bạn phải dài trên 5 ký tự
-                                    </p>
+                                    
                                     <style>
                                         #text_logout{
                                             content: "";
@@ -135,7 +130,23 @@
     let signup = document.getElementById("signup");
     let emailSignup = document.getElementById("emailSignup");
     let text_logout = document.getElementById("text_logout");
-
+    let checkUserLogin = {{data}}
+    if(checkUserLogin ===false){
+        text_logout.classList.remove("text-logout-none")
+        text_logout.innerHTML =`<p class="auth-form__policy-text" style="color:red;margin-top:-24px; text-align:left">
+                                    Tên người đã được sử dụng, hãy thử tên khác!
+                                </p>`
+        checkUserLogin=true
+    }
+    else{
+        text_logout.classList.add("text-logout-none")
+        text_logout.innerHTML = `<p class="auth-form__policy-text" style="color:red;margin-top:-24px; text-align:left">
+                                    Tên tài khoản phải có 5-30 ký tự,
+                                </p>
+                                <p class="auth-form__policy-text" style="color:red;margin:0; text-align:left">
+                                    Mật khẩu của bạn phải dài trên 5 ký tự
+                                </p>`
+    }
         emailSignup.addEventListener("keyup", function(e) {
 
             if(emailSignup.value.length<5||emailSignup.value.length>15){
@@ -153,16 +164,24 @@
                     signup.classList.add("btn--primary");
                     signup.classList.remove("error");
                     signup.disabled=false;   
+                    
                 }   
             }
 
             if(signup.disabled){
                 console.log("true");
                 text_logout.classList.remove("text-logout-none")
+                text_logout.innerHTML = `<p class="auth-form__policy-text" style="color:red;margin-top:-24px; text-align:left">
+                                        Tên tài khoản phải có 5-30 ký tự,
+                                    </p>
+                                    <p class="auth-form__policy-text" style="color:red;margin-top:-10px; text-align:left">
+                                        Mật khẩu của bạn phải dài trên 5 ký tự
+                                    </p>`
             }
             else{
                 console.log("false");
                 text_logout.classList.add("text-logout-none")
+                
             }
         })   
 
@@ -187,10 +206,17 @@
             if(signup.disabled){
                 console.log("true");
                 text_logout.classList.remove("text-logout-none")
+                text_logout.innerHTML = `<p class="auth-form__policy-text" style="color:red;margin-top:-24px; text-align:left">
+                                        Tên tài khoản phải có 5-30 ký tự,
+                                    </p>
+                                    <p class="auth-form__policy-text" style="color:red;margin-top:-10px; text-align:left">
+                                        Mật khẩu của bạn phải dài trên 5 ký tự
+                                    </p>`
             }
             else{
                 console.log("false");
                 text_logout.classList.add("text-logout-none")
+                
             }  
         })
         passwordSignup2.addEventListener("keyup", function(e) {
@@ -214,10 +240,17 @@
             if(signup.disabled){
                 console.log("true");
                 text_logout.classList.remove("text-logout-none")
+                text_logout.innerHTML = `<p class="auth-form__policy-text" style="color:red;margin-top:-24px; text-align:left">
+                                        Tên tài khoản phải có 5-30 ký tự,
+                                    </p>
+                                    <p class="auth-form__policy-text" style="color:red;margin-top:-10px; text-align:left">
+                                        Mật khẩu của bạn phải dài trên 5 ký tự
+                                    </p>`
             }
             else{
                 console.log("false");
                 text_logout.classList.add("text-logout-none")
+                
             }     
         })
 
@@ -229,13 +262,7 @@
             authFormSign.submit()
         }
     })
-    let checkUserLogin = {{data}}
-    if(!checkUserLogin){
-        text_logout.classList.remove("text-logout-none")
-        text_logout.innerHTML =`<p class="auth-form__policy-text" style="color:red;margin-top:-24px; text-align:left">
-                                    Tên người đã được sử dụng, hãy thử tên khác!
-                                </p>`
-    }
+    
 
 </script>
 
