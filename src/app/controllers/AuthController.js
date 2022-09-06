@@ -27,15 +27,22 @@ class AuthController{
         const newUser = new user(req.body);
         user.findOne({username:req.body.username})
         .then(data =>{
-            res.render('auth/signup',{
-                layout:false,
-                data:false
-            })
-        })
-        .catch(err =>{
-            newUser.save()
+            console.log(data)
+            if(data==null){
+                newUser.save()
                 .then(()=>res.redirect('/auth/login'))
                 .catch(next)
+            }
+            else{
+
+                res.render('auth/signup',{
+                    layout:false,
+                    data:false
+                })
+            }
+        })
+        .catch(err =>{
+            res.json("lỗi sever")
         })
     }
 
