@@ -1,9 +1,7 @@
-// const {MongooseToObject, mutipleMongooseToObject} = require('../../util/mongoose');
-// const bodyParser = require('body-parser')
+const {hashPassword,checkPassword} = require('../../util/mongoose');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const user = require('../modals/user')
-const cookieParser = require('cookie-parser')
 
 class AuthController{
     login(req,res,next){
@@ -24,14 +22,16 @@ class AuthController{
     }
 
     saveAccount(req,res,next){
-        const newUser = new user(req.body);
         let username = req.body.username.toLowerCase();
         let password = req.body.password
+        const newUser = new user({username:username,password: hashPassword(password)});
         user.findOne({username:username})
         .then(data =>{
             if(data==null){
                 newUser.save()
-                .then(()=>res.redirect('/auth/login'))
+                .then(()=>
+                    res.redirect('/auth/login')
+                    )
                 .catch(next)
             }
             else{
@@ -39,8 +39,8 @@ class AuthController{
                 res.render('auth/signup',{
                     layout:false,
                     data:false,
+                    username:username,
                     password:password,
-                    username:username
                 })
             }
         })
@@ -52,19 +52,27 @@ class AuthController{
     setLogin(req,res,next){
         let username = req.body.username;
         let password = req.body.password;
-        // console.log("username: ",username,"password: ",password);
-        user.findOne({ username: username, password: password })
+        user.findOne({ username: username})
             .then(data=>{
-                // console.log(data)
+
                 if(data){
-                    let token = jwt.sign({_id:data._id},"mk")
-                    res.cookie("token",token,{ maxAge: 9000000, httpOnly: true })
-                    // return res.redirect("/private")
-                    return res.redirect("/")
-                    // return res.json({
-                    //         message: "thành công",
-                    //         token: token 
-                    //     })
+                    if(checkPassword(password,data.password)){
+                        
+                        let token = jwt.sign({_id:data._id},"mk")
+                        res.cookie("token",token,{ maxAge: 9000000, httpOnly: true })
+                        // return res.redirect("/private")
+                        return res.redirect("/")
+                        // return res.json({
+                        //         message: "thành công",
+                        //         token: token 
+                        //     })
+                    }
+                    else{
+                        return res.render("auth/login",{
+                            layout: false,
+                            loginFalied:true,
+                        })
+                    }
                 }
                 else{
                     // return res.redirect("/auth/login")

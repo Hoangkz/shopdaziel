@@ -12,7 +12,6 @@ class getUser{
             let idUser = jwt.verify(token,"mk")
             user.findOne({_id: idUser})
             .then(data => {
-                console.log(data)
                 let data1 ={
                     username: data.username,
                     role: data.role,
