@@ -229,7 +229,13 @@
             authFormSign.submit()
         }
     })
-
+    let checkUserLogin = {{data}}
+    if(!checkUserLogin){
+        text_logout.classList.remove("text-logout-none")
+        text_logout.innerHTML =`<p class="auth-form__policy-text" style="color:red;margin-top:-24px; text-align:left">
+                                    Tên người đã được sử dụng, hãy thử tên khác!
+                                </p>`
+    }
 
 </script>
 

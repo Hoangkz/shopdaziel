@@ -17,14 +17,26 @@ class AuthController{
         res.redirect("/")
     }
     signup(req,res,next){
-        res.render("auth/signup",{layout:false});
+        res.render("auth/signup",{
+            layout:false,
+            data:true
+        });
     }
 
     saveAccount(req,res,next){
         const newUser = new user(req.body);
-        newUser.save()
-            .then(()=>res.redirect('/auth/login'))
-            .catch(next)
+        user.findOne({username:req.body.username})
+        .then(data =>{
+            res.render('auth/signup',{
+                layout:false,
+                data:false
+            })
+        })
+        .catch(err =>{
+            newUser.save()
+                .then(()=>res.redirect('/auth/login'))
+                .catch(next)
+        })
     }
 
     setLogin(req,res,next){
