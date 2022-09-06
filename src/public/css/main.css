@@ -69,7 +69,7 @@
     font-weight: 560;
 }
 .auth-form__controls{
-    margin-top: 80px;
+    margin-top: 60px;
     display: flex;
     justify-content: flex-end;
 }

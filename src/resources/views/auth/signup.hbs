@@ -81,13 +81,22 @@
                                     <a href="" class="auth-form__policy-link para-text">Chính cách bảo mật</a>
                                 </p>
                             </div>
-                            <div id="text_logout" class="auth-form__aside text-logout-none">
-                                <p class="auth-form__policy-text" style="color:red;margin:0; text-align:left">
-                                    Tên tài khoản phải có 5-30 ký tự,
-                                </p>
-                                 <p class="auth-form__policy-text" style="color:red;margin:0; text-align:left">
-                                    Mật khẩu của bạn phải dài trên 5 ký tự
-                                </p>
+                            <div style="position: absolute;">
+                                <div id="text_logout" class="auth-form__aside text-logout-none">
+                                    <p class="auth-form__policy-text" style="color:red;margin:0; text-align:left">
+                                        Tên tài khoản phải có 5-30 ký tự,
+                                    </p>
+                                    <p class="auth-form__policy-text" style="color:red;margin:0; text-align:left">
+                                        Mật khẩu của bạn phải dài trên 5 ký tự
+                                    </p>
+                                    <style>
+                                        #text_logout{
+                                            content: "";
+                                            position: relative;
+                                            top: -30px;
+                                        }
+                                    </style>
+                                </div>
                             </div>
                             <div class="auth-form__controls">
                                 <a id="goBack" onclick="goback()" class="btn btn--normal auth-form__controls--back" style="color: black" type="submit">Trở lại</a>
