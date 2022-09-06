@@ -1,5 +1,6 @@
 // const {MongooseToObject, mutipleMongooseToObject} = require('../../util/mongoose');
 // const bodyParser = require('body-parser')
+const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const user = require('../modals/user')
 const cookieParser = require('cookie-parser')
@@ -20,8 +21,8 @@ class AuthController{
     }
 
     saveAccount(req,res,next){
-        const user = new User(req.body);
-        user.save()
+        const newUser = new user(req.body);
+        newUser.save()
             .then(()=>res.redirect('/auth/login'))
             .catch(next)
     }
