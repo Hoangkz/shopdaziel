@@ -56,8 +56,14 @@
             <a href="/" class="a-header">
                 <h1 class="mt-1 mb-1 ml-3" style="color: #fff;">Dalziel</h1>
             </a>
-            <form class="form-inline collapsenavbar-collapse w-100 mt-1 ml-5 mb-3" action="/search" method="GET" >
-                <input id="id-form-search" name ="q" class="form-control collapsenavbar-collapse w-75"style=" height: 40px;font-size:1.1rem;"autocomplete="off"  type="text" placeholder="Search" aria-label="Search">
+            <form class="form-inline collapsenavbar-collapse w-100 mt-1 ml-5 mb-3" style="position: relative;"action="/search" method="GET" >
+                <input id="id-form-search"  name ="q" class="form-control collapsenavbar-collapse w-75"style=" height: 40px;font-size:1.1rem;"autocomplete="off"  type="text" placeholder="Search" aria-label="Search">
+                <div id="idSuggestion" class ="suggestion displayNone" style="position: absolute; top: 40px; left: -24%;width: 75%;">
+                    <div class="nav-suggestion">
+                        <li id="header-suggestion" class="para-suggestion background-ddd"></li>
+                    </div>
+                    <ul id="ul-Suggestion" class="m-0 p-0"></ul>
+                </div>
                 <button type="submit" id="button-search" class="btn btn-outline-danger border border-white ml-2"style="border: 2px;height: 40px; color: #fff; font-size: 0.8rem">Search</button>
             </form>
             <div class="mt-3 d-flex justify-content-between">
@@ -89,12 +95,7 @@
                 </style>
             </div>
         </div>
-        <div id="idSuggestion" class ="suggestion displayNone">
-            <div class="nav-suggestion">
-                <li id="header-suggestion" class="para-suggestion background-ddd"></li>
-            </div>
-            <ul id="ul-Suggestion" class="m-0 p-0"></ul>
-        </div>
+        
     </div>      
 </header>
 <style>
