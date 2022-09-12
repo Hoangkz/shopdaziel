@@ -39,7 +39,7 @@
                                                                         </li>`
                             }
                             else{
-                                navUser.innerHTML = navUser.innerHTML+`<li id="liUserName" class=" nav-item active  " >
+                                navUser.innerHTML = navUser.innerHTML+`<li class=" nav-item active liUserName " >
                                                                             <a class="aUserName hover" href="/">{{data.username}}</a>
                                                                             <div id="headerUserName" class="header__notify"></div>
                                                                         </li>`
@@ -83,8 +83,9 @@
                                                                         `
                             }
                             else{
-                                font_User.innerHTML = font_User.innerHTML+`<li id="liUserName" class="nav-item active "style="margin-top:-2px">
+                                font_User.innerHTML = font_User.innerHTML+`<li class="nav-item active liUserName"style="margin-top:-2px">
                                                                                 <a class="hover aUserName " >{{data.username}}</a>
+                                                                                <div id="font_user--header" class="header__notify"></div>
                                                                             </li>`
                             }
                         </script>         
@@ -103,16 +104,9 @@
         #font_user{
             display: none;
         }
-        .header__notify::before{
-            content: '';
-            border-width: 12px 30px;
-            border-style: solid;
-            border-color: transparent transparent white transparent;
-            position: absolute;
-            right: 60%;
-            top: -22px;
+        .header__notify{
+            right: 4%;
         }
-
     }
 
     .header__notify{
@@ -179,7 +173,7 @@
             transform: scale(1);
         }
     }
-    #font_user:hover .header__notify,#liUserName:hover .header__notify{
+    #font_user:hover .header__notify,.liUserName:hover .header__notify{
         display: block;
     }
     .header__notify-link{
@@ -214,7 +208,7 @@
         cursor: pointer;
         text-decoration: none;
     }
-    #liUserName::first-letter{
+    .liUserName::first-letter{
         
         text-transform: capitalize;
 
@@ -224,7 +218,7 @@
         text-transform: capitalize;
 
     }
-    #liUserName{
+    .liUserName{
         margin-top: 6px;
 
     }
