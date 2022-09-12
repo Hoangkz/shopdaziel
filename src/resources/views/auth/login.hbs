@@ -37,9 +37,24 @@
                             <div class="auth-form__group">
                                 <input id="username"name="username" type="text" class="auth-form__input" placeholder="Email/Số điện thoại">
                             </div>
-                            <div class="auth-form__group">
+                            <div class="auth-form__group"  style="position:relative">
                                 <input id="password" name="password" type="password" class="auth-form__input" placeholder="Mật khẩu">
+                                <span style="padding: 2px;cursor: pointer;position:absolute; top:50%; right:4%;font-size:13px"><i id="show-btn"class="fas fa-eye"></i></span>
+
                             </div>
+                                    <script>
+                                        const passField = document.getElementById("password");
+                                        const showBtn = document.getElementById("show-btn");
+                                        showBtn.onclick = (()=>{
+                                            if(passField.type === "password"){
+                                                passField.type = "text";
+                                                showBtn.classList.add("hide-btn");
+                                            }else{
+                                                passField.type = "password";
+                                                showBtn.classList.remove("hide-btn");
+                                            }
+                                        });
+                                    </script>
                         </div>
                         <div class="auth-form__aside">
                             <div class="auth-form__help">
