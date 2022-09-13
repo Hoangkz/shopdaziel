@@ -197,8 +197,8 @@
             {{#each items}}
             <div class="col-1 p-0 "style="max-width:100%; margin-top:4px">
                 <a href="/items/{{this.name}}" style="color:black;text-decoration:none" class="gia">
-                    <div class="card sanphamhover " style="width:130px;height:250px; margin:0 2px">
-                        <img class="card-img-top"style="width:124;height:120px; "src="{{this.img}}" alt="Card image cap">
+                    <div class="card sanphamhover " style="width:136px;height:250px; margin:0 2px">
+                        <img class="card-img-top"style="width:134;height:120px; "src="{{this.img}}" alt="Card image cap">
                         <div class="card-body pl-2 pr-1 pb-2 pt-0 d-flex flex-column" >
                             <h5 class="card-para"style="min-height:40px"> {{this.name}} </h5>
                             <p style="color: rgb(142, 138, 138);min-height:40px">{{this.description}}</p>
@@ -217,8 +217,8 @@
             <ul id= "ulPagination"class="pagination"style="margin:0; justify-content:center">
                 <script>
                     let ulPagination = document.getElementById("ulPagination");
-                    let pageLength = Math.ceil({{pageLength}}/16);
-                    let currentPage={{currentPage}}+1
+                    let pageLength ={{pageLength}}// Math.ceil({{pageLength}}/16);
+                    let currentPage={{currentPage}}
                    
                     let html = `<li id="previous" class="page-item ">
                                     <a class="page-link" href="?page=`+(currentPage-1)+`#PageNavigation" tabindex="-1">

@@ -8,15 +8,20 @@ class SitesController{
     // [get] /home
     index(req, res, next){
         //promise
-        let page =(parseInt(req.query.page-1))||0;
-        Item.find({}).skip(12*page).limit(12)
+        let page =(parseInt(req.query.page)-1)||0;
+        let pageSize = 16
+        Item.find({}).skip(pageSize*page).limit(pageSize)
             .then(items =>{
-                res.render("home",{
-                    items: mutipleMongooseToObject(items),
-                    data: res.data,
-                    pageLength:100,
-                    currentPage:(page)
+                Item.countDocuments({})
+                .then((total)=>{
+                    res.render("home",{
+                        items: mutipleMongooseToObject(items),
+                        data: res.data,
+                        pageLength: (Math.ceil((total)/pageSize)),
+                        currentPage:(page+1)
+                    })
                 })
+
             })
             .catch(next);
         
