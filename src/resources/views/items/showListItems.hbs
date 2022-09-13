@@ -22,12 +22,12 @@
                 </a>
             </div>
             {{else}}
-                <h4 class="text-center" style="margin-left: 400px; margin-top:50px">
+                <h4 id="nullItem" class="text-center" style="margin-left: 400px; margin-top:50px:50px">
                   Chưa có sản phẩm nào được đăng
                 </h4>
             {{/each}}
         </div>
-        <nav id=""style="margin:10px 0 0 0 ;" aria-label="Page navigation example">
+        <nav id="navPage"style="margin:10px 0 0 0 ;" aria-label="Page navigation example">
             <ul id= "ulPagination"class="pagination"style="margin:0; justify-content:center">
                 <script>
                     let ulPagination = document.getElementById("ulPagination");
@@ -72,5 +72,18 @@
                 </script>
             </ul>
         </nav>
+        <script>
+            let nullItem = document.getElementById("nullItem");
+            let navPage = document.getElementById("navPage");
+            if (nullItem){
+                navPage.classList.add("displayNone");
+            }
+            console.log(nullItem)
+        </script>
+        <style>
+            .displayNone{
+                display: none;
+            }
+        </style>
     </div>
 </div>

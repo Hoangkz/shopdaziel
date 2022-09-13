@@ -21,7 +21,7 @@
                 </a>
             </div>
             {{else}}
-                <h4 class="text-center" style="margin-left: 400px; margin-top:50px">
+                <h4 id="" class="text-center" style="margin-left: 400px; margin-top:50px">
                   Không tìm thấy sản phẩm bạn cần tìm
                 </h4>
             {{/each}}
@@ -30,21 +30,22 @@
             <ul id= "ulPagination"class="pagination"style="margin:0; justify-content:center">
                 <script>
                     let ulPagination = document.getElementById("ulPagination");
-                    let pageLength ={{pageLength}}// Math.ceil({{pageLength}}/16);
+                    let pageLength ={{pageLength}}
+                    console.log(pageLength);
                     let currentPage={{currentPage}}
-                   
+                    let search = "{{search}}"
                     let html = `<li id="previous" class="page-item ">
-                                    <a class="page-link" href="?q=`+{{search}}+`&page=`+(currentPage-1)+`" tabindex="-1">
+                                    <a class="page-link" href="?q=`+(search)+`&page=`+(currentPage-1)+`" tabindex="-1">
                                         <span aria-hidden="true" style="font-size: 16px;">&laquo;</span>
                                     </a>
                                 </li>`;
                     for(let i = 0; i < pageLength; i++){
                         html = html+`<li class="page-item liPageItem">
-                                        <a class="page-link" href="?q=`+{{search}}+`&page=`+(i+1)+`">`+(i+1)+`</a>
+                                        <a class="page-link" href="?q=`+(search)+`&page=`+(i+1)+`">`+(i+1)+`</a>
                                     </li>`
                     }
                     html = html+`<li id="nextPage" class="page-item">
-                                    <a class="page-link" href="?q=`+{{search}}+`&page=`+(currentPage+1)+`">
+                                    <a class="page-link" href="?q=`+(search)+`&page=`+(currentPage+1)+`">
                                         <span aria-hidden="true" style="font-size: 16px;">&raquo;</span>
                                     </a>
                                 </li>`
@@ -71,5 +72,18 @@
                 </script>
             </ul>
         </nav>
+        {{!-- <script>
+            let nullItem = document.getElementById("nullItem");
+            let navPage = document.getElementById("navPage");
+            if (nullItem){
+                navPage.classList.add("displayNone");
+            }
+            console.log(nullItem)
+        </script>
+        <style>
+            .displayNone{
+                display: none;
+            }
+        </style> --}}
     </div>
 </div>
