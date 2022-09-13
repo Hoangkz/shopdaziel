@@ -9,7 +9,7 @@ class SitesController{
     index(req, res, next){
         //promise
         let page =(parseInt(req.query.page)-1)||0;
-        let pageSize = 16
+        let pageSize = 8
         Item.find({}).skip(pageSize*page).limit(pageSize)
             .then(items =>{
                 Item.countDocuments({})
