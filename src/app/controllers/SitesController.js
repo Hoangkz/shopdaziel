@@ -8,7 +8,8 @@ class SitesController{
     // [get] /home
     index(req, res, next){
         //promise
-        Item.find({})
+        let n =0;
+        Item.find({}).skip(12*n).limit(12)
             .then(items =>{
                 res.render("home",{
                     items: mutipleMongooseToObject(items),
