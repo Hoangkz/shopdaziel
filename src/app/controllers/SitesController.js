@@ -8,12 +8,14 @@ class SitesController{
     // [get] /home
     index(req, res, next){
         //promise
-        let n =0;
-        Item.find({}).skip(12*n).limit(12)
+        let page =(parseInt(req.query.page-1))||0;
+        Item.find({}).skip(12*page).limit(12)
             .then(items =>{
                 res.render("home",{
                     items: mutipleMongooseToObject(items),
-                    data: res.data
+                    data: res.data,
+                    pageLength:100,
+                    currentPage:(page)
                 })
             })
             .catch(next);

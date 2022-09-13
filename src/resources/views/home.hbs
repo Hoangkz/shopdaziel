@@ -183,72 +183,81 @@
                     </div>
                 </a>
             </div>
-            
+            <div id="PageNavigation"></div>
         </div>
     </div>
 </div>
 
 
 
-<div class="mt-5 mb-5"style="max-width:99.9%; ">
+<div  class="mt-5 mb-5"style="max-width:99.9%; ">
     <div class="card card-courses-item"style="min-height:300px ">
-        <h5 class="m-3" style="color: rgb(149, 147, 147);">DANH SÁCH SẢN PHẨM</h5>
-        <div class="d-flex justify-content-between">
-            <div>
-                <div>
-                    <i class="icon-angles fa-sharp fa-solid fa-angles-left"></i>            
-                </div>
-            </div>
-            <div class="row "style="align-items:center;margin:0 6px">
-                {{#each items}}
-                <div class="col-1 p-0 m-0 "style="max-width:100%; ">
-                    <a href="/items/{{this.name}}" style="color:black;text-decoration:none" class="gia">
-                        <div class="card sanphamhover" style="width:154px;height:280px;align-items:center;text-align:center; margin:0 2px">
-                            <img class="card-img-top"style="width:150px;height:130px; "src="{{this.img}}" alt="Card image cap">
-                            <div class="card-body pl-2 pr-1 pb-2 pt-0" >
-                                <h5 class="card-para mt-2"> {{this.name}} </h5>
-                                <p style="color: rgb(142, 138, 138);">{{this.description}}</p>
-                                <h6 class="gia" style="margin-top: 14px; text-align:center">Giá: {{this.gia}}đ</h6>
-                            </div>
+        <h6 class="m-3" style="color: rgb(149, 147, 147);">DANH SÁCH SẢN PHẨM</h6>
+        <div class="row "style="align-items:center;margin:0 6px">
+            {{#each items}}
+            <div class="col-1 p-0 "style="max-width:100%; margin-top:4px">
+                <a href="/items/{{this.name}}" style="color:black;text-decoration:none" class="gia">
+                    <div class="card sanphamhover " style="width:130px;height:250px; margin:0 2px">
+                        <img class="card-img-top"style="width:124;height:120px; "src="{{this.img}}" alt="Card image cap">
+                        <div class="card-body pl-2 pr-1 pb-2 pt-0 d-flex flex-column" >
+                            <h5 class="card-para"style="min-height:40px"> {{this.name}} </h5>
+                            <p style="color: rgb(142, 138, 138);min-height:40px">{{this.description}}</p>
+                            <p class="gia" style="margin-bottom:14px; text-align: center; font-weight:500">Giá: {{this.gia}}đ</p>
                         </div>
-                    </a>
-                </div>
-                {{else}}
-                    <h4 class="text-center" style="margin-left: 400px; margin-top:50px">
-                    Chưa có sản phẩm nào được đăng
-                    </h4>
-                {{/each}}
+                    </div>
+                </a>
             </div>
-            <div>
-                <div>
-                    <i class="icon-angles fa-sharp fa-solid fa-angles-right"></i>            
-                </div>
-            </div>
-            <style>
-                
-                .icon-angles{
-                    margin: 300% 10px;
-                    color: rgb(246, 225, 225);
-                    font-size: 75px;
-                    cursor: pointer;
-                }
-
-                .icon-angles:hover{
-                    color: rgb(234, 44, 44);
-                    opacity: 0.5;
-                    cursor: pointer;
-                }
-            </style>
-            <script>
-                let iconAngles = document.getElementsByClassName("icon-angles")
-                for (let index in iconAngles)
-                {
-                    iconAngles[index].onclick = function(e) {
-                        console.log(e.target)
-                    }
-                }
-            </script>
+            {{else}}
+                <h4 class="text-center" style="margin-left: 400px; margin-top:50px">
+                Chưa có sản phẩm nào được đăng
+                </h4>
+            {{/each}}
         </div>
+        <nav id=""style="margin:10px 0 0 0 ;" aria-label="Page navigation example">
+            <ul id= "ulPagination"class="pagination"style="margin:0; justify-content:center">
+                <script>
+                    let ulPagination = document.getElementById("ulPagination");
+                    let pageLength = Math.ceil({{pageLength}}/16);
+                    let currentPage={{currentPage}}+1
+                   
+                    let html = `<li id="previous" class="page-item ">
+                                    <a class="page-link" href="?page=`+(currentPage-1)+`#PageNavigation" tabindex="-1">
+                                        <span aria-hidden="true" style="font-size: 16px;">&laquo;</span>
+                                    </a>
+                                </li>`;
+                    for(let i = 0; i < pageLength; i++){
+                        html = html+`<li class="page-item liPageItem">
+                                        <a class="page-link" href="?page=`+(i+1)+`#PageNavigation">`+(i+1)+`</a>
+                                    </li>`
+                    }
+                    html = html+`<li id="nextPage" class="page-item">
+                                    <a class="page-link" href="?page=`+(currentPage+1)+`#PageNavigation">
+                                        <span aria-hidden="true" style="font-size: 16px;">&raquo;</span>
+                                    </a>
+                                </li>`
+                    ulPagination.innerHTML = html
+
+                    let previous = document.getElementById("previous");
+                    let nextPage = document.getElementById("nextPage");
+                    if (pageLength===1){
+                        previous.classList.add("disabled");
+                        nextPage.classList.add("disabled");
+                    }
+                    else if (currentPage<=1){
+                        previous.classList.add("disabled");
+                    }
+                    else if (currentPage>=pageLength){
+                        nextPage.classList.add("disabled");
+                    }
+                    else{
+                        previous.classList.remove("disabled");
+                        nextPage.classList.remove("disabled");
+                    }
+                    let liPageItem = document.getElementsByClassName("liPageItem")
+                    liPageItem[currentPage-1].classList.add("disabled")
+                </script>
+            </ul>
+        </nav>
     </div>
 </div>
 
