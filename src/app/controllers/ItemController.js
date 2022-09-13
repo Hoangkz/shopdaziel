@@ -29,15 +29,29 @@ class ItemController{
         // res.send("Item: "+req.params.id+" "+ Item.findById(req.params.id));
         // res.json(req.params.loai)
         let a = req.params.loai;
+        let page =(parseInt(req.query.page)-1)||0;
+        let pageSize = 6
         // res.json(a)
-        Item.find({loai:a})
-            .then(item => {
-                return res.render('items/showListItems',{
-                    item: mutipleMongooseToObject(item),
-                    data: res.data
-                });
+        Item.find({loai:a}).skip(pageSize*page).limit(pageSize)
+            .then(items => {
+                Item.countDocuments({loai:a})
+                .then((total)=>{
+                    res.render("items/showListItems",{
+                        item: mutipleMongooseToObject(items),
+                        data: res.data,
+                        pageLength: (Math.ceil((total)/pageSize)),
+                        currentPage:(page+1)
+                    })
+                })
             })
             .catch(next) 
+        
+        Item.find({})
+            .then(items =>{
+                
+
+            })
+            .catch(next);
     }
 
     //GET /items/store (edit)
@@ -137,15 +151,23 @@ class ItemController{
         
         let search = req.query.q
         let search2 = req.query.q.charAt(0).toUpperCase() + req.query.q.slice(1)
-        
-        Item.find({$or:[{name:{$regex: search}},{name:{$regex: search2}}]})
-        .then(item => {
+        let page =(parseInt(req.query.page)-1)||0;
+        let pageSize = 6
+        // res.json(a)
+        Item.find({$or:[{name:{$regex: search}},{name:{$regex: search2}}]}).skip(pageSize*page).limit(pageSize)
+        .then(items => {
             if (search != ""){
                 // return res.json({item: mutipleMongooseToObject(item)});
-                return res.render('items/search',{
-                    item : mutipleMongooseToObject(item),
-                    data: res.data
-                });
+                Item.countDocuments({$or:[{name:{$regex: search}},{name:{$regex: search2}}]})
+                .then((total)=>{
+                    return res.render("items/search",{
+                        item: mutipleMongooseToObject(items),
+                        data: res.data,
+                        pageLength: (Math.ceil((total)/pageSize)),
+                        currentPage:(page+1),
+                        search:search
+                    })
+                })
             }
             else{
                 return res.redirect('back')
