@@ -1,3 +1,5 @@
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
 
 <header id="header_nav" style="width: 100%;  background-image: linear-gradient(0, #fe6433, #f53e2d);">
     <div class="container" style="height: 100%">
@@ -57,13 +59,18 @@
                 <h1 class="mt-1 mb-1 ml-3" style="color: #fff;">Dalziel</h1>
             </a>
             <form class="form-inline collapsenavbar-collapse w-100 mt-1 ml-5 mb-3" style="position: relative;"action="/search" method="GET" >
-                <input id="id-form-search"  name ="q" class="form-control collapsenavbar-collapse w-75"style=" height: 40px;font-size:1.1rem;"autocomplete="off"  type="text" placeholder="Search" aria-label="Search">
+                {{!-- <input id="id-form-search"  name ="q" class="form-control collapsenavbar-collapse w-75"style=" height: 40px;font-size:1.1rem;"autocomplete="off"  type="text" placeholder="Search" aria-label="Search">
                 <div id="idSuggestion" class ="suggestion displayNone" style="position: absolute; top: 40px; left:-24%;right:1%;width: 74.8%;">
                     <div class="nav-suggestion" >
                         <li id="header-suggestion" class="para-suggestion background-ddd"></li>
                     </div>
                     <ul id="ul-Suggestion" class="m-0 p-0"></ul>
-                </div>
+                </div> --}}
+                <section class="w-75">
+                    <input id="id-form-search"  name ="q" class="form-control collapsenavbar-collapse w-100"style=" height: 40px;font-size:1.1rem;"autocomplete="off"  type="text" placeholder="Search" aria-label="Search">
+                    <ul id="filter-select" class="filter-select no-value">
+                    </ul>
+                </section>
                 <button type="submit" id="button-search" class="btn btn-outline-danger border border-white ml-2"style="border: 2px;height: 40px; color: #fff; font-size: 0.8rem">Search</button>
             </form>
             <div class="mt-3 d-flex justify-content-between">
@@ -88,11 +95,8 @@
                                                                                 <div id="font_user--header" class="header__notify"></div>
                                                                             </li>`
                             }
-                        </script>         
+                    </script>         
                 </div>
-                <style>
-                    
-                </style>
             </div>
         </div>
         
@@ -313,7 +317,256 @@
         formLogOut.submit()
     }
 </script>
-<script>
+<style>
+    #id-form-search {
+        border: 1px solid #ccc;
+        padding: 10px;
+        font: 1.5em 'Arimo', sans-serif;
+        width: 50%;
+        outline: none;
+        transition: border 0.5s ease-in-out
+    }
+    #id-form-search:focus {
+        border-top-color: rgba(0,0,0,0);
+        border-left-color: rgba(0,0,0,0);
+        border-right-color: rgba(0,0,0,0);
+    }
+    #keyword-button {
+        position: absolute;
+        right: 26%;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 1.7em;
+        color: #8DB9ED
+    }
+    #keyword-button:hover {
+        color: #ccc
+    }
+    .filter-select {
+        width: 75%;
+        list-style: none;
+        font-size: 1.1em;
+        color: rgb(105,105,105);
+        border: 1px solid #ccc;
+        border-top: none;
+        /*so things don't jump around*/
+        position: absolute;
+        left: 0%;
+        /*Since we know the wrapper will always be 100% height, we can use half of 100% + half the height of the input*/
+        top: calc(50% + 25px);
+        /*for a better calculation use JS.  I'm calculating half of the body height - half the height of the input - li padding*/
+        max-height: calc(400% - 15px);
+        overflow-y: auto;
+        background: #fff
+    }
+    .filter-select-list {
+        cursor: pointer;
+        padding: 5px 10px;
+    }
+    .filter-select-list:hover {
+        background: #fafaf8;
+        color: black;
+    }
+    .no-value {
+        border: none
+    }
+    .list-highlight, .list-highlight:hover {
+        background: #fafaf8;
+        color: black;
+    }
+        /*some simple responsive designs*/
+    @media only screen and (max-width: 768px) { 
+        .filter-select, #id-form-search {
+            width: 80%;
+        }
+        #id-form-search {
+            font-size: 1.3em
+        }
+        .filter-select {
+            font-size: 0.9em;
+            left: 10%;
+            top: calc(50% + 23px);
+        }
+        #keyword-button {
+            right: 11%
+        }
+    }
+    @media only screen and (max-width: 480px) {
+        
+        .filter-select, #id-form-search {
+            width: 95%;
+        }
+        .filter-select {
+            left: 2.5%;
+        }
+        #keyword-button {
+            right: 3.5%
+        }
+    }
+</style>
+<script type='text/javascript'>
+    //<![CDATA[
+    //global variables
+    let keyword = $("#id-form-search");
+    let filterSelect = $("#filter-select");
+    let keywordHref = $("#keyword-button").attr("href");
+    let keywordVal = "";
+    /*var filters = {
+    "aardvark" : { sprite : "" }
+    }
+    var filterArray = Object.keys(filters);*/
+
+    //the filter array.  It should probably be organized better, or possibly broken down into a few arrays.  You can collapse it, since it takes up a lot of space.  These are actual popular search terms at paviliongift.com.
+    let filterArray = ["05853 in memory candle holder","05971 stars in the sky candle holder","19050 heaven in our home frame","19045 stars in the sky angel","19043 mother angel","82045 with sympathy angel","82224 stars in the sky angel","19009 in memory candle holder","82351 in memory angel","66111 teacher mug","74033 mother mug","19044 in memory angel","82294 sympathy angel","19060 father memorial stone","19058 stars memorial stone","82249 mother in memory angel","82338 stars in the sky angel","82328 best things in life angel","66120 retirement mug","61034 teacher mug","66101 mother mug","61044 mother plaque","66105 grandmother mug","72150 dog door stopper","72151 bless this home door stopper","72157 home door stopper","72160 welcome door stopper","72198 dog door stopper","72196 shut the front door stopper","66241 dad mug","75117 girlfriends mug","75113 friendships mug","67220 wine frame","79207 fox baby leggings","79217 elephant baby leggings","79246 camouflage baby leggings","67089 white fishing hat","81073 friends snowman with penguin","81085 snowman holding birdhouse","81125 family love","81123 snowman and moose","74056 joy bicycle mug","74036 sister mug","74027 grandma plaque","61049 teachers plaque","74053 survivor mug","82344 teacher angel ornament","74067 friend teapot","02998 october bird figurine","angels","angels elements","accents","aunt","aunt gift","aunt mug","adjustable hats","amylee weeks","angel figurines","angel holding flowers","angel ornaments","angels mother","angels grandmother","angels friend","angels in memory","angels god","angels simple spirits","angels light your way","angels country soul","angels perfectly paisley","angel praying","angel holding cross","angel holding heart","angel holding dove","angel holding butterfly","angel holding book","angel birthstone","angel blonde hair","angel brown hair","angel black hair","angel bible","amylee weeks mugs","baby","baby leggings","birchhearts christmas figurines","birthday","birthday gifts","black lab","baby girl","baby boy","baby unisex","baby hats","baby bibs","baby blankets","birthday angel","birthday mug","bloom by amylee weeks","bloom by amylee weeks mugs","birthstone","birthstone angels","birthstone necklace","birthstone bracelet","breast cancer awareness","bird","bird mug","bird figurine","bird plaque","boxer","beach","baptism","bunny","butterfly","butterfly figurine","butterfly mug","butterfly plaque","butterfly angel","baseball hats","blue","brown hair angel","blonde hair angel","bible","blessed","blanket baby","beer","beer glasses","beer bottle magnets","beer bottle lanterns","comfort candles","candle holders","coffee mugs","cat","christmas","christmas gift","christmas decor","christmas ornament","christmas figurines","christmas angels","cross","country soul","country soul angels","candles","candle holders tealight","candle holders glass","candle holders terra cotta","candle holders memorial","candle holders stars","candle holders round","cat mugs","cat magnets","cat wall art","cat mom","communion","cute","cork","cork holder","cork bag","canvas","canvas tote","ceramic mug","coasters","cookie jars","cat orange","cat black","door stopper","decorative","dog","dog mugs","dad","dad mugs","daughter","decorative figurines","double angel","december","distressed wood","dog door stoppers","dog key chains","dog coin banks","dog vases","dog salt pepper shakers","dishwaser safe","diamond","elements","elements angels","earrings","earrings swarovski","earrings silver","earrings gold","eat share love","easel back","figurine","figurine angel","faith","family","family angel","family mug","family ornament","friend","friendship","friend angel","friend mug","friend ornament","frames","funny","funny mugs","funny magnets","father","football","flower","flower angel","flower figurine","fox","gift mother","globe","god bless","golden retriever","gift grandmother","gift aunt","gift friend","gift teacher","gift nurse","gift dad","gift sister","gift box","godmother","grandmother","grandmother angel","grandma","grandma mug","global love","global love mugs","global love ornaments","graduation","german shepherd","granddaughter","god","grandparents","grandson","glass","gray","home","home decor","hiccup","hand painted","heart","heart angel","heaven","heavenly woods","heavenly winter woods","husband","hats","hats baseball","hats fishing","hats mom","handbags","home door stopper","home plaque","halloween","high quality ceramic","home sweet home","hope","in memory","in memory angels","in memory candle holders","izzy & owie","izzy & owie baby leggings","izzy & owie blanket","izzy & owie baby hats","in memory grandmother","jewelry","jewelry swarovski","jessie steele","jesus","kitchen","keepsake","keepsake box","kindness angel","key chains","keyhole hanger","knife","leggings baby","lit LED","leather","lake","lake people","lake tote","lake picture frame","love","love angel","light your way","light your way angels","light your way memorial","light your way every day","leather purse","lantern","mug","mom gift","musical water globes","magnets","mugs mom","mugs grandma","mugs dad","mugs mark my words","mugs we people","mugs bloom by amylee weeks","magnets dog","magnets funny","marquee","mother","mother angel","mother mug","mother memorial","mother plaque","music box","mom mugs","mom angels","mom plaque","my pedigree pals","mark my words","mark my words mugs","mom love","mom love mugs","mom love shirts","merry christmas","memory","memory grandmother","modeles","modeles angels","merlot","microwave safe","men shirt","nana","nana gift","nurse","nurse gift","nurse angel","nurse mug","nativity","necklace","necklace swarovski","november birthstone","notepads","open door decor door stoppers","ornaments","owl","ornaments angels","ornaments birchhearts","ornaments snowman","october birthstone","picture frames","pet","pet mug","pug","pedigree pals","pedigree pals mugs","pedigree pals plaques","pilsner beer glass","perfectly paisley","paw palettes","paw palettes mugs","popular","popular gifts","pink ribbon","pink mug","pink angel","polyresin","polyresin figurine","polyresin angel","polyresin ornament","purse","purse leather","pens","pen sets","purple","peace","plaques","plaques friend","plaques mother","purple shirt","photo frames","plate","plate glass","planters","retirement","round candle holder","rescue me now","remove your shoes","rememberance","sister","sister mug","sister angel","swarovski","sockings","sympathy","snowman","snowman figurine","simple spirits","simple spirits angels","simple spirits figurines","shot glasses","shot glass girl","survivor","stars in the sky","shut the front door","star of wonder plaques","stoneware","stoneware mug","stoneware bowl","sawtooth hanger","tea","tea mugs","the birchhearts","teacher","teacher mug","teacher angel","teacher plaque","the sockings","tray","tea for one","teapot","tealights","tealight candle holders","tote bags","travel mugs","terra cotta","vintage","vase","vase dog","vase cat","vintage by stephanie ryan","violet","water globes","water globes musical","wine","we people","with god","wreaths","wine tumbler","wine glasses","wine hiccup","we people hats","we people mugs","we people picture frames","wine candle holders","wedding","wedding gifts","waggy dogz","waggy dogz door stoppers","waggy dogz mugs","wood","wall art","wall hanging","wallet","women shirt","yellow","yellow lab","yellow shirt","you are my world"];
+    let imgArray=[];
+    let newFilter = [];
+    let tabIndex = -1;
+    let data = 'https://localhost:3000/danhsachItem/danhsachItem/items'
+    let nameArray =[]
+    fetch(data)
+        .then(function (response){
+            return response.json();
+        })
+        .then(function (posts){
+            nameArray = posts.map((post)=>{
+                console.log(posts)
+                imgArray = post.img
+                return post.name
+                {{!-- return `<li class="li-suggestion para-suggestion suggestion-hover">
+                            <a href="/items/${post.name}" class="textcolor-black a-suggestion" style="display:block; text-decoration:none">
+                                <img src="${post.img}" alt=""style="width:50px;height:50px">
+                                ${post.name}
+                            </a>
+                        </li>` --}}
+
+            })
+        })
+        .catch(function(err){
+            console.log(err)
+        })
+        console.log(imgArray)
+        console.log(nameArray)
+    //Events
+
+    keyword.on("focus", function(e){
+        e.preventDefault();
+        if (keywordVal !== "" && keydownTarget !== 9 && keydownTarget !== 16 && keydownTarget !== 38 && keydownTarget !== 40 && newFilter.length > 1) {
+            fillSelect();
+        }
+    });
+    keyword.on("keyup", function(e) {
+        keywordVal = $(this).val();
+        keydownTarget = e.which;
+        let ignoreKeys = e.which !== 9 && e.which !== 16 && e.which !== 38 && e.which !== 40;
+        if (keywordVal !== "" && ignoreKeys) { 
+            newFilter = filterArray.filter(isResult);
+            if (newFilter.length === 0) {
+                removeListBlur();
+                return false;
+            }
+                //keyword.val(newFilter[0]);
+                //keyword[0].setSelectionRange(selectRange, newFilter[0].length);
+        }
+    
+        if (e.which !== 9 && ignoreKeys) {
+            fillSelect();
+            tabIndex = -1;
+            if (newFilter.length === 0) {
+                removeListBlur();
+                return false;
+            }    
+        }
+    });
+
+    keyword.on("keydown", function(e) {
+        if (keywordVal !== "") {
+            if (e.which === 9) {
+                e.preventDefault();
+                keydownTarget = e.which;
+                if (!e.shiftKey) {
+                    cycleSelectList("next");
+                }
+                if (e.shiftKey) { 
+                    cycleSelectList("previous");
+                }
+            }
+            if (e.which === 38 || e.which === 40) {
+                e.preventDefault();
+                keydownTarget = e.which;
+            }
+            if (e.which === 38) {
+                cycleSelectList("previous");
+            }
+            else if (e.which === 40) {
+                cycleSelectList("next");
+            }
+        }
+        if (e.which === 13) {
+            $("#keyword-button").click()
+        }
+    });
+    /*use mousedown instead of click because the keyword blur event is firing before this call back can occur*/
+    $("#filter-select").on("mousedown",".filter-select-list", function(e){
+        e.preventDefault();
+        let $this = $(this);
+        let currentIndex = $this.index();
+        tabIndex = currentIndex;
+        keydownTarget = 9;
+        cycleSelectList("none");
+    });
+    keyword.on('blur', removeListBlur);
+    //helper functions
+    function isResult(val) {
+        return val.indexOf(keywordVal.toLowerCase()) === 0 
+    }
+    function removeListBlur() {
+        if (filterSelect.has("li").length) {
+            filterSelect.addClass("no-value").children("li").remove();
+        }
+    }
+    function cycleSelectList(direction) {
+        let newList = filterSelect.find("li");
+        if (direction === "previous") {
+            if (tabIndex <= 0) {
+                tabIndex = newList.length;
+            }
+            tabIndex--;
+        }
+        else if (direction === "next") {
+            tabIndex++;
+            if (tabIndex === newList.length) {  
+                tabIndex = 0;
+            }
+        }
+        newList.eq(tabIndex).addClass("list-highlight");
+        keyword.val(newList.eq(tabIndex).attr("data-value"));
+        newList.not(newList.eq(tabIndex)).removeClass("list-highlight");
+        keyword.focus();
+    }
+    function fillSelect() {
+        filterSelect.children("li").remove();
+    //filterSelect.attr("size",newFilter.length)
+        if (keywordVal !== "") {
+            filterSelect.removeClass("no-value");
+
+            for (let i = 0; i < newFilter.length; i++) {
+                filterSelect.append("<li class='filter-select-list' data-value='" + newFilter[i] + "'>" + newFilter[i] + "</li>");
+                //filters[i].sprite;
+            }
+        }
+        else {
+            filterSelect.addClass("no-value");
+        }
+    }
+    //for demo purposes only
+    $("#keyword-button").on("click", fillHref)
+        function fillHref() {
+        let newHrefString = keywordHref + keyword.val().replace(/\s+/g, '+');
+        let newHref = $("#keyword-button").attr("href", newHrefString);
+    }
+//]]>
+</script>
+{{!-- <script>
     let formSearch = document.getElementById("id-form-search")
     let suggestion = document.getElementById("idSuggestion")
     let ulSuggestion = document.getElementById("ul-Suggestion")
@@ -325,8 +578,8 @@
             return response.json();
         })
         .then(function (posts){
-            {{!-- console.log(posts) --}}
             var htmls = posts.map((post)=>{
+                
                 return `<li class="li-suggestion para-suggestion suggestion-hover">
                             <a href="/items/${post.name}" class="textcolor-black a-suggestion" style="display:block; text-decoration:none">
                                 <img src="${post.img}" alt=""style="width:50px;height:50px">
@@ -363,4 +616,4 @@
         }
     }
 
-</script>
+</script> --}}
