@@ -31,6 +31,3 @@ module.exports = {
     }
 
 }
-
-// mongodb+srv://hoang:<GouIxy969gPx450t>@cluster0.glxu3.mongodb.net/Dalziel?retryWrites=true&w=majority
-// GouIxy969gPx450t

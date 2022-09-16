@@ -53,7 +53,7 @@
 
                     let previous = document.getElementById("previous");
                     let nextPage = document.getElementById("nextPage");
-                    if (pageLength===1){
+                    if (pageLength===1||pageLength===0){
                         previous.classList.add("disabled");
                         nextPage.classList.add("disabled");
                     }
