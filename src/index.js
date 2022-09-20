@@ -37,8 +37,10 @@ app.use(express.urlencoded({
   extended: true
 })); 
 app.use(express.json()); 
+
     // khởi tạo tuyến đường
 const methodOverride = require('method-override')
+
 app.use(methodOverride('_method'))
 const route = require('./routes');
 // const { homedir } = require('os');
