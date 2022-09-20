@@ -64,7 +64,7 @@
                     <div class="nav-suggestion" >
                         <li id="header-suggestion" class="para-suggestion background-ddd"></li>
                     </div>
-                    <ul id="ul-Suggestion" class="m-0 p-0"></ul>
+                    <section id="ul-Suggestion" class="m-0 p-0"></section>
                 </div>
 
                 <button type="submit" id="button-search" class="btn btn-outline-danger border border-white ml-2"style="border: 2px;height: 40px; color: #fff; font-size: 0.8rem">Search</button>
@@ -421,12 +421,12 @@
         .then(function (posts){
             var htmls = posts.map((post)=>{
                 
-                return `<li class="li-suggestion para-suggestion suggestion-hover">
+                return `<option class="li-suggestion para-suggestion suggestion-hover">
                             <a href="/items/${post.name}" class="textcolor-black a-suggestion" style="display:block; text-decoration:none">
                                 <img src="${post.img}" alt=""style="width:50px;height:50px">
                                 ${post.name}
                             </a>
-                        </li>`
+                        </option>`
 
             }).join("");
             ulSuggestion.innerHTML=htmls
