@@ -17,7 +17,7 @@ function route(app){
     app.use('/search', itemsRouter);
     app.use('/danhsachItem', itemsRouter);
     app.use('/items', itemsRouter);
-    app.use('/listUsers', userRouter);
+    app.use('/users', userRouter);
     app.use('/buy', buyRouter);
 }
 module.exports = route;

@@ -41,7 +41,7 @@
         </td>
         <th style="padding-top:15px;" scope="row">{{sum @index 1}}</th>
         <th style="padding-top:15px;">
-          <a href="/items/{{this.slug}}">{{this.username}}
+          <a href="/users/{{this._id}}">{{this.username}}
           </a>
         </th>
 
@@ -49,7 +49,7 @@
         <td class="userRole" style="padding-top:15px" value="{{this.role}}"></td>
 
         <td class="text-center">
-          <a href="/items/{{this._id}}/edit" class="btn btn-link">
+          <a href="/users/{{this._id}}/edit" class="btn btn-link">
             <i class="fa-solid fa-screwdriver-wrench"></i>
           </a>
           {{!-- phải lấy được id thì mới xoá được (data-id) --}}

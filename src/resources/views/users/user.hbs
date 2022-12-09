@@ -1,13 +1,14 @@
 <body>
     <div class="mt-5 mb-5">
         <div class="card card-courses-item "> 
-            <div>
+            <div >
                 <div style="margin:24px;"> 
-                        <h5 style="text-align: left; margin:24px 24px 0; font-weight: 400;">Hồ sơ của tôi</h5> 
+                        <h5 style="text-align: left; margin:24px 24px 0; font-weight: 400;">Hồ sơ của <strong>{{user.fullname}}</strong></h5> 
                         <p style="margin-left: 24px ;font-weight: 400;font-size: 14px">Quản lý thông tin hồ sơ để bảo mật tài khoản</p>
                         <div style="width:80%; height:0.6px;background-color:rgb(234, 222, 222);margin-left:9%"></div>
                 </div>
             </div>
+
             <div class="row m-0 " >
                 <div class="col p-0 m-0 " style="background-color:rgb(255, 250, 250);">     
                     <div style="margin:24px 0 24px;"> 
@@ -35,43 +36,112 @@
                     </div>           
                 </div>
                 <div class="col-9 p-0 m-0 " style="background-color:rgb(255, 250, 250);">     
-                    <form action="/auth/user/{{data.id}}" method="POST">
-                        <div style="margin:24px;"> 
-                            <div class="d-flex">
-                                <h5 style="color: rgb(62, 56, 56);font-size:16px;margin-top:9px">{{data.username}}</h5>          
-                            </div>
-                            <div class="d-flex">
-                                <input class="inputFocusUser mt-2" name="fullname"value="{{data.fullname}}" type="text"required style="color: rgb(62, 56, 56); margin-top:3px;height: 30px; width:60%" placeholder="Họ và tên">
-                            </div>
-                            <div class="d-flex">
-                                <input class=" inputFocusUser mt-2" name="extname"value="{{data.extname}}" type="email"required style="color: rgb(62, 56, 56); margin-top:3px;height: 30px; width:60%" placeholder="Email">
-                            </div>
-                            <div class="d-flex">
-                                <input class=" inputFocusUser mt-2" name="tell"value="{{data.tell}}" type="text"required style="color: rgb(62, 56, 56); margin-top:3px;height: 30px; width:60%" placeholder="Số điện thoại">
-                            </div>
-                            <div class="d-flex" style="padding-top:8px;">
-                                <input class="checkGender inputFocusUser mt-2" name="gender"value="nam" type="radio" style="color: rgb(62, 56, 56);height: 24px; width:10%">
-                                <p style="margin-top:10px">Nam</p>
-                                <input class="checkGender inputFocusUser mt-2" name="gender"value="nữ" type="radio" style="color: rgb(62, 56, 56);height: 24px; width:10%">
-                                <p style="margin-top:10px">Nữ</p>
-                                <input class="checkGender inputFocusUser mt-2" name="gender"value="khác" type="radio" style="color: rgb(62, 56, 56);height: 24px; width:10%">
-                                <p style="margin-top:10px">Khác</p>
-                            </div>
-                            <div class="d-flex">
-                                <input id="daten" class=" inputFocusUser mt-2" name="birthday" type="date"min="1900-01-01" max="2060-01-01" value="{{data.birthday}}" style="color: rgb(62, 56, 56); margin-top:3px;height: 30px; width:20%">
-                            </div>
-                            <div class="d-flex">
-                                <input class=" inputFocusUser mt-2" name="address" type="text" value="{{data.address}}" style="color: rgb(62, 56, 56); margin-top:8px;height: 30px; width:80%" required placeholder="Số nhà, tên đường, thôn/ấp, xã huyện, thành phố">
-                            </div>
-                        </div> 
-                        <button type="submit" class="btn btn-outline-Save" style="margin-left: 24px;margin-bottom: 50px;">Lưu lại</button>
-                    </form>
+                    <div style="margin:24px;"> 
+                        <div class="d-flex">
+                            <h5 style="color: rgb(62, 56, 56);font-size:16px;margin-top:9px">{{user.username}}</h5>          
+                        </div>
+                        <div class="d-flex">
+                            <input id="fullname" class="inputFocusUser mt-2" name="fullname"value="{{user.fullname}}" disabled type="text"required style="color: rgb(62, 56, 56); margin-top:3px;height: 30px; width:60%" placeholder="Họ và tên">
+                        </div>
+                        <div class="d-flex">
+                            <input id="extname" class=" inputFocusUser mt-2" name="extname"value="{{user.extname}}" disabled type="email"required style="color: rgb(62, 56, 56); margin-top:3px;height: 30px; width:60%" placeholder="Email">
+                        </div>
+                        <div class="d-flex">
+                            <input id="tell" class=" inputFocusUser mt-2" name="tell"value="{{user.tell}}" type="text"disabled required style="color: rgb(62, 56, 56); margin-top:3px;height: 30px; width:60%" placeholder="Số điện thoại">
+                        </div>
+                        <div class="d-flex" style="padding-top:8px;">
+                            <input class="checkGender inputFocusUser mt-2" name="gender"value="nam" type="radio" style="color: rgb(62, 56, 56);height: 24px; width:10%">
+                            <p style="margin-top:10px">Nam</p>
+                            <input class="checkGender inputFocusUser mt-2" name="gender"value="nữ" type="radio" style="color: rgb(62, 56, 56);height: 24px; width:10%">
+                            <p style="margin-top:10px">Nữ</p>
+                            <input class="checkGender inputFocusUser mt-2" name="gender"value="khác" type="radio" style="color: rgb(62, 56, 56);height: 24px; width:10%">
+                            <p style="margin-top:10px">Khác</p>
+                        </div>
+                        <div class="d-flex">
+                            <input id="birthday" class=" inputFocusUser mt-2" name="birthday" type="date"min="1900-01-01" max="2060-01-01" disabled value="{{user.birthday}}" style="color: rgb(62, 56, 56); margin-top:3px;height: 30px; width:120px">
+                        </div>
+                        <div class="d-flex">
+                            <input id="address" class=" inputFocusUser mt-2" name="address" type="text" value="{{user.address}}"disabled style="color: rgb(62, 56, 56); margin-top:8px;height: 30px; width:80%" required placeholder="Số nhà, tên đường, thôn/ấp, xã huyện, thành phố">
+                        </div>
+                    </div>
+                    <button class="btn btn-outline-primary btn-update-user" style="margin-left: 24px;margin-bottom: 50px;">Update</button>
+                    <button class="btn btn-outline-Save d-none" style="margin-left: 24px;margin-bottom: 50px;"data-id="{{user._id}}">Save</button>
+                    <button class="btn btn-outline-secondary d-none btn-update-comeback"style="margin-left: 24px;margin-bottom: 50px;">Huỷ</button>
                 </div>
             </div>
         </div>
     </div>
 </body>
-
+<script>
+    let checkGender="{{user.gender}}";
+    let isCheckGender = document.getElementsByClassName("checkGender")
+    for (let key in isCheckGender){
+        if(isCheckGender[key].value===checkGender){
+            isCheckGender[key].setAttribute("checked",true)
+        }
+    }
+</script>
+<script>
+    $(".btn-update-user").click(function(e) {
+        let update_user = this
+        update_user.classList.add("d-none")
+        $(".btn-update-comeback").removeClass("d-none")
+        $(".btn-outline-Save").removeClass("d-none")
+        $("#fullname").attr("disabled",false)
+        $("#extname").attr("disabled",false)
+        $("#tell").attr("disabled",false)
+        $("#birthday").attr("disabled",false)
+        $("#address").attr("disabled",false)
+    })
+    $(".btn-update-comeback").click(function(e) {
+        $("#fullname").attr("disabled",true)
+        $("#extname").attr("disabled",true)
+        $("#tell").attr("disabled",true)
+        $("#birthday").attr("disabled",true)
+        $("#address").attr("disabled",true)
+        this.classList.add("d-none")
+        $(".btn-outline-Save").addClass("d-none")        
+        $(".btn-update-user").removeClass("d-none")
+    })
+    $(".btn-outline-Save").click((e) => {
+        let data_id = $(".btn-outline-Save").attr("data-id")
+        let fullname = $("#fullname").val()
+        let extname = $("#extname").val()
+        let tell = $("#tell").val()
+        let birthday = $("#birthday").val()
+        let address = $("#address").val()
+        let gender = $(".checkGender:checked").val()
+        $.ajax({
+            url: `/auth/user/${data_id}`,
+            type: "POST",
+            data:{fullname: fullname, extname: extname,tell: tell,birthday:birthday,address:address,gender:gender},
+            success: (data) => {
+                Toastify({
+                    text: "Thông tin của bạn đã được cập nhật thành công",
+                    duration: -1,
+                    destination: "http://localhost:3000/",
+                    newWindow: true,
+                    //close: true,
+                    offset: {
+                        x: 50, // horizontal axis - can be a number or a string indicating unity. eg: '2em'
+                        y: 10 // vertical axis - can be a number or a string indicating unity. eg: '2em'
+                    },
+                    gravity: "top", // `top` or `bottom`
+                    position: "center", // `left`, `center` or `right`
+                    stopOnFocus: true, // Prevents dismissing of toast on hover
+                    style: {
+                        background: "linear-gradient(to right, green, green)",
+                    },
+                    onClick: function(){} // Callback after click
+                }).showToast();
+                
+                setTimeout(() => {
+                    location.reload();
+                }, "1000")
+            }
+        });
+    });
+</script>
 <style>
     .inputFocusUser:focus{
         outline: none;
@@ -110,13 +180,5 @@
         box-shadow: 0 0 0 0.2rem #fe62338d;
     }
 </style>
-<script>
-    let checkGender="{{data.gender}}";
-    let isCheckGender = document.getElementsByClassName("checkGender")
-    for (let key in isCheckGender){
-        if(isCheckGender[key].value===checkGender){
-            isCheckGender[key].setAttribute("checked",true)
-        }
-    }
-</script>
+
 

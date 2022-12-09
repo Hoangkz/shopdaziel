@@ -1,6 +1,6 @@
-<body>
+<main>
     <div class="mt-5 mb-5">
-        <div class="card card-courses-item "> 
+        <div class="card card-courses-item"style="position: relative;"> 
             <div>
                 <div style="margin:24px;"> 
                         <h5 style="text-align: left; margin:24px 24px 0; font-weight: 400;">Hồ sơ của tôi</h5> 
@@ -8,6 +8,8 @@
                         <div style="width:80%; height:0.6px;background-color:rgb(234, 222, 222);margin-left:9%"></div>
                 </div>
             </div>
+            
+            <button class="btn btn-primary"style="position: absolute;top:100px;right: 20%;z-index: 1;"data-toggle="modal" data-target="#exampleModalChangePass">Đổi mật khẩu</button>
             <div class="row m-0 " >
                 <div class="col p-0 m-0 " style="background-color:rgb(255, 250, 250);">     
                     <div style="margin:24px 0 24px;"> 
@@ -58,7 +60,7 @@
                                 <p style="margin-top:10px">Khác</p>
                             </div>
                             <div class="d-flex">
-                                <input id="daten" class=" inputFocusUser mt-2" name="birthday" type="date"min="1900-01-01" max="2060-01-01" value="{{data.birthday}}" style="color: rgb(62, 56, 56); margin-top:3px;height: 30px; width:20%">
+                                <input id="daten" class=" inputFocusUser mt-2" name="birthday" type="date"min="1900-01-01" max="2060-01-01" value="{{data.birthday}}" style="color: rgb(62, 56, 56); margin-top:3px;height: 30px; width:120px">
                             </div>
                             <div class="d-flex">
                                 <input class=" inputFocusUser mt-2" name="address" type="text" value="{{data.address}}" style="color: rgb(62, 56, 56); margin-top:8px;height: 30px; width:80%" required placeholder="Số nhà, tên đường, thôn/ấp, xã huyện, thành phố">
@@ -70,8 +72,90 @@
             </div>
         </div>
     </div>
-</body>
+</main>
+<div class="modal fade" id="exampleModalChangePass" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Đổi mật khẩu</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                    <div style="margin-bottom: 16px;">
+                        <p class="mt-2" style="margin-bottom: 0;font-weight:500;color: rgba(0, 0, 0, 0.553);">Mật khẩu cũ</p>
+                        <input id="password" style="width: 100%;" type="password"name="password" required>
+                        <p class="mt-2" style="margin-bottom: 0;font-weight:500;color: rgba(0, 0, 0, 0.553);">Mật khẩu Mới</p>
+                        <input id="newPassword" style="width: 100%;"name="newPassword" type="password"required>
+                    </div>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary changepassword"data-id="{{data.id}}">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function closeModal(){        
+        $('#exampleModalChangePass').modal("hide")
+    }
 
+    document.addEventListener("DOMContentLoaded", function(){  
+        $(".changepassword").click(function(e){
+            let dataid=$(".changepassword").attr("data-id")
+            let password = $("#password").val()
+            let newPassword = $("#newPassword").val()
+            $.ajax({
+                url: `/users/changePassword/${dataid}`,
+                type: "POST",
+                data:{password: password, newPassword: newPassword},
+                success: (data) => {
+                    Toastify({
+                        text: "Thay đổi mật khẩu thành công",
+                        duration: 1000,
+                        destination: "http://localhost:3000/",
+                        newWindow: true,
+                        //close: true,
+                        offset: {
+                            x: 50, // horizontal axis - can be a number or a string indicating unity. eg: '2em'
+                            y: 10 // vertical axis - can be a number or a string indicating unity. eg: '2em'
+                        },
+                        gravity: "top", // `top` or `bottom`
+                        position: "center", // `left`, `center` or `right`
+                        stopOnFocus: true, // Prevents dismissing of toast on hover
+                        style: {
+                            background: "linear-gradient(to right, green, green)",
+                        },
+                        onClick: function(){
+                            
+                        } // Callback after click
+                    }).showToast();
+                    closeModal()
+                },
+                error: response => {
+                    Toastify({
+                        text: "Thay đổi mật khẩu không thành công",
+                        duration: 1000,
+                        destination: "http://localhost:3000/",
+                        newWindow: true,
+                        //close: true,
+                        offset: {
+                            x: 50, // horizontal axis - can be a number or a string indicating unity. eg: '2em'
+                            y: 10 // vertical axis - can be a number or a string indicating unity. eg: '2em'
+                        },
+                        gravity: "top", // `top` or `bottom`
+                        position: "center", // `left`, `center` or `right`
+                        stopOnFocus: true, // Prevents dismissing of toast on hover
+                        style: {
+                            background: "linear-gradient(to right, red, red)",
+                        },
+                        onClick: function(){} // Callback after click
+                    }).showToast();
+                },
+            })
+        })
+    })
+</script>
 <style>
     .inputFocusUser:focus{
         outline: none;
