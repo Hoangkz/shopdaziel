@@ -6,6 +6,7 @@ const siteRouter =require("./siteRouter")
 const checkUser = require("../app/controllers/checkuser")
 const meRouter =require("./me")
 const userRouter =require("./user")
+const buyRouter =require("./buyRouter")
 
 function route(app){
     app.use('/', checkUser.getuser,siteRouter);
@@ -17,7 +18,7 @@ function route(app){
     app.use('/danhsachItem', itemsRouter);
     app.use('/items', itemsRouter);
     app.use('/listUsers', userRouter);
-
+    app.use('/buy', buyRouter);
 }
 module.exports = route;
 

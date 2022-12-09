@@ -11,7 +11,7 @@ class MeController{
 
         Promise.all([Item.find({}),Item.countDocumentsDeleted()])
             .then(([items, deleteCount]) =>
-                res.render("me",{
+                res.render("items/me",{
                     deleteCount,
                     items: mutipleMongooseToObject(items),
                     data:res.data

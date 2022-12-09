@@ -46,21 +46,25 @@ class ItemController{
             })
             .catch(next) 
         
-        Item.find({})
-            .then(items =>{
+        // Item.find({})
+        //     .then(items =>{
                 
 
-            })
-            .catch(next);
+        //     })
+        //     .catch(next);
     }
 
     //GET /items/store (edit)
     edit(req,res, next){
         Item.findById(req.params.id)
-            .then(item => res.render('items/edit',{
-                item: MongooseToObject(item),
-                data: res.data
-            }))
+            .then(item => {
+
+                res.render('items/edit',{
+                    item: MongooseToObject(item),
+                    data: res.data,
+                })
+                
+            })
             .catch(next)
         
     }

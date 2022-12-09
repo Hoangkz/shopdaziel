@@ -1,7 +1,8 @@
 const {hashPassword,checkPassword} = require('../../util/mongoose');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const user = require('../modals/user')
+const user = require('../modals/user');
+const checkuser = require('./checkuser');
 
 class AuthController{
     login(req,res,next){
@@ -20,7 +21,16 @@ class AuthController{
             data:true
         });
     }
-
+    saveProfile(req,res,next){
+        let data = req.body
+        data.checkuser = 1
+        user.updateOne({_id: req.params.id}, data)
+        // redirect chuyển sang trang ....
+        .then(()=> {
+            res.redirect('/auth/user/')
+        })
+        .catch(next)
+    }
     saveAccount(req,res,next){
         let username = req.body.username.toLowerCase();
         let password = req.body.password
@@ -91,6 +101,7 @@ class AuthController{
     }
 
     getuser(req,res,next){
+        console.log(res.data.username)
         res.render("auth/user",{
             data:res.data
         })

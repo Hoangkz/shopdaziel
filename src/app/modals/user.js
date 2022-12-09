@@ -12,12 +12,12 @@ const User = new Schema({
   extname: {type: String},
   fullname: {type: String},
   avatar : {type: String},
-  tell :{type: Number},  
+  tell :{type: String},  
   gender :{type: String,default: 'khác'},
   role: {type: Number, default:1},
   birthday: {type: String},
-  address: {type: String}
-
+  address: {type: String},
+  checkuser: {type: Number,default:0}
 },{
   timestamps: true,
 });

@@ -27,7 +27,9 @@ app.engine('hbs',handlebars.engine({
         // các function sử dụng
         // hàm sum dùng tính tổng 2 số 
         sum: (a,b) => (a+b),
-
+        date: (d) => {
+          return ("0" + d.getDate()).slice(-2) + "-" + ("0"+(d.getMonth()+1)).slice(-2) + "-" +d.getFullYear()
+        }
     }
   }));
 app.set('view engine', 'hbs');

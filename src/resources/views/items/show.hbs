@@ -1,12 +1,11 @@
-{{!-- <div class="mt-5 mb-5">
-    <div class="card card-items-item "style="min-height:300px">
-        <div class="row">
-            <div class="col"style="margin-left: -128px;">
-                <img src="{{item.img}}" alt="">
-                <h2>{{item.name}}</h2>            
-            </div>
-        </div>
-    </div>
+{{!-- <div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v15.0"
+    nonce="LoPlylGS"></script>
+<div class="fb-share-button" data-href="https://kiemtra-hoangkz.koyeb.app/"
+    data-layout="button_count" data-size="large">
+    <a target="_blank"
+        href="https://kiemtra-hoangkz.koyeb.app/"
+        class="fb-xfbml-parse-ignore">Chia sẻ</a>
 </div> --}}
 
 <div class="mt-5 mb-5">
@@ -17,73 +16,121 @@
         <i class="fa-solid fa-chevron-right"></i>
         <h>{{item.name}}</h>
     </div>
-    <div class="card card-courses-item "> 
-        <div class="row m-0 " >
-            <div class="col-3 p-0 m-0 m-5"style="max-width:75%">
-                <img class="card-img-top"src="{{item.img}}" alt="Card image cap" style="width:400px">
+    <div class="card card-courses-item ">
+        <div class="row m-0 ">
+            <div class="col-3 p-0 m-0 m-5" style="max-width:75%">
+                <img class="card-img-top" src="{{item.img}}" alt="Card image cap" style="width:400px">
                 <div class="mt-3 ml-5 pl-2 d-flex" style="color: black ; font-weight:500">
                     <p>
                         Chia sẻ :
-                    </p> 
-                    <a href="https://www.facebook.com/messages"class="icon-mangXH">
-                        <i class="fa-brands fa-facebook-messenger "style="font-size: 24px; color: blue"></i>
+                    </p>
+                    <a href="https://www.facebook.com/messages" class="icon-mangXH">
+                        <i class="fa-brands fa-facebook-messenger " style="font-size: 24px; color: blue"></i>
                     </a>
-                    <a href="https://www.facebook.com"class="icon-mangXH">
-                        <i class="fa-brands fa-facebook"style="font-size: 24px;color:blue"></i>                    
+                    <a href="https://www.facebook.com" class="icon-mangXH">
+                        <i class="fa-brands fa-facebook" style="font-size: 24px;color:blue"></i>
                     </a>
-                    <a href="https://www.instagram.com/"class="icon-mangXH">
-                        <i class="fa-brands fa-instagram"style="font-size: 26px; color: red"></i>
+                    <a href="https://www.instagram.com/" class="icon-mangXH">
+                        <i class="fa-brands fa-instagram" style="font-size: 26px; color: red"></i>
                     </a>
-                    <a href="https://twitter.com"class="icon-mangXH">
-                        <i class="fa-brands fa-twitter"style="font-size: 24px"></i>
+                    <a href="https://twitter.com" class="icon-mangXH">
+                        <i class="fa-brands fa-twitter" style="font-size: 24px"></i>
                     </a>
                     <a class="like">
-                        <i class="fa-solid fa-thumbs-up border-heart mr-2"style="font-size:26px"></i>
+                        <i class="fa-solid fa-thumbs-up border-heart mr-2" style="font-size:26px"></i>
                         <span style="font-size: 1.3rem;">Like</span>
                     </a>
                 </div>
             </div>
-            <div class="col p-0 m-0 " style="background-color:rgb(255, 250, 250);">     
-                <div style="margin:24px;"> 
-                    <h2 style="text-align: center; margin: 24px;">{{item.name}} </h2> 
+            <div class="col p-0 m-0 " style="background-color:rgb(255, 250, 250);">
+                <div style="margin:24px;">
+                    <h2 style="text-align: center; margin: 24px;">{{item.name}} </h2>
                     <div class="d-flex">
-                        <p class="mt-2" style="font-weight:500; margin-right:2rem;color: rgba(0, 0, 0, 0.553);">Giá</p >
-                        <h3 style="color: #fe6433;">
+                        <p class="mt-2" style="font-weight:500; margin-right:2rem;color: rgba(0, 0, 0, 0.553);">Giá</p>
+                        <h3 id="databuy" style="color: #fe6433;" data-price="{{item.gia}}" data-id-item="{{item._id}}"
+                            data-id-user="{{data.id}}" data-amount="1">
                             {{item.gia}}đ
-                        </h3>          
+                        </h3>
                     </div>
                     <div class="d-flex">
-                        <p class="mt-2" style="font-weight:500; margin-right:2rem;color: rgba(0, 0, 0, 0.553);">Chi tiết</p >
+                        <p class="mt-2" style="font-weight:500; margin-right:2rem;color: rgba(0, 0, 0, 0.553);">Chi tiết
+                        </p>
                         <h4 style="font-weight:600;color: rgb(171, 165, 165); margin-top:3px">
                             {{item.description}}
-                        </h4>          
+                        </h4>
                     </div>
                     <div class="d-flex">
-                        <p class="mt-2" style="font-weight:500; margin-right:2rem;color: rgba(0, 0, 0, 0.553);">Vân chuyển</p >
-                        <p class="mt-2" style="font-weight:500; margin-right:0.3rem;color: rgba(0, 0, 0, 0.653);">Vân chuyển tới</p >
-                        <h4 style="font-weight:500;color:rgba(0, 0, 0, 0.623);; margin-top:3px">
+                        <p class="mt-2" style="font-weight:500; margin-right:2rem;color: rgba(0, 0, 0, 0.553);">Vân
+                            chuyển</p>
+                        <p class="mt-2" style="font-weight:500; margin-right:0.3rem;color: rgba(0, 0, 0, 0.653);">Vân
+                            chuyển tới</p>
+                        <h4 class="text-danger" style="font-weight:500; margin-top:3px">
                             {{!-- địa chỉ khách hàng --}}
-                            {{khachhang.address }}
-                        </h4>          
+                            {{data.address}}
+                        </h4>
                     </div>
                     <div class="d-flex">
-                        <p class="mt-2" style="font-weight:500; margin-right:2rem;color: rgba(0, 0, 0, 0.553);">Số lượng</p >         
+                        <p class="mt-2" style="font-weight:500; margin-right:2rem;color: rgba(0, 0, 0, 0.553);">Số lượng
+                        </p>
                         <div class="buttons_added">
-                            <button id="minus" class="minus is-form" type="button" name ="minus" style="font-size:20px">-</button>
-                            <input id="qty" aria-label="quantity" class="input-qty" max="{{item.soluong}}" min="1" type="number" value="1" style="max-width:50px">                    
-                            <button id="plus" class="plus is-form" type="button" name ="plus" style="font-size:20px">+</button>
+                            <button id="minus" class="minus is-form" type="button" name="minus"
+                                style="font-size:20px">-</button>
+                            <input id="qty" aria-label="quantity" class="input-qty" max="{{item.soluong}}" min="1"
+                                type="number" value="1" style="max-width:50px">
+                            <button id="plus" class="plus is-form" type="button" name="plus"
+                                style="font-size:20px">+</button>
                         </div>
-                        <p style="font-weight:350; margin-left:1rem; margin-top: 0.5rem">{{item.soluong}} Sản phẩm có sẵn</p>
+                        <p style="font-weight:350; margin-left:1rem; margin-top: 0.5rem">{{item.soluong}} Sản phẩm có
+                            sẵn</p>
                     </div>
                     <div class="d-flex">
-                        <button class ="buttonGioHang1 mr-2">
+                        <p class="mt-2" style="font-weight:500; margin-right:2rem;color: rgba(0, 0, 0, 0.553);">Phí ship
+                        </p>
+                        <h4 class="text-success" style="font-weight:500; margin-top:3px">
+                            {{!-- địa chỉ khách hàng --}}
+                            Miễn phí
+                        </h4>
+                    </div>
+                    <div class="d-flex">
+                        <button class="buttonGioHang1 mr-2">
                             &nbsp&nbsp
                             <i class="fa-solid fa-cart-shopping " style="font-size: 1rem"></i>
-                                Thêm vào giỏ hàng &nbsp&nbsp
-                        </button>  
-                        <button class ="buttonGioHang2 ml-2">&nbsp&nbspMua ngay&nbsp&nbsp</button>   
+                            Thêm vào giỏ hàng &nbsp&nbsp
+                        </button>
+                        <button class="buttonGioHang2 ml-2" data-toggle="modal"
+                            data-target="#exampleModalLong">&nbsp&nbspMua ngay&nbsp&nbsp</button>
+                        <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog"
+                            aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLongTitle" style="color:#fe6433">
+                                            {{item.name}}</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="row">
+                                            <div style="margin: 20px;">
+                                                <img class="card-img-top" src="{{item.img}}" alt="Card image cap"
+                                                    style="width:200px">
+                                            </div>
+                                            <div style="margin: auto 5px;" id="chitietbuy">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-dismiss="modal">Close</button>
+                                        <button type="button" id="buyItem" class="btn btn-primary">Đặt hàng</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>           
+                </div>
             </div>
         </div>
     </div>
@@ -92,7 +139,7 @@
 <script>
     const like = document.querySelector('.like');
     const traiTim = document.querySelector('.border-heart')
-    like.onclick = function(e) {
+    like.onclick = function (e) {
         traiTim.classList.toggle("border-heart")
         traiTim.classList.toggle("colorBlue")
     }
@@ -101,39 +148,95 @@
 <script>
     let minus = document.getElementById("minus");
     let getInput = document.getElementById("qty");
-    let plus =document.getElementById("plus")
+    let plus = document.getElementById("plus")
     let min = Number(getInput.getAttribute('min'))
     let max = Number(getInput.getAttribute('max'))
-    minus.addEventListener("click", function(e) {
-        if(getInput.value <= min){
+    let amount = document.querySelector("#databuy")
+    minus.addEventListener("click", function (e) {
+        if (getInput.value <= min) {
             getInput.value = min;
+            amount.setAttribute("data-amount", min)
         }
-        else{
+        else {
+            amount.setAttribute("data-amount", parseInt(getInput.value) - 1)
             getInput.value--;
         }
-        {{!-- console.log(getInput.value) --}}
+        //console.log(getInput.value)
+
     })
-    plus.addEventListener("click", function(e) {
-        if(getInput.value >= max){
+    plus.addEventListener("click", function (e) {
+        if (getInput.value >= max) {
+            amount.setAttribute("data-amount", max)
             getInput.value = max;
         }
-        else{
-            getInput.value ++;
+        else {
+            amount.setAttribute("data-amount", parseInt(getInput.value) + 1)
+            getInput.value++;
         }
-        {{!-- console.log(getInput.value) --}}
-    })
+        //console.log(getInput.value)
 
-    getInput.addEventListener("change", function(e) {
-        if(e.target.value>=max){
+    })
+    getInput.addEventListener("change", function (e) {
+        if (e.target.value >= max) {
             e.target.value = max
         }
-        else if(e.target.value<=min){
+        else if (e.target.value <= min) {
             e.target.value = min
         }
         else {
             getInput.value = e.target.value
         }
-        {{!-- console.log(getInput.value) --}}
+        //console.log(getInput.value)
+
     })
 </script>
-     
+
+<script>
+    $(".buttonGioHang2").click(() => {
+        let databuy = $("#databuy")
+        let data_amount = databuy.attr("data-amount")
+        document.getElementById("chitietbuy").innerHTML = `<p>Số lượng: <strong class="text-success count-amount"></strong></p>
+                                                            <p>Đơn giá: <strong class="text-success">{{item.gia}}</strong></p>
+                                                            <p>Tổng thanh toán:<strong id="totalBuy"
+                                                            style="color:#fe6433;font-size:30px;margin-left:3px"></strong></p>
+                                                            `
+        $(".count-amount").html(data_amount)
+        $("#totalBuy").html(data_amount * {{ item.gia }})
+    })
+    $("#buyItem").click(() => {
+        let databuy = $("#databuy")
+        let data_id_item = databuy.attr("data-id-item")
+        let data_id_user = databuy.attr("data-id-user")
+        let data_amount = databuy.attr("data-amount")
+        let data_price = databuy.attr("data-price") * data_amount
+        $.ajax({
+            url: "/buy/items/",
+            type: "POST",
+            data:{ id_item: data_id_item, id_user: data_id_user,soluong: data_amount},
+            success: (data) => {
+                Toastify({
+                    text: "Chức năng đang được cập nhật, hãy thử lại sau!",
+                    duration: -1,
+                    destination: "http://localhost:3000/",
+                    newWindow: true,
+                    //close: true,
+                    offset: {
+                        x: 50, // horizontal axis - can be a number or a string indicating unity. eg: '2em'
+                        y: 10 // vertical axis - can be a number or a string indicating unity. eg: '2em'
+                    },
+                    gravity: "top", // `top` or `bottom`
+                    position: "center", // `left`, `center` or `right`
+                    stopOnFocus: true, // Prevents dismissing of toast on hover
+                    style: {
+                        background: "linear-gradient(to right, red, red)",
+                    },
+                    onClick: function(){} // Callback after click
+                }).showToast();
+                setTimeout(() => {
+                    location.reload()
+                }, "2000")
+            }
+        });
+    });
+    
+</script>

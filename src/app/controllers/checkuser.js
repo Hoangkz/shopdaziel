@@ -13,6 +13,7 @@ class getUser{
             user.findOne({_id: idUser})
             .then(data => {
                 let data1 ={
+                    id: data._id,
                     username: data.username,
                     role: data.role,
                     extname: data.extname,

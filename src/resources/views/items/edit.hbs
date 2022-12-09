@@ -1,6 +1,6 @@
 <div class="mt-4 w-75 container">
     {{!-- {{#each courses}} --}}
-    <h3>Sửa sản phẩm {{item.name}}</h3>
+    <h3 class="text-info">{{item.name}}</h3>
     <form class="mt-4" method="POST" action="/items/{{item._id}}?_method=PUT">
         <div class="form-group">
             <label for="name">Tên sản phẩm</label>
@@ -15,10 +15,9 @@
         <div class="form-group">
             <label for="loai">Loại sản phẩm</label>
             <div class="input-group">
-            <select class="custom-select" id="loai" name = "loai">
-                <option value="{{item.loai}}">{{item.loai}}</option>
-                <option value="Thời Trang Nam">Thời Trang Nam</option>
-                <option value="Điện Thoại và Phụ Kiện">Điện Thoại và Phụ Kiện</option>
+            <select class="custom-select" id="loai" name = "loai"data-value="{{item.loai}}">
+                <option value="Thời trang nam" >Thời trang nam</option>
+                <option value="Điện thoại và phụ kiện">Điện thoại và phụ kiện</option>
                 <option value="Thiết bị điện tử">Thiết bị điện tử</option>
                 <option value="Máy tính và lattop">Máy tính và lattop</option>
                 <option value="Giày dép">Giày dép</option>
@@ -35,6 +34,10 @@
                 <option value="Đồ dùng trẻ em">Đồ dùng trẻ em</option>
                 <option value="Chăm sóc sắc đẹp">Chăm sóc sắc đẹp</option>
                 <option value="Bách hoá online">Bách hoá online</option>
+                <script>
+                    let loaioption = document.querySelector(".custom-select")
+                    loaioption.value = loaioption.getAttribute("data-value")
+                </script>
             </select>
             </div>
         </div>
@@ -53,6 +56,7 @@
         </div>
         
         <button type="submit" class="btn btn-primary">Lưu lại</button>
+         <a href="/me/stored/items" class="btn btn-secondary text-light">Trở lại</a>
     </form>
     {{!-- {{/each}} --}}
 </div>

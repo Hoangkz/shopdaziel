@@ -12,7 +12,6 @@ class NewsController{
 
     show(req,res){
         res.send("news show")
-
     }
 
 

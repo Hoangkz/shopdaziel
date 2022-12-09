@@ -35,7 +35,7 @@
                 <th scope="col"></th>
                 <th scope="col">STT</th>
                 <th scope="col">Tên vật phẩm</th>
-                <th scope="col">Trình độ</th>
+                {{!-- <th scope="col">Trình độ</th> --}}
                 <th scope="col">Ngày tạo</th>
                 <th scope="col" class="text-center">Thao tác</th>
                 <th scope="col"></th>
@@ -50,24 +50,24 @@
                       <input type="checkbox" class="form-check-input" name="courseIds[]" value="{{this._id}}">
                     </div>
                   </td>
-                  <th style="padding-top:15px" scope="row">{{sum @index 1}}</td>
+                  <th style="padding-top:15px" scope="row">{{sum @index 1}}</th>
                   {{!-- sum là hàm tính tổng ở trong file index @index là đối số thứ nhất, số 1 là dối số thứ hai}}--}}
                   <th style="padding-top:15px">
-                      <a href="/items/{{this.slug}}">
+                      <a href="/items/{{this.name}}">
                           <div>{{this.name}}</div>
                       </a>
-                  </td>
+                  </th>
 
-                  <td style="padding-top:15px">{{this.level}}</td>
-                  <td style="padding-top:15px">{{this.createdAt}}</td>                    
+                  {{!-- <td style="padding-top:15px">{{this.level}}</td> --}}
+                  <td style="padding-top:15px">{{date this.createdAt}}</td>                    
 
                   <td class="text-center">
-                      <a href="/items/{{this._id}}/edit" class="btn btn-link">
-                        <i class="fa-solid fa-screwdriver-wrench"></i>
+                      <a href="/items/{{this._id}}/edit" class="btn btn-success">
+                          Update
                       </a>
                       {{!-- phải lấy được id thì mới xoá được (data-id) --}}
-                      <a class="btn btn-link" href="" data-toggle="modal" data-id="{{this._id}}" data-target="#delete-course">
-                        <i class="fa-solid fa-trash"></i>
+                      <a class="btn btn-danger" href="" data-toggle="modal" data-id="{{this._id}}" data-target="#delete-course">
+                        Delete
                       </a>
                   </td>
               </tr>
@@ -100,7 +100,7 @@
         <p>Bạn có chắc chắc xoá vật phẩm này không</p>
       </div>
       <div class="modal-footer">        
-        <button id="btn-delete-course" type="button" class="btn btn-danger">Xoá bỏ</button>
+        <button id="btn-delete-course" type="button" class="btn btn-danger" >Xoá bỏ</button>
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Huỷ</button>
       </div>
     </div>
@@ -153,7 +153,6 @@
           checkboxAll.prop("checked", isChecked);
           renderCheckSubmitBtn();
         });
-                {{!-- console.log(btnCheckSubmit); --}}
 
         //hiện button khi click vào checkbox
         function renderCheckSubmitBtn(){
