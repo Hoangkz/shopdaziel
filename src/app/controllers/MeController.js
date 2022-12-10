@@ -38,10 +38,9 @@ class MeController{
     trashItem(req,res,next){
         Item.findDeleted({})
             // render ra file trash-courses.hbs
-            .then((items)=> res.render('trash-items',{
+            .then((items)=> res.render('items/trash-items',{
                 items: mutipleMongooseToObject(items),
                 data:res.data
-
             }))
             .catch(next)
     }

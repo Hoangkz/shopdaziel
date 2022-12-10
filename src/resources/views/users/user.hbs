@@ -1,4 +1,4 @@
-<body>
+<main>
     <div class="mt-5 mb-5">
         <div class="card card-courses-item "> 
             <div >
@@ -28,6 +28,9 @@
                             <p class="  " style="font-weight:500;color: rgba(0, 0, 0, 0.553);">Giới tính</p >
                         </div>
                         <div class="d-flex flex-row-reverse">
+                            <p class="  " style="font-weight:500;margin-top:18px;color: rgba(0, 0, 0, 0.553);">Loại tài khoản</p >
+                        </div>
+                        <div class="d-flex flex-row-reverse">
                             <p class="  " style="font-weight:500;margin-top:18px;color: rgba(0, 0, 0, 0.553);">Ngày sinh</p >
                         </div>
                         <div class="d-flex flex-row-reverse">
@@ -50,15 +53,22 @@
                             <input id="tell" class=" inputFocusUser mt-2" name="tell"value="{{user.tell}}" type="text"disabled required style="color: rgb(62, 56, 56); margin-top:3px;height: 30px; width:60%" placeholder="Số điện thoại">
                         </div>
                         <div class="d-flex" style="padding-top:8px;">
-                            <input class="checkGender inputFocusUser mt-2" name="gender"value="nam" type="radio" style="color: rgb(62, 56, 56);height: 24px; width:10%">
+                            <input class="checkGender inputFocusUser mt-2" disabled name="gender"value="nam" type="radio" style="color: rgb(62, 56, 56);height: 24px; width:10%">
                             <p style="margin-top:10px">Nam</p>
-                            <input class="checkGender inputFocusUser mt-2" name="gender"value="nữ" type="radio" style="color: rgb(62, 56, 56);height: 24px; width:10%">
+                            <input class="checkGender inputFocusUser mt-2"disabled name="gender"value="nữ" type="radio" style="color: rgb(62, 56, 56);height: 24px; width:10%">
                             <p style="margin-top:10px">Nữ</p>
-                            <input class="checkGender inputFocusUser mt-2" name="gender"value="khác" type="radio" style="color: rgb(62, 56, 56);height: 24px; width:10%">
+                            <input class="checkGender inputFocusUser mt-2"disabled name="gender"value="khác" type="radio" style="color: rgb(62, 56, 56);height: 24px; width:10%">
                             <p style="margin-top:10px">Khác</p>
                         </div>
+                        <div class="d-flex" style="margin: 13px 0;">
+                            <select id="roleUser"style="padding: 5px;" data-role="{{user.role}}" disabled>
+                                <option value="1">Khách hàng</option>
+                                <option value="2">Nhân viên</option>
+                                <option value="3">Admin</option>
+                            </select>
+                        </div>
                         <div class="d-flex">
-                            <input id="birthday" class=" inputFocusUser mt-2" name="birthday" type="date"min="1900-01-01" max="2060-01-01" disabled value="{{user.birthday}}" style="color: rgb(62, 56, 56); margin-top:3px;height: 30px; width:120px">
+                            <input id="birthday" class=" inputFocusUser mt-2"name="birthday" type="date"min="01-01-1900" max="31-12-1960" disabled value="{{user.birthday}}" style="color: rgb(62, 56, 56); margin-top:3px;height: 30px; width:120px">
                         </div>
                         <div class="d-flex">
                             <input id="address" class=" inputFocusUser mt-2" name="address" type="text" value="{{user.address}}"disabled style="color: rgb(62, 56, 56); margin-top:8px;height: 30px; width:80%" required placeholder="Số nhà, tên đường, thôn/ấp, xã huyện, thành phố">
@@ -71,7 +81,7 @@
             </div>
         </div>
     </div>
-</body>
+</main>
 <script>
     let checkGender="{{user.gender}}";
     let isCheckGender = document.getElementsByClassName("checkGender")
@@ -80,8 +90,17 @@
             isCheckGender[key].setAttribute("checked",true)
         }
     }
+    let roleUser = document.getElementById("roleUser")
+    roleUser.value=roleUser.getAttribute("data-role")
 </script>
 <script>
+    let fullname =$("#fullname").val()
+    let extname =$("#extname").val()
+    let tell =$("#tell").val()
+    let birthday =$("#birthday").val()
+    let address =$("#address").val()
+    let role2 =$("#roleUser").val()
+    let checkGender2 = $(".checkGender").val()
     $(".btn-update-user").click(function(e) {
         let update_user = this
         update_user.classList.add("d-none")
@@ -92,6 +111,10 @@
         $("#tell").attr("disabled",false)
         $("#birthday").attr("disabled",false)
         $("#address").attr("disabled",false)
+        $("#roleUser").attr("disabled",false)
+        $(".checkGender[value='nam']").attr("disabled",false)
+        $(".checkGender[value='nữ']").attr("disabled",false)
+        $(".checkGender[value='khác']").attr("disabled",false)
     })
     $(".btn-update-comeback").click(function(e) {
         $("#fullname").attr("disabled",true)
@@ -102,6 +125,23 @@
         this.classList.add("d-none")
         $(".btn-outline-Save").addClass("d-none")        
         $(".btn-update-user").removeClass("d-none")
+        $("#roleUser").attr("disabled",true)
+        $(".checkGender[value='nam']").attr("disabled",true)
+        $(".checkGender[value='nữ']").attr("disabled",true)
+        $(".checkGender[value='khác']").attr("disabled",true)
+        let checkGender3 = document.querySelectorAll(".checkGender")
+        for(value of checkGender3){
+            if(value.value ==checkGender2){
+                value.checked =true
+            }
+        }
+        $(".checkGender")[0].value=checkGender2
+        $("#fullname")[0].value=fullname
+        $("#extname")[0].value=extname
+        $("#tell")[0].value=tell
+        $("#birthday")[0].value=birthday
+        $("#address")[0].value=address
+        $("#roleUser")[0].value=role2
     })
     $(".btn-outline-Save").click((e) => {
         let data_id = $(".btn-outline-Save").attr("data-id")
@@ -111,10 +151,11 @@
         let birthday = $("#birthday").val()
         let address = $("#address").val()
         let gender = $(".checkGender:checked").val()
+        let role = $("#roleUser").val()
         $.ajax({
             url: `/auth/user/${data_id}`,
             type: "POST",
-            data:{fullname: fullname, extname: extname,tell: tell,birthday:birthday,address:address,gender:gender},
+            data:{fullname: fullname, extname: extname,tell: tell,birthday:birthday,address:address,gender:gender,role:role},
             success: (data) => {
                 Toastify({
                     text: "Thông tin của bạn đã được cập nhật thành công",

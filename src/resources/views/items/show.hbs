@@ -239,4 +239,28 @@
         });
     });
     
+    $(".buttonGioHang1").click(() => {
+        $.ajax({
+            success: (data) => {
+                Toastify({
+                    text: "Chức năng đang được cập nhật, hãy thử lại sau!",
+                    duration: 2000,
+                    destination: "http://localhost:3000/",
+                    newWindow: true,
+                    //close: true,
+                    offset: {
+                        x: 50, // horizontal axis - can be a number or a string indicating unity. eg: '2em'
+                        y: 10 // vertical axis - can be a number or a string indicating unity. eg: '2em'
+                    },
+                    gravity: "top", // `top` or `bottom`
+                    position: "center", // `left`, `center` or `right`
+                    stopOnFocus: true, // Prevents dismissing of toast on hover
+                    style: {
+                        background: "linear-gradient(to right, red, red)",
+                    },
+                }).showToast();
+            }
+        });
+    });
+    
 </script>

@@ -29,6 +29,10 @@ app.engine('hbs',handlebars.engine({
         sum: (a,b) => (a+b),
         date: (d) => {
           return ("0" + d.getDate()).slice(-2) + "-" + ("0"+(d.getMonth()+1)).slice(-2) + "-" +d.getFullYear()
+        },
+        date1: (d) => {
+          let date = new Date(d)
+          return ("0" + date.getDate()).slice(-2) + "-" + ("0"+(date.getMonth()+1)).slice(-2) + "-" +date.getFullYear()
         }
     }
   }));

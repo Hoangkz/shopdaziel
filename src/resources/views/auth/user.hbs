@@ -83,14 +83,87 @@
                 </button>
             </div>
             <div class="modal-body">
-                    <div style="margin-bottom: 16px;">
+                <div style="margin-bottom: 16px;">
+                    <div style="position: relative;">
                         <p class="mt-2" style="margin-bottom: 0;font-weight:500;color: rgba(0, 0, 0, 0.553);">Mật khẩu cũ</p>
                         <input id="password" style="width: 100%;" type="password"name="password" required>
+                        <span style="padding: 2px;cursor: pointer;position:absolute; top:50%; right:2%;font-size:16px"><i id="show-btn1"class="far fa-eye"></i></span>
+                    </div>
+                    <div style="position: relative;">
                         <p class="mt-2" style="margin-bottom: 0;font-weight:500;color: rgba(0, 0, 0, 0.553);">Mật khẩu Mới</p>
                         <input id="newPassword" style="width: 100%;"name="newPassword" type="password"required>
+                        <span style="padding: 2px;cursor: pointer;position:absolute; top:50%; right:2%;font-size:16px"><i id="show-btn2"class="far fa-eye"></i></span>
                     </div>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary changepassword"data-id="{{data.id}}">Save changes</button>
+                    <div style="position: relative;">
+                        <p class="mt-2" style="margin-bottom: 0;font-weight:500;color: rgba(0, 0, 0, 0.553);">Nhập lại khẩu Mới</p>
+                        <input id="changeNewPassword" style="width: 100%;" type="password"required>
+                        <span style="padding: 2px;cursor: pointer;position:absolute; top:50%; right:2%;font-size:16px"><i id="show-btn3"class="far fa-eye"></i></span>
+                    </div>
+                </div>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary changepassword"data-id="{{data.id}}"disabled>Save</button>
+                <script>
+                    const passField1 = document.getElementById("password");
+                    const showBtn1 = document.getElementById("show-btn1");
+                    showBtn1.onclick = (()=>{
+                        if(passField1.type === "password"){
+                            passField1.type = "text";
+                            showBtn1.classList.toggle("fa-eye");
+                            showBtn1.classList.toggle("fa-eye-slash");
+                        }else{
+                            passField1.type = "password";
+                            showBtn1.classList.toggle("fa-eye");
+                            showBtn1.classList.toggle("fa-eye-slash");
+                        }
+                    });
+                    const passField2 = document.getElementById("newPassword");
+                    const showBtn2 = document.getElementById("show-btn2");
+                    showBtn2.onclick = (()=>{
+                        if(passField2.type === "password"){
+                            passField2.type = "text";
+                            showBtn2.classList.toggle("fa-eye");
+                            showBtn2.classList.toggle("fa-eye-slash");
+                        }else{
+                            passField2.type = "password";
+                            showBtn2.classList.toggle("fa-eye");
+                            showBtn2.classList.toggle("fa-eye-slash");
+                        }
+                    });
+                    const passField3 = document.getElementById("changeNewPassword");
+                    const showBtn3 = document.getElementById("show-btn3");
+                    showBtn3.onclick = (()=>{
+                        if(passField3.type === "password"){
+                            passField3.type = "text";
+                            showBtn3.classList.toggle("fa-eye");
+                            showBtn3.classList.toggle("fa-eye-slash");
+                        }else{
+                            passField3.type = "password";
+                            showBtn3.classList.toggle("fa-eye");
+                            showBtn3.classList.toggle("fa-eye-slash");
+                        }
+                    });
+                </script>
+                <script>
+                    let passwordSignup1 = document.getElementById("newPassword")
+                    let passwordSignup2 = document.getElementById("changeNewPassword")
+                    let password = document.getElementById("password")
+                    passwordSignup1.addEventListener("keyup", function(e) {
+                        if (passwordSignup1.value !== passwordSignup2.value||passwordSignup1.value==""||passwordSignup2.value==""||passwordSignup1.value.length<5||passwordSignup2.value.length<5) {
+                            $(".changepassword").attr("disabled",true)
+                        }
+                        else{
+                            $(".changepassword").attr("disabled",false)
+                        } 
+                    })
+                    passwordSignup2.addEventListener("keyup", function(e) {
+                        if (passwordSignup1.value !== passwordSignup2.value||passwordSignup1.value==""||passwordSignup2.value==""||passwordSignup1.value.length<5||passwordSignup2.value.length<5) {
+                            $(".changepassword").attr("disabled",true)
+                        }
+                        else{
+                            $(".changepassword").attr("disabled",false)
+                        }
+                    })
+                </script>
             </div>
         </div>
     </div>

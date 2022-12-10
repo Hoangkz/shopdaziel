@@ -50,28 +50,29 @@ class UserController{
             })
             .catch(next) 
     }
-    //GET /items/store (edit)
-    edit(req,res, next){
-        User.findById(req.params.id)
-            .then(user => res.render('items/edit',{
-                user: MongooseToObject(user),
-                data: res.data
-            }))
-            .catch(next)
-        
-    }
-    
-    //POST /items/create, tạo database    
-    store(req,res, next){
-        
-        // res.json(req.body);
-        // body nhận form từ sever gửi về database
-        const user = new User(req.body);
-        user.save()
-            .then(()=>res.redirect('/me/stored/items'))
-            .catch(next)
-        // res.send(req.body.img)
-
+    formUsers(req,res, next){
+        switch(req.body.action){
+            //chuyển vào thùng rác
+            case "delete":
+                User.delete({_id: {$in: req.body["userIds[]"]}})
+                    .then(()=> res.redirect('back'))
+                    .catch(next)
+                break;
+            // Khôi phục
+            case "fix":
+                User.restore({_id: {$in: req.body["userIds[]"]}})
+                    .then(()=> res.redirect('back'))
+                    .catch(next)
+                break;
+            // xoá vĩnh viễn
+            case "permanentlyDelete":
+                User.deleteMany({_id: {$in: req.body["userIds[]"]}})
+                    .then(()=> res.redirect('back'))
+                    .catch(next)
+                break;  
+            default:
+                res.json(req.body);
+        }
     }
 }
 module.exports = new UserController();

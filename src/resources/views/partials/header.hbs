@@ -413,10 +413,32 @@
     let ulSuggestion = document.getElementById("ul-Suggestion")
     let liSuggestion = document.getElementsByClassName("li-suggestion")
     let aSuggestion = document.getElementsByClassName("a-suggestion")
-    //let data = 'https://shopdalziel.herokuapp.com/danhsachItem/danhsachItem/items'
-    let data = '/danhsachItem/danhsachItem/items'
+    //let data = '/danhsachItem/danhsachItem/items'
+    $.ajax({
+        type: "GET",
+        url: "/danhsachItem/danhsachItem/items",
+        success: (posts) => {
+            let list_img;
+            var htmls = posts.map((post)=>{
+                
+                return `<li class="li-suggestion para-suggestion suggestion-hover">
+                            <a href="/items/${post.name}" class="textcolor-black a-suggestion" style="display:block; text-decoration:none">
+                                <img src="${post.img}" alt=""style="width:50px;height:50px">
+                                ${post.name}
+                            </a>
+                        </li>`
 
-    fetch(data)
+            }).join("");
+            ulSuggestion.innerHTML=htmls
+        },
+        error: function (xhr, ajaxOptions, error) {
+            alert(xhr.responseText);
+        },
+        cache: false,
+        contentType: "application/json",
+        processData: false,
+    });
+    /*fetch(data)
         .then(function (response){
             return response.json();
         })
@@ -435,7 +457,7 @@
         })
         .catch(function(err){
 			console.log('“có lỗi”')
-		})
+		})*/
     formSearch.onkeyup = function(e) {
         let valueFormSearch=e.target.value;
         let paraSuggestion = document.getElementById("header-suggestion")

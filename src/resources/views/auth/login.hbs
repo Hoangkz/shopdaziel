@@ -39,7 +39,7 @@
                             </div>
                             <div class="auth-form__group"  style="position:relative">
                                 <input id="password" name="password" type="password" class="auth-form__input" placeholder="Mật khẩu">
-                                <span style="padding: 2px;cursor: pointer;position:absolute; top:50%; right:4%;font-size:13px"><i id="show-btn"class="fas fa-eye"></i></span>
+                                <span style="padding: 2px;cursor: pointer;position:absolute; top:50%; right:4%;font-size:16px"><i id="show-btn"class="far fa-eye"></i></span>
 
                             </div>
                                     <script>
@@ -48,10 +48,12 @@
                                         showBtn.onclick = (()=>{
                                             if(passField.type === "password"){
                                                 passField.type = "text";
-                                                showBtn.classList.add("hide-btn");
+                                                showBtn.classList.toggle("fa-eye");
+                                                showBtn.classList.toggle("fa-eye-slash");
                                             }else{
                                                 passField.type = "password";
-                                                showBtn.classList.remove("hide-btn");
+                                                showBtn.classList.toggle("fa-eye");
+                                                showBtn.classList.toggle("fa-eye-slash");
                                             }
                                         });
                                     </script>

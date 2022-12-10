@@ -125,30 +125,28 @@ class ItemController{
 
     //POST /items/formAction danh sách lưa chọn thực hiện    
     formAction(req,res, next){
-        
         switch(req.body.action){
             //chuyển vào thùng rác
             case "delete":
-                Item.delete({_id: {$in: req.body.courseIds}})
+                Item.delete({_id: {$in: req.body["itemIds[]"]}})
                     .then(()=> res.redirect('back'))
                     .catch(next)
                 break;
             // Khôi phục
             case "fix":
-                Item.restore({_id: {$in: req.body.courseIds}})
+                Item.restore({_id: {$in: req.body["itemIds[]"]}})
                     .then(()=> res.redirect('back'))
                     .catch(next)
                 break;
             // xoá vĩnh viễn
             case "permanentlyDelete":
-                Item.deleteMany({_id: {$in: req.body.courseIds}})
+                Item.deleteMany({_id: {$in: req.body["itemIds[]"]}})
                     .then(()=> res.redirect('back'))
                     .catch(next)
                 break;  
             default:
                 res.json(req.body);
         }
-
     }
 
     search(req, res,next) {

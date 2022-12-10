@@ -1,4 +1,4 @@
-<form id="container-Form"style="padding-top:20px " method="POST" action="/items/formAction">
+{{!-- <form id="container-Form"style="padding-top:20px " method="POST" action="/items/formAction"> --}}
 
     <h3>Vật Phẩm đã xoá</h3>
     <a href="/me/stored/items">Quay lại</a>
@@ -9,13 +9,13 @@
             <label class="form-check-label" for="checkbox-All">Chọn tất cả</label>
         </div>
 
-        <select class="form-control form-control-sm selectAllCheckbox"style="width:165px;height:40px; margin-right:2px" name="action" required>
+        <select class="form-control form-control-sm selectAllCheckbox"style="width:165px;height:40px; margin-right:2px" required>
             <option value="">--Hành động--</option>
             <option value="fix">--Khôi phục--</option>
             <option value="permanentlyDelete">--Xoá vĩnh viễn--</option>
         </select>
 
-        <button id="btnCheckSubmit" class=" btn btn-primary btn-sm "disabled>
+        <button id="btnCheckSubmit" type="click" class=" btn btn-primary btn-sm"style="padding: .375rem .75rem" disabled>
           Thực hiện
         </button>
     </div>
@@ -26,10 +26,8 @@
                 <th scope="col"></th>
                 <th scope="col">STT</th>
                 <th scope="col">Tên vật phẩm</th>
-                <th scope="col">Trình độ</th>
                 <th scope="col">Ngày xoá</th>
                 <th scope="col" class="text-center">Thao tác</th>
-                <th scope="col"></th>
             </tr>
         </thead>
         <tbody >
@@ -37,7 +35,7 @@
               <tr>
                   <th>
                     <div class="form-check">
-                      <input type="checkbox" class="form-check-input" name="courseIds[]" value="{{this._id}}">
+                      <input type="checkbox" class="form-check-input" data="courseIds" value="{{this._id}}">
                     </div>
                   </th>
 
@@ -49,13 +47,12 @@
                       </a>
                   </th>
 
-                  <td style="padding-top:15px">{{this.level}}</td>
-                  <td style="padding-top:15px">{{this.deletedAt}}</td>                    
+                  <td style="padding-top:15px">{{date this.deletedAt}}</td>                    
 
                   <td class="text-center">
-                      <a href="" class="btn btn-link btn-restore"data-id="{{this._id}}">Khôi phục</a>
+                      <a href="" class="btn btn-info btn-restore"data-id="{{this._id}}">Khôi phục</a>
                       {{!-- phải lấy được id thì mới xoá được (data-id) --}}
-                      <a class="btn btn-link" href="" data-toggle="modal" data-id="{{this._id}}" data-target="#delete-course">Xoá vĩnh viễn</a>
+                      <a class="btn btn-danger" href="" data-toggle="modal" data-id="{{this._id}}" data-target="#delete-course">Xoá vĩnh viễn</a>
                   </td>
               </tr>
             {{else}}
@@ -68,7 +65,7 @@
             {{/each}}
         </tbody>
     </table>
-</form>
+{{!-- </form> --}}
 
 {{!-- confirm delete course hộp thoại xoá 
         cần có id từng cái course cần xoá id của nó là data-target 
@@ -137,9 +134,9 @@
 <script>
     document.addEventListener("DOMContentLoaded", function(){
         let checkboxAll = $("#checkbox-All")
-        let checkItemBox = $('input[name="courseIds[]"]')
+        let checkItemBox = $('.form-check-input[data="courseIds"]')
         let btnCheckSubmit = $("#btnCheckSubmit")
-        let containerForm = $("#container-form") 
+        /*let containerForm = $("#container-form") */
 
         checkboxAll.change(function() { 
             let isCheckedAll = $(this).prop("checked");
@@ -148,27 +145,96 @@
         })
 
         checkItemBox.change(function() {
-            let isCheckedAll = checkItemBox.length === $('input[name="courseIds[]"]:checked').length
+            let isCheckedAll = checkItemBox.length === $('.form-check-input[data="courseIds"]:checked').length
             checkboxAll.prop("checked", isCheckedAll);
             renderCheckSubmitBtn();
         })
 
         function renderCheckSubmitBtn(){
-            let countItems = $('input[name="courseIds[]"]:checked').length;
-
-            if(countItems>0){
-                btnCheckSubmit.attr('disabled',false)
-            }else{
-                btnCheckSubmit.attr('disabled',true)
+            let CheckedCount = $('.form-check-input[data="courseIds"]:checked').length;
+            if (CheckedCount > 0) {
+              let selectAllCheckbox = $('.selectAllCheckbox')
+              if(selectAllCheckbox.val()){
+                btnCheckSubmit.attr("disabled",false);                
+              }
+              else{
+                selectAllCheckbox.change(function(e){
+                  let CheckedCount = $('.form-check-input[data="courseIds"]:checked').length
+                  if(CheckedCount>0){
+                    if(this.value){
+                      btnCheckSubmit.attr("disabled",false);                
+                    }
+                    else{
+                      btnCheckSubmit.attr("disabled",true);
+                    }
+                  }
+                  else{
+                    btnCheckSubmit.attr("disabled",true);
+                  }
+                })
+              }
+            }
+            else {
+              btnCheckSubmit.attr("disabled",true);
             }
         }
    
-        containerForm.on("submit",function(e) {
+        /*containerForm.on("submit",function(e) {
             let isSubmitable = !$(btnCheckSubmit).hasClass("disabled");
             if(!isSubmitable) {
               e.preventDefault();
             }
-        })
-
+        })*/
+        $("#btnCheckSubmit").click(function(e) {
+          let isChecked = document.querySelectorAll('.form-check-input[data="courseIds"]:checked')
+          let itemIds = []
+          for(Checked of isChecked){
+            itemIds.push(Checked.value);
+          }
+          let action = $(".selectAllCheckbox").val()
+          let text=""
+          let background=""
+          if(action =="permanentlyDelete"){
+            text="Vật phẩm đã được xoá!"
+            background= "linear-gradient(to right, green, green)"
+          }
+          else if(action =="fix"){
+            text="Vật phẩm khôi phục lại!"
+            background= "linear-gradient(0, #33aafe, #2df5ec)"
+          }
+          else{
+            text="Chức năng này đang được cập nhật, hãy thử lại sau!"
+            background= "linear-gradient(to right, red, red)"
+          }
+          $.ajax({
+            url: `/items/formAction`,
+            type: "POST",
+            data:{itemIds: itemIds, action: action},
+            success: (data) => {
+                Toastify({
+                    text: text,
+                    duration: -1,
+                    destination: "http://localhost:3000/",
+                    newWindow: true,
+                    //close: true,
+                    offset: {
+                        x: 50, // horizontal axis - can be a number or a string indicating unity. eg: '2em'
+                        y: 10 // vertical axis - can be a number or a string indicating unity. eg: '2em'
+                    },
+                    gravity: "top", // `top` or `bottom`
+                    position: "center", // `left`, `center` or `right`
+                    stopOnFocus: true, // Prevents dismissing of toast on hover
+                    style: {
+                        background: background,
+                    },
+                    onClick: function(){} // Callback after click
+                }).showToast();
+                
+                setTimeout(() => {
+                    location.reload();
+                }, "1000")
+            }
+        });
+      })
     })
 </script>

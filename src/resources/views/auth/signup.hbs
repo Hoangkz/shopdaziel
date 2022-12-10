@@ -42,37 +42,41 @@
                                     </div>
                                     <div class="auth-form__group" style="position:relative">
                                         <input id="passwordSignup1" class="auth-form__input paswordInput"value="{{password}}" type="password" name="password" placeholder="Mật khẩu" type="password">
-                                        <span style="padding: 2px;cursor: pointer;position:absolute; top:50%; right:4%;font-size:13px"><i id="show-btn1"  class="fas fa-eye"></i></span>
+                                        <span style="padding: 2px;cursor: pointer;position:absolute; top:50%; right:4%;font-size:13px"><i id="show-btn1"  class="far fa-eye"></i></span>
                                     </div>
                                 <div class="auth-form__group" style="position:relative">
                                     <input id="passwordSignup2" class="auth-form__input paswordInput"value="{{password}}" placeholder="Nhập lại mật khẩu"type="password">
-                                    <span style="padding: 2px;cursor: pointer;position:absolute; top:50%; right:4%;font-size:13px"><i id="show-btn2"class="fas fa-eye"></i></span>
+                                    <span style="padding: 2px;cursor: pointer;position:absolute; top:50%; right:4%;font-size:13px"><i id="show-btn2"class="far fa-eye"></i></span>
                                 </div>
                             </div>
-                                    <script>
-                                        const passField1 = document.getElementById("passwordSignup1");
-                                        const showBtn1 = document.getElementById("show-btn1");
-                                        showBtn1.onclick = (()=>{
-                                            if(passField1.type === "password"){
-                                                passField1.type = "text";
-                                                showBtn1.classList.add("hide-btn");
-                                            }else{
-                                                passField1.type = "password";
-                                                showBtn1.classList.remove("hide-btn");
-                                            }
-                                        });
-                                        const passField2 = document.getElementById("passwordSignup2");
-                                        const showBtn2 = document.getElementById("show-btn2");
-                                        showBtn2.onclick = (()=>{
-                                            if(passField2.type === "password"){
-                                                passField2.type = "text";
-                                                showBtn2.classList.add("hide-btn");
-                                            }else{
-                                                passField2.type = "password";
-                                                showBtn2.classList.remove("hide-btn");
-                                            }
-                                        });
-                                    </script>
+                            <script>
+                                const passField1 = document.getElementById("passwordSignup1");
+                                const showBtn1 = document.getElementById("show-btn1");
+                                showBtn1.onclick = (()=>{
+                                    if(passField1.type === "password"){
+                                        passField1.type = "text";
+                                        showBtn1.classList.toggle("fa-eye");
+                                        showBtn1.classList.toggle("fa-eye-slash");
+                                    }else{
+                                        passField1.type = "password";
+                                        showBtn1.classList.toggle("fa-eye");
+                                        showBtn1.classList.toggle("fa-eye-slash");
+                                    }
+                                });
+                                const passField2 = document.getElementById("passwordSignup2");
+                                const showBtn2 = document.getElementById("show-btn2");
+                                showBtn2.onclick = (()=>{
+                                    if(passField2.type === "password"){
+                                        passField2.type = "text";
+                                        showBtn2.classList.toggle("fa-eye");
+                                        showBtn2.classList.toggle("fa-eye-slash");
+                                    }else{
+                                        passField2.type = "password";
+                                        showBtn2.classList.toggle("fa-eye");
+                                        showBtn2.classList.toggle("fa-eye-slash");
+                                    }
+                                });
+                            </script>
                             <div class="auth-form__aside">
                                 <p class="auth-form__policy-text">
                                     Bằng việc đăng ký, bạn đã đồng ý với Dalziel về
