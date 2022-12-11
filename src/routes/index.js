@@ -18,7 +18,7 @@ function route(app){
     app.use('/danhsachItem', itemsRouter);
     app.use('/items', itemsRouter);
     app.use('/users', userRouter);
-    app.use('/buy', buyRouter);
+    app.use('/buy',checkUser.getuser, buyRouter);
 }
 module.exports = route;
 

@@ -9,6 +9,9 @@ const buyItemController = require('../app/controllers/buyItemController');
 
 //newcontroller.index
 
-router.post('/items',buyItemController.index);
+router.post('/items',buyItemController.AddCart);
+router.delete('/:id',buyItemController.delete);
+router.get('/cart',buyItemController.ShopCart);
+router.post('/formAction',buyItemController.formAction);
 module.exports = router;
 

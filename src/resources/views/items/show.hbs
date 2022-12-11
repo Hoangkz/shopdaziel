@@ -92,7 +92,7 @@
                         </h4>
                     </div>
                     <div class="d-flex">
-                        <button class="buttonGioHang1 mr-2">
+                        <button class="buttonGioHang1 mr-2"data-toggle="modal" data-target="#exampleModalThem">
                             &nbsp&nbsp
                             <i class="fa-solid fa-cart-shopping " style="font-size: 1rem"></i>
                             Thêm vào giỏ hàng &nbsp&nbsp
@@ -135,7 +135,33 @@
         </div>
     </div>
 </div>
+<div class="modal fade" id="exampleModalThem" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabelThem" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabelThem">Thêm <Strong style="color: green;">{{item.name}}</Strong> vào giỏ hàng</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div style="margin: 20px;">
+                        <img class="card-img-top" src="{{item.img}}" alt="Card image cap"
+                            style="width:200px">
+                    </div>
+                    <div style="margin: auto 5px;" id="ThemVaoGioHang">
 
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary"id="add_to_cart">Thêm vào giỏ hàng</button>
+            </div>
+        </div>
+    </div>
+</div>
 <script>
     const like = document.querySelector('.like');
     const traiTim = document.querySelector('.border-heart')
@@ -190,8 +216,10 @@
 
     })
 </script>
-
 <script>
+    function closeModal(modal){      
+        $(`#${modal}`).modal("hide")
+    }
     $(".buttonGioHang2").click(() => {
         let databuy = $("#databuy")
         let data_amount = databuy.attr("data-amount")
@@ -216,7 +244,7 @@
             success: (data) => {
                 Toastify({
                     text: "Chức năng đang được cập nhật, hãy thử lại sau!",
-                    duration: -1,
+                    duration: 2000,
                     destination: "http://localhost:3000/",
                     newWindow: true,
                     //close: true,
@@ -232,20 +260,37 @@
                     },
                     onClick: function(){} // Callback after click
                 }).showToast();
-                setTimeout(() => {
-                    location.reload()
-                }, "2000")
+                closeModal('exampleModalLong')
             }
         });
     });
     
     $(".buttonGioHang1").click(() => {
+        let databuy = $("#databuy")
+        let data_amount = databuy.attr("data-amount")
+        document.getElementById("ThemVaoGioHang").innerHTML = `<p>Số lượng: <strong class="text-success count-amount"></strong></p>
+                                                            <p>Đơn giá: <strong class="text-success">{{item.gia}}</strong></p>
+                                                            <p>Tổng giá:<strong id="totalBuy2"
+                                                            style="color:#fe6433;font-size:30px;margin-left:3px"></strong></p>
+                                                            `
+        $(".count-amount").html(data_amount)
+        $("#totalBuy2").html(data_amount * {{ item.gia }})
+    });
+    $("#add_to_cart").click(() => {
+        let databuy = $("#databuy")
+        let data_id_item = databuy.attr("data-id-item")
+        let data_id_user = databuy.attr("data-id-user")
+        let data_amount = databuy.attr("data-amount")
+        let data_price = databuy.attr("data-price") * data_amount
         $.ajax({
+            url: "/buy/items/",
+            type: "POST",
+            data:{ id_item: data_id_item, id_user: data_id_user,soluong: data_amount},
             success: (data) => {
                 Toastify({
-                    text: "Chức năng đang được cập nhật, hãy thử lại sau!",
+                    text: "Thêm vào giỏ hàng thành công",
                     duration: 2000,
-                    destination: "http://localhost:3000/",
+                    destination: "/buy/cart",
                     newWindow: true,
                     //close: true,
                     offset: {
@@ -256,9 +301,11 @@
                     position: "center", // `left`, `center` or `right`
                     stopOnFocus: true, // Prevents dismissing of toast on hover
                     style: {
-                        background: "linear-gradient(to right, red, red)",
+                        background: "linear-gradient(to right, green, green)",
                     },
+                    onClick: function(){} // Callback after click
                 }).showToast();
+                closeModal('exampleModalThem')
             }
         });
     });

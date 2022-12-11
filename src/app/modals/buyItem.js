@@ -9,6 +9,7 @@ const buyItem = new Schema({
   id_user: {type: String, required: true},
   id_item: {type: String, required: true},
   soluong: {type: Number, required: true},
+  buy:{type: String, default: false}
 //   slug: { type: String, slug: 'loai', unique: true}
 },{
   timestamps: true,
