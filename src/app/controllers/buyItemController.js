@@ -7,9 +7,14 @@ class buyItemController{
 
     // [get] /home
     AddCart(req, res, next){
-        const newAddCart = new BuyItem(req.body);
-        newAddCart.save()
-        .then(()=>res.json(req.body))
+        if(req.body.id_user && req.body.id_item && req.body.soluong){
+            const newAddCart = new BuyItem(req.body);
+            newAddCart.save()
+            .then(()=>res.json({text:"Thêm vật phẩm vào giỏ hàng thành công!",bg:"linear-gradient(to right, green, green)"}))
+        }
+        else{
+            res.json({text:"Hãy đăng nhập để thực hiện chức năng này!",bg:"linear-gradient(to right, red, red)"});
+        }
     }
     delete(req,res,next){
         BuyItem.deleteOne({_id: req.params.id})

@@ -32,7 +32,7 @@ class AuthController{
         .catch(next)
     }
     saveAccount(req,res,next){
-        let username = req.body.username.toLowerCase();
+        let username = req.body.username;
         let password = req.body.password
         const newUser = new user({username:username,password: hashPassword(password)});
         user.findOne({username:username})

@@ -243,7 +243,7 @@
             data:{ id_item: data_id_item, id_user: data_id_user,soluong: data_amount},
             success: (data) => {
                 Toastify({
-                    text: "Chức năng đang được cập nhật, hãy thử lại sau!",
+                    text: data.text,
                     duration: 2000,
                     destination: "http://localhost:3000/",
                     newWindow: true,
@@ -256,7 +256,7 @@
                     position: "center", // `left`, `center` or `right`
                     stopOnFocus: true, // Prevents dismissing of toast on hover
                     style: {
-                        background: "linear-gradient(to right, red, red)",
+                        background: data.bg,
                     },
                     onClick: function(){} // Callback after click
                 }).showToast();
@@ -288,7 +288,7 @@
             data:{ id_item: data_id_item, id_user: data_id_user,soluong: data_amount},
             success: (data) => {
                 Toastify({
-                    text: "Thêm vào giỏ hàng thành công",
+                    text: data.text,
                     duration: 2000,
                     destination: "/buy/cart",
                     newWindow: true,
@@ -301,7 +301,7 @@
                     position: "center", // `left`, `center` or `right`
                     stopOnFocus: true, // Prevents dismissing of toast on hover
                     style: {
-                        background: "linear-gradient(to right, green, green)",
+                        background: data.bg,
                     },
                     onClick: function(){} // Callback after click
                 }).showToast();
