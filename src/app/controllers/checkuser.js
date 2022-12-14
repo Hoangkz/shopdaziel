@@ -22,7 +22,8 @@ class getUser{
                     tell: data.tell,
                     gender: data.gender,
                     birthday: data.birthday,
-                    address: data.address
+                    address: data.address,
+                    checkuser: data.checkuser
                 }
                 res.data =data1
                 next();
@@ -54,7 +55,19 @@ class getUser{
         }
         
     }
-
+    checkProfile(req,res,next){
+        try {
+            let checkuser = res.data.checkuser;
+            if(checkuser==1){
+                next();
+            }
+            else{
+                res.json({error:"error"})
+            }
+        } catch (error) {
+            res.json({error:"error"})
+        }
+    }
     checklogin(req, res, next) {
         try {
             let token = req.cookies.token

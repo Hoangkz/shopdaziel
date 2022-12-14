@@ -84,7 +84,7 @@
               </tr>
             {{else}}
               <tr>
-                <td class="text-center" colspan="7">
+                <td class="text-center" colspan="111">
                   Bạn chưa có đơn hàng nào.
                 </td>
               </tr>
@@ -269,7 +269,6 @@
         $(".giao_Hang").click(function(e) {
           let action = "giaohang"
           let id = $(e.target).attr("data")
-          console.log(id)
           $.ajax({
             url: `/buy/formAction`,
             type: "POST",
@@ -375,7 +374,6 @@
                 itemIds.push(Checked.value);
             }
           }
-          console.log(itemIds)
           let text=""
           let background=""
           if(action =="huy"){

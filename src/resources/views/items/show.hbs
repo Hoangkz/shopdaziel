@@ -242,26 +242,51 @@
             type: "POST",
             data:{ id_item: data_id_item, id_user: data_id_user,soluong: data_amount,buy:true,status:"Chờ giao hàng"},
             success: (data) => {
-                Toastify({
-                    text: data.text,
-                    duration: 2000,
-                    destination: "http://localhost:3000/",
-                    newWindow: true,
-                    //close: true,
-                    offset: {
-                        x: 50, // horizontal axis - can be a number or a string indicating unity. eg: '2em'
-                        y: 10 // vertical axis - can be a number or a string indicating unity. eg: '2em'
-                    },
-                    gravity: "top", // `top` or `bottom`
-                    position: "center", // `left`, `center` or `right`
-                    stopOnFocus: true, // Prevents dismissing of toast on hover
-                    style: {
-                        background: data.bg,
-                    },
-                    onClick: function(){} // Callback after click
-                }).showToast();
-                closeModal('exampleModalLong')
-            }
+                if(data.error){
+                    Toastify({
+                        text: "Hãy nhập thông tin cá nhân!",
+                        duration: 3000,
+                        destination: "/auth/user",
+                        newWindow: true,
+                        //close: true,
+                        offset: {
+                            x: 50, // horizontal axis - can be a number or a string indicating unity. eg: '2em'
+                            y: 10 // vertical axis - can be a number or a string indicating unity. eg: '2em'
+                        },
+                        gravity: "top", // `top` or `bottom`
+                        position: "center", // `left`, `center` or `right`
+                        stopOnFocus: true, // Prevents dismissing of toast on hover
+                        style: {
+                            background: "linear-gradient(to right, pink, blue)",
+                        },
+                        onClick: function(){} // Callback after click
+                    }).showToast();
+                    setTimeout(()=>{
+                        location.replace("/auth/user")
+                    },2000)
+                }
+                else{
+                    Toastify({
+                        text: data.text,
+                        duration: 2000,
+                        destination: "http://localhost:3000/",
+                        newWindow: true,
+                        //close: true,
+                        offset: {
+                            x: 50, // horizontal axis - can be a number or a string indicating unity. eg: '2em'
+                            y: 10 // vertical axis - can be a number or a string indicating unity. eg: '2em'
+                        },
+                        gravity: "top", // `top` or `bottom`
+                        position: "center", // `left`, `center` or `right`
+                        stopOnFocus: true, // Prevents dismissing of toast on hover
+                        style: {
+                            background: data.bg,
+                        },
+                        onClick: function(){} // Callback after click
+                    }).showToast();
+                    closeModal('exampleModalLong')
+                }
+            },
         });
     });
     
@@ -287,25 +312,53 @@
             type: "POST",
             data:{ id_item: data_id_item, id_user: data_id_user,soluong: data_amount},
             success: (data) => {
-                Toastify({
-                    text: data.text,
-                    duration: 2000,
-                    destination: "/buy/cart",
-                    newWindow: true,
-                    //close: true,
-                    offset: {
-                        x: 50, // horizontal axis - can be a number or a string indicating unity. eg: '2em'
-                        y: 10 // vertical axis - can be a number or a string indicating unity. eg: '2em'
-                    },
-                    gravity: "top", // `top` or `bottom`
-                    position: "center", // `left`, `center` or `right`
-                    stopOnFocus: true, // Prevents dismissing of toast on hover
-                    style: {
-                        background: data.bg,
-                    },
-                    onClick: function(){} // Callback after click
-                }).showToast();
-                closeModal('exampleModalThem')
+                if(data.error){
+                    Toastify({
+                        text: "Hãy nhập thông tin cá nhân!",
+                        duration: 3000,
+                        destination: "/auth/user",
+                        newWindow: true,
+                        //close: true,
+                        offset: {
+                            x: 50, // horizontal axis - can be a number or a string indicating unity. eg: '2em'
+                            y: 10 // vertical axis - can be a number or a string indicating unity. eg: '2em'
+                        },
+                        gravity: "top", // `top` or `bottom`
+                        position: "center", // `left`, `center` or `right`
+                        stopOnFocus: true, // Prevents dismissing of toast on hover
+                        style: {
+                            background: "linear-gradient(to right, pink, blue)",
+                        },
+                        onClick: function(){} // Callback after click
+                    }).showToast();
+                    setTimeout(()=>{
+                        location.replace("/auth/user")
+                    },2000)
+                }
+                else{
+                    Toastify({
+                        text: data.text,
+                        duration: 2000,
+                        destination: "/buy/cart",
+                        newWindow: true,
+                        //close: true,
+                        offset: {
+                            x: 50, // horizontal axis - can be a number or a string indicating unity. eg: '2em'
+                            y: 10 // vertical axis - can be a number or a string indicating unity. eg: '2em'
+                        },
+                        gravity: "top", // `top` or `bottom`
+                        position: "center", // `left`, `center` or `right`
+                        stopOnFocus: true, // Prevents dismissing of toast on hover
+                        style: {
+                            background: data.bg,
+                        },
+                        onClick: function(){} // Callback after click
+                    }).showToast();
+                    closeModal('exampleModalThem')
+                }
+            },
+            error:()=>{
+              location.replace("/auth/user");
             }
         });
     });

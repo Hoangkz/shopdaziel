@@ -126,10 +126,10 @@ class buyItemController{
                         total:(List_buyItems[i].soluong*cart.gia),
                         id:List_buyItems[i].id,
                         status:List_buyItems[i].status,
-                        fullname:user.fullname,
-                        tell:user.tell,
-                        address:user.address,
-                        id_user:user._id,
+                        fullname:user?.fullname,
+                        tell:user?.tell,
+                        address:user?.address,
+                        id_user:user?._id,
                     })
                 }
                 // let list_cart = List_buyItems.map(async function(buyItem){
