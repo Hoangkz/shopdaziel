@@ -101,7 +101,6 @@ class AuthController{
     }
 
     getuser(req,res,next){
-        console.log(res.data.username)
         res.render("auth/user",{
             data:res.data
         })

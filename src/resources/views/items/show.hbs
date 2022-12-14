@@ -240,7 +240,7 @@
         $.ajax({
             url: "/buy/items/",
             type: "POST",
-            data:{ id_item: data_id_item, id_user: data_id_user,soluong: data_amount},
+            data:{ id_item: data_id_item, id_user: data_id_user,soluong: data_amount,buy:true,status:"Chờ giao hàng"},
             success: (data) => {
                 Toastify({
                     text: data.text,

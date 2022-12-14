@@ -1,5 +1,6 @@
     <div class="d-flex flex-end d-flex justify-content-between" >
         <h3>Giỏ hàng của tôi</h3>
+        <a class="btn btn-primary noAdmin" href="/buy/cart-orders " role="button">Đơn hàng của tôi</a>
     </div>
     
     <div class="mt-3 ml-3 d-flex align-items-center">
@@ -51,8 +52,8 @@
                   <td style="padding-top:15px"class="text-center">{{this.total}}</td>
 
                   <td class="text-center">
-                      <button type="click" class="btn btn-success buyCart" >
-                        Mua
+                      <button type="click" class="btn btn-success buyCart" data-id="{{this.id}}">
+                        Đặt hàng
                       </button>
                       {{!-- phải lấy được id thì mới xoá được (data-id) --}}
                       <a class="btn btn-danger" href="" data-toggle="modal" data-id="{{this.id}}" data-target="#delete-course">
@@ -100,26 +101,36 @@
 {{!-- delete form--}}
 <form method="POST" name="delete-form"></form>
 <script>
-    $(".buyCart").click((e)=>{
-        Toastify({
-            text: "Chức năng đang được cập nhật, hãy thử lại sau!",
-            duration: 1000,
-            destination: "http://localhost:3000/",
-            newWindow: true,
-            //close: true,
-            offset: {
-                x: 50, // horizontal axis - can be a number or a string indicating unity. eg: '2em'
-                y: 10 // vertical axis - can be a number or a string indicating unity. eg: '2em'
-            },
-            gravity: "top", // `top` or `bottom`
-            position: "center", // `left`, `center` or `right`
-            stopOnFocus: true, // Prevents dismissing of toast on hover
-            style: {
-                background: 'linear-gradient(to right, red, red)',
-            },
-            onClick: function(){} // Callback after click
-        }).showToast();
-    })
+  $(".buyCart").click((e) => {
+        let id_buy = e.target.getAttribute("data-id")
+        $.ajax({
+            url: "/buy/items/",
+            type: "POST",
+            data:{id_buy: id_buy},
+            success: (data) => {
+                Toastify({
+                    text: data.text,
+                    duration: 2000,
+                    destination: "http://localhost:3000/",
+                    newWindow: true,
+                    //close: true,
+                    offset: {
+                        x: 50, // horizontal axis - can be a number or a string indicating unity. eg: '2em'
+                        y: 10 // vertical axis - can be a number or a string indicating unity. eg: '2em'
+                    },
+                    gravity: "top", // `top` or `bottom`
+                    position: "center", // `left`, `center` or `right`
+                    stopOnFocus: true, // Prevents dismissing of toast on hover
+                    style: {
+                        background: data.bg,
+                    },
+                    onClick: function(){} // Callback after click
+                }).showToast();
+                setTimeout(()=>{location.reload()},2000)
+            }
+        });
+    });
+    
 </script>
 <script>
     document.addEventListener("DOMContentLoaded", function(){

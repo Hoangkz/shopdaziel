@@ -33,6 +33,12 @@ app.engine('hbs',handlebars.engine({
         date1: (d) => {
           let date = new Date(d)
           return ("0" + date.getDate()).slice(-2) + "-" + ("0"+(date.getMonth()+1)).slice(-2) + "-" +date.getFullYear()
+        },
+        checkAdmin:(role)=>{
+          if (role==3){
+            return true
+          }
+          return false
         }
     }
   }));
