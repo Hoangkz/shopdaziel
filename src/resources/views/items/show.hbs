@@ -99,8 +99,9 @@
                         </button>
                         <button class="buttonGioHang2 ml-2" data-toggle="modal"
                             data-target="#exampleModalLong">&nbsp&nbspMua ngay&nbsp&nbsp</button>
-                        <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog"
-                            aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+
+                            
+                        <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -205,12 +206,15 @@
     getInput.addEventListener("change", function (e) {
         if (e.target.value >= max) {
             e.target.value = max
+            amount.setAttribute("data-amount", parseInt(max))
         }
         else if (e.target.value <= min) {
             e.target.value = min
+            amount.setAttribute("data-amount", parseInt(min))
         }
         else {
             getInput.value = e.target.value
+            amount.setAttribute("data-amount", parseInt(e.target.value))
         }
         //console.log(getInput.value)
 
