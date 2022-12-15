@@ -127,7 +127,7 @@
     // khi click vào xoá form xoá sẽ thêm action = ...
     // deleteForm.submit() dùng để submit vào form xoá và thực hiện xoá course trên database
     btnDeleteCourse.onclick = function () {
-      deleteForm.action = '/items/' + accountId + '?_method=DELETE'
+      deleteForm.action = '/users/deleteAccount/' + accountId + '?_method=DELETE'
       deleteForm.submit()
     }
   })

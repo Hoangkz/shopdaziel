@@ -50,7 +50,13 @@ class UserController{
             })
             .catch(next) 
     }
+    deleteAccount(req,res, next){
+        User.delete({_id: req.params.id})
+        .then(()=> res.redirect('back'))
+        .catch(next)
+    }
     formUsers(req,res, next){
+        console.log(req.body)
         switch(req.body.action){
             //chuyển vào thùng rác
             case "delete":
