@@ -39,9 +39,7 @@ class AuthController{
         .then(data =>{
             if(data==null){
                 newUser.save()
-                .then(()=>
-                    res.redirect('/auth/login')
-                    )
+                .then(()=>res.redirect('/auth/login'))
                 .catch(next)
             }
             else{
