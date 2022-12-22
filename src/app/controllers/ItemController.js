@@ -151,11 +151,10 @@ class ItemController{
 
     search(req, res,next) {
         
-        let search = req.query.q
-        let search2 = req.query.q.charAt(0).toUpperCase() + req.query.q.slice(1)
+        let search = req.query.q.toLowerCase()
+        let search2 = search.charAt(0).toUpperCase() +search.slice(1)
         let page =(parseInt(req.query.page)-1)||0;
         let pageSize = 6
-        // res.json(a)
         Item.find({$or:[{name:{$regex: search}},{name:{$regex: search2}}]}).skip(pageSize*page).limit(pageSize)
         .then(items => {
             if (search != ""){
