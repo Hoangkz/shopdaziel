@@ -23,11 +23,7 @@ class ItemController{
     }
 
     showList(req,res,next){
-        // req.query.name
-        // req.body.name
-        // req.params.slug
-        // res.send("Item: "+req.params.id+" "+ Item.findById(req.params.id));
-        // res.json(req.params.loai)
+
         let a = req.params.loai;
         let page =(parseInt(req.query.page)-1)||0;
         let pageSize = 6
@@ -46,12 +42,6 @@ class ItemController{
             })
             .catch(next) 
         
-        // Item.find({})
-        //     .then(items =>{
-                
-
-        //     })
-        //     .catch(next);
     }
 
     //GET /items/store (edit)
