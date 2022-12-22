@@ -1,11 +1,11 @@
-const newsRouter =require("./news")
-const itemsRouter =require("./items")
-const authRouter =require("./auth")
+const newsRouter =require("./newsRouter")
+const itemsRouter =require("./itemsRouter")
+const authRouter =require("./authRouter")
 
 const siteRouter =require("./homeRouter")
 const checkUser = require("../app/controllers/checkuser")
-const meRouter =require("./me")
-const userRouter =require("./user")
+const meRouter =require("./meRouter")
+const userRouter =require("./userRouter")
 const buyRouter =require("./buyRouter")
 
 function route(app){
