@@ -2,7 +2,7 @@ const newsRouter =require("./news")
 const itemsRouter =require("./items")
 const authRouter =require("./auth")
 
-const siteRouter =require("./siteRouter")
+const siteRouter =require("./homeRouter")
 const checkUser = require("../app/controllers/checkuser")
 const meRouter =require("./me")
 const userRouter =require("./user")

@@ -3,7 +3,7 @@ const Item = require('../modals/Item');
 // const jwt = require('jsonwebtoken');
 // const user = require('../modals/user');
 const {mutipleMongooseToObject} = require('../../util/mongoose')
-class SitesController{
+class homeController{
 
     // [get] /home
     index(req, res, next){
@@ -42,4 +42,4 @@ class SitesController{
     
 }
 
-module.exports = new SitesController();
+module.exports = new homeController();
