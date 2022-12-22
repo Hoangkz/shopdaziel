@@ -3,7 +3,6 @@ const bcrypt = require('bcrypt');
 
 module.exports = {
     mutipleMongooseToObject: function(mongooses) {
-
         return mongooses.map(mongoose=>mongoose.toObject())
     },
     MongooseToObject: function(mongoose) {
