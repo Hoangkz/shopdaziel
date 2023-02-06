@@ -7,11 +7,11 @@ class NewsController{
 
     // [get] /news
     index(req, res){
-        res.render('news')
+        res.json('news')
     }
 
     show(req,res){
-        res.send("news show")
+        res.json("news show")
     }
 
 

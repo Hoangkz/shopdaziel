@@ -7,6 +7,7 @@ const checkUser = require("../app/controllers/checkuser")
 const meRouter =require("./meRouter")
 const userRouter =require("./userRouter")
 const buyRouter =require("./buyRouter")
+const apiRouter =require("./API")
 
 function route(app){
     app.use('/', checkUser.getuser,siteRouter);
@@ -19,6 +20,7 @@ function route(app){
     app.use('/items', itemsRouter);
     app.use('/users', userRouter);
     app.use('/buy',checkUser.checklogin,checkUser.getuser,checkUser.checkProfile, buyRouter);
+    app.use('/api',apiRouter);
 }
 module.exports = route;
 
