@@ -39,17 +39,12 @@ class AuthController{
         .then(data =>{
             if(data==null){
                 newUser.save()
-                .then(()=>res.redirect('/auth/login'))
+                .then(()=>res.json({message:'Đăng ký tài khoản thành cônng'}))
                 .catch(next)
             }
             else{
 
-                res.render('auth/signup',{
-                    layout:false,
-                    data:false,
-                    username:username,
-                    password:password,
-                })
+                res.json({message:'Tên tài khoản đã được đăng ký, hãy chọn một tên tài khoản khác'})
             }
         })
         .catch(err =>{
@@ -68,28 +63,17 @@ class AuthController{
                         
                         let token = jwt.sign({_id:data._id},"mk")
                         res.cookie("token",token,{ maxAge: 9000000, httpOnly: true })
-                        // return res.redirect("/private")
-                        return res.redirect("/")
-                        // return res.json({
-                        //         message: "thành công",
-                        //         token: token 
-                        //     })
+                        return res.json({
+                                message: "thành công",
+                                token: token 
+                            })
                     }
                     else{
-                        return res.render("auth/login",{
-                            layout: false,
-                            loginFalied:true,
-                        })
+                        res.json({ message: "Thông tin tài khoản hoặc mật khẩu không chính xác"})
                     }
                 }
                 else{
-                    // return res.redirect("/auth/login")
-                    // return res.redirect("/")
-
-                    return res.render("auth/login",{
-                        layout: false,
-                        loginFalied:true,
-                    })
+                    res.json({ message: "Thông tin tài khoản hoặc mật khẩu không chính xác"})
                 }
 
             })
