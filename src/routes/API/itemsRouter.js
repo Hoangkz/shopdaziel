@@ -6,9 +6,6 @@ const router = express.Router();
 
 const itemController = require('../../app/controllers_API/ItemController');
 
-
-//newcontroller.index
-
 // router.get('/:id/edit',checkUser.getuser, itemController.edit);
 // router.get('/create',checkUser.getuser,checkUser.checkAdmin, itemController.create);
 // router.post('/formAction', itemController.formAction);
