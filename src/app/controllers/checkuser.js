@@ -32,7 +32,6 @@ class getUser{
                 res.json("sai")
             })  
         } catch (error) {
-            // res.json("sai")
             let data2 ={
                 username: false,
                 role: 0,
