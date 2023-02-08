@@ -14,6 +14,7 @@ class AuthController{
         })
         .catch(next)
     }
+    //đăng ký
     saveAccount(req,res,next){
         let username = req.body.username;
         let password = req.body.password
@@ -26,7 +27,6 @@ class AuthController{
                 .catch(next)
             }
             else{
-
                 res.json({message:'Tên tài khoản đã được đăng ký, hãy chọn một tên tài khoản khác'})
             }
         })
@@ -34,7 +34,7 @@ class AuthController{
             res.json("lỗi sever")
         })
     }
-
+    //đăng nhập
     setLogin(req,res,next){
         let username = req.body.username;
         let password = req.body.password;
