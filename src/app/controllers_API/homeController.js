@@ -1,7 +1,5 @@
 
 const Item = require('../modals/Item');
-// const jwt = require('jsonwebtoken');
-// const user = require('../modals/user');
 const {mutipleMongooseToObject} = require('../../util/mongoose')
 class homeController{
 
@@ -14,7 +12,7 @@ class homeController{
             .then(items =>{
                 Item.countDocuments({})
                 .then((total)=>{
-                    res.render("home",{
+                    res.json({
                         items: mutipleMongooseToObject(items),
                         data: res.data,
                         pageLength: (Math.ceil((total)/pageSize)),
@@ -24,22 +22,7 @@ class homeController{
 
             })
             .catch(next);
-        
-        //callbacks
-            // Course.find({},function(err, courses){
-            //     if(!err) {
-            //     res.json(courses);
-            //     }
-            //     else{
-            //         next(err)
-            //     }
-            // })
     }
-     // [get] /search
-    //  search(req, res){
-    //     res.render('search')
-    // }
-    
 }
 
 module.exports = new homeController();
