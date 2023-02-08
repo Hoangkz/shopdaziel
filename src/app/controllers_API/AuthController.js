@@ -1,29 +1,12 @@
 const {hashPassword,checkPassword} = require('../../util/mongoose');
-const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const user = require('../modals/user');
-const checkuser = require('./checkuser');
 
 class AuthController{
-    login(req,res,next){
-        res.render("auth/login",{
-            layout:false,
-            loginFalied:false
-        })
-    }
-    logout(req,res,next){
-        res.clearCookie("token")
-        res.redirect("/")
-    }
-    signup(req,res,next){
-        res.render("auth/signup",{
-            layout:false,
-            data:true
-        });
-    }
     saveProfile(req,res,next){
         let data = req.body
         data.checkuser = 1
+        return res.json({message:"error"})
         user.updateOne({_id: req.params.id}, data)
         // redirect chuyển sang trang ....
         .then(()=> {
@@ -80,12 +63,6 @@ class AuthController{
             .catch(err=>{
                 res.status(500).json("lỗi sever")
             })
-    }
-
-    getuser(req,res,next){
-        res.render("auth/user",{
-            data:res.data
-        })
     }
 
 }
