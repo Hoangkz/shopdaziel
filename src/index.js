@@ -1,7 +1,7 @@
 const express = require('express')
 const morgan = require('morgan')
 const app = express()
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 8000;
 
 const handlebars = require('express-handlebars');
 const path = require('path');
@@ -12,7 +12,6 @@ const cookieParser = require('cookie-parser')
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 app.use(cookieParser())
-
 
 //HTTP logger
 app.use(morgan('combined'))
@@ -64,5 +63,5 @@ require('dotenv').config()
 db.connect();
 
 app.listen(port, () => {
-  console.log(`App listening on http://localhost:${port}`)
+  console.log(`App listening on http://127.0.0.1:${port}`)
 })

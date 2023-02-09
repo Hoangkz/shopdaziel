@@ -44,7 +44,6 @@ class ItemController{
         Item.find({$or:[{name:{$regex: search}},{name:{$regex: search2}}]}).skip(pageSize*page).limit(pageSize)
         .then(items => {
             if (search != ""){
-                // return res.json({item: mutipleMongooseToObject(item)});
                 Item.countDocuments({$or:[{name:{$regex: search}},{name:{$regex: search2}}]})
                 .then((total)=>{
                     return res.json({
