@@ -5,12 +5,15 @@ const port = process.env.PORT || 8000;
 
 const handlebars = require('express-handlebars');
 const path = require('path');
-
+const cors = require('cors');
 const bodyParser  = require('body-parser')
 const cookieParser = require('cookie-parser') 
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
+
+app.use(cors())
+
 app.use(cookieParser())
 
 //HTTP logger
@@ -63,5 +66,5 @@ require('dotenv').config()
 db.connect();
 
 app.listen(port, () => {
-  console.log(`App listening on http://127.0.0.1:${port}`)
+  console.log(`App listening on http://localhost:${port}`)
 })
