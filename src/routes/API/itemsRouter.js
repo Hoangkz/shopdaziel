@@ -21,7 +21,6 @@ const itemController = require('../../app/controllers_API/ItemController');
 
 // router.get('/danhsachItem/items', itemController.listItems);
 
-
 router.get('/:loai/show', itemController.showList);
 router.get('/search', itemController.search);
 router.get('/:id', itemController.show);

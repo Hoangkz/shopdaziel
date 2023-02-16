@@ -8,7 +8,7 @@ const buyItemController = require('../../app/controllers/buyItemController');
 
 
 //newcontroller.index
-
+// mua bán
 router.post('/items',buyItemController.AddCart);
 router.delete('/:id',buyItemController.delete);
 router.get('/cart',buyItemController.ShopCart);

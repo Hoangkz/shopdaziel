@@ -9,6 +9,5 @@ router.post('/signup', AuthController.saveAccount);
 router.post('/user/:id', AuthController.saveProfile);
 
 
-
 module.exports = router;
 
