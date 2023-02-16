@@ -24,7 +24,7 @@ class ItemController{
                 Item.countDocuments({loai:a})
                 .then((total)=>{
                     res.json({
-                        item: mutipleMongooseToObject(items),
+                        items: mutipleMongooseToObject(items),
                         pageLength: (Math.ceil((total)/pageSize)),
                         currentPage:(page+1)
                     })
