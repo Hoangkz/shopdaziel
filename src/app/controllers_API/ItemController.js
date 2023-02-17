@@ -47,7 +47,7 @@ class ItemController{
                 Item.countDocuments({$or:[{name:{$regex: search}},{name:{$regex: search2}}]})
                 .then((total)=>{
                     return res.json({
-                        item: mutipleMongooseToObject(items),
+                        items: mutipleMongooseToObject(items),
                         pageLength: (Math.ceil((total)/pageSize)),
                         currentPage:(page+1),
                         search:search,
