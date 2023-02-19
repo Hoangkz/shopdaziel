@@ -33,6 +33,24 @@ class ItemController{
             .catch(next) 
         
     }
+    searchClient(req, res,next) {
+        let search =""
+        if(req.query.q){
+            search = req.query.q.toLowerCase()
+        }
+        let search2 = (search.charAt(0).toUpperCase() +search.slice(1))
+        Item.find({$or:[{name:{$regex: search}},{name:{$regex: search2}}]})
+        .then(items => {
+            return res.json({
+                items: mutipleMongooseToObject(items),
+                search:search,
+                length:items.length,
+                message:'success'
+            })  
+        })
+        .catch(()=> res.json({message:'error'})) 
+    }
+
     search(req, res,next) {
         let search =""
         if(req.query.q){

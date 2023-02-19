@@ -68,12 +68,7 @@ class AuthController{
                         
                         let token = jwt.sign({_id:data._id},"mk")
                         res.cookie("token",token,{ maxAge: 9000000, httpOnly: true })
-                        // return res.redirect("/private")
                         return res.redirect("/")
-                        // return res.json({
-                        //         message: "thành công",
-                        //         token: token 
-                        //     })
                     }
                     else{
                         return res.render("auth/login",{
@@ -83,9 +78,6 @@ class AuthController{
                     }
                 }
                 else{
-                    // return res.redirect("/auth/login")
-                    // return res.redirect("/")
-
                     return res.render("auth/login",{
                         layout: false,
                         loginFalied:true,
