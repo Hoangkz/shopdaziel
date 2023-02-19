@@ -54,39 +54,43 @@ class AuthController {
                         return JSON.stringify(response)
                     }
                     else {
-                        res.status(400).json({ message: "Thông tin tài khoản hoặc mật khẩu không chính xác" })
+                        return false
                     }
                 }
                 else {
+                    return false
+                }
+            })
+            .then(data => {
+                if(!data){
                     res.status(400).json({ message: "Thông tin tài khoản hoặc mật khẩu không chính xác" })
+                }
+                else{
+                    data = JSON.parse(data)
+                    const { password, ...rest } = data
+                    const token = jwt.sign({ data: rest }, "mk", {
+                        expiresIn: "60s"
+                    })
+                    const refresh_token = jwt.sign({ data: rest }, "refresh", {
+                        expiresIn: "360d"
+                    })
+                    const newToken = new List_Token({refresh_token});
+                    newToken.save()
+                    .then(() => {
+                        return res.json({
+                            message: "Đăng nhập thành công",
+                            token: token,
+                            refresh_token: refresh_token
+                        })
+                    })
+                    .catch(err => {
+                        res.status(500).json({message:"lỗi sever"})
+                    })
                 }
 
             })
-            .then(data => {
-                data = JSON.parse(data)
-                const { password, ...rest } = data
-                const token = jwt.sign({ data: rest }, "mk", {
-                    expiresIn: "60s"
-                })
-                const refresh_token = jwt.sign({ data: rest }, "refresh", {
-                    expiresIn: "360d"
-                })
-                const newToken = new List_Token({refresh_token});
-                newToken.save()
-                .then(() => {
-                    return res.json({
-                        message: "Đăng nhập thành công",
-                        token: token,
-                        refresh_token: refresh_token
-                    })
-                })
-                .catch(err => {
-                    res.status(500).json("lỗi sever")
-                })
-
-            })
             .catch(err => {
-                res.status(500).json("lỗi sever")
+                res.status(500).json({message:"lỗi sever"})
             })
     }
     //Middleware
@@ -125,7 +129,7 @@ class AuthController {
             })
         })
         .catch((error)=>{
-            res.status(500).json("lỗi sever")
+            res.status(500).json({message:"lỗi sever"})
         })
         
     }
