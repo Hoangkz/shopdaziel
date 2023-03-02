@@ -1,19 +1,6 @@
-const express = require('express');
-const getUser = require("../app/controllers/checkuser")
-
-const router = express.Router();
+const router = require("express").Router();
 const passport = require("passport");
 
-const AuthController = require('../app/controllers/AuthController');
-
-router.get('/login', AuthController.login);
-router.post('/login', AuthController.setLogin);
-router.post('/logout', AuthController.logout);
-router.get('/signup', AuthController.signup);
-router.post('/signup', AuthController.saveAccount);
-router.post('/user/:id', AuthController.saveProfile);
-
-router.get('/user',getUser.checklogin, getUser.getuser,AuthController.getuser);
 const CLIENT_URL = "http://localhost:3000/";
 
 router.get("/login/success", (req, res) => {
@@ -59,5 +46,4 @@ router.get(
   })
 );
 
-module.exports = router;
-
+module.exports = router

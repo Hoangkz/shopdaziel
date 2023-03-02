@@ -2,7 +2,9 @@ const express = require('express')
 const morgan = require('morgan')
 const app = express()
 const port = process.env.PORT || 8000;
-
+const session = require('express-session');
+const passportSetup = require('./partpost');
+const passport = require('passport');
 const handlebars = require('express-handlebars');
 const path = require('path');
 const cors = require('cors');
@@ -59,8 +61,22 @@ app.use(methodOverride('_method'))
 const route = require('./routes');
 // const { homedir } = require('os');
 
-route(app);
+app.use(session({
+  secret: '<YOUR_SECRET>',
+  resave: false,
+  saveUninitialized: true,
+}));
+app.use(passport.initialize());
+app.use(passport.session());
 
+route(app);
+app.use(session({
+        secret: '<YOUR_SECRET>',
+        resave: false,
+        saveUninitialized: true,
+      }));
+    app.use(passport.initialize());
+    app.use(passport.session());
 const db = require('./config/db')
 require('dotenv').config()
 db.connect();

@@ -8,6 +8,7 @@ const meRouter =require("./meRouter")
 const userRouter =require("./userRouter")
 const buyRouter =require("./buyRouter")
 const apiRouter =require("./API")
+const passport = require('passport');
 
 function route(app){
     app.use('/', checkUser.getuser,siteRouter);

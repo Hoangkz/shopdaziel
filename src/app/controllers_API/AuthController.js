@@ -68,11 +68,10 @@ class AuthController {
                 else{
                     data = JSON.parse(data)
                     const { password, ...rest } = data
-                    const token = jwt.sign({ data: rest }, "mk", { expiresIn: '5s' })
-                    const refresh_token = jwt.sign({ id: rest.id,username: rest.username,gender:rest.gender}, "refresh", { expiresIn: "15s"})
-                    const newToken = new List_Token({refresh_token});
+                    const token = jwt.sign({ data: rest }, "mk", { expiresIn: '3s' })
+                    const refresh_token = jwt.sign({ id: rest.id,username: rest.username,gender:rest.gender}, "refresh", { expiresIn: "1d"})
+                    const newToken = new List_Token({data:rest,refresh_token});
                     newToken.save()
-                    console.log("vao day")
                     return res.status(200).json({
                         message: "Đăng nhập thành công",
                         token: token,
@@ -99,6 +98,7 @@ class AuthController {
 
 
     refreshToken(req, res, next) {
+        console.log("refreshToken")
         const refreshToken = req.body.refresh_token;
         if(!refreshToken){
             return res.status(401).json({
@@ -114,14 +114,16 @@ class AuthController {
                     }) 
                 }
                 else{
-                    jwt.verify(refreshToken,"refresh",(err, decoded)=>{
+                    jwt.verify(refreshToken,"refresh",async(err, decoded)=>{
                         if (err) {
                             return res.status(401).json({
                                 message: "Thời gian truy cập của bạn đã hết!",
                             })                  
-                        }
+                        }                                                                                                   
                         else{
-                            const token =  jwt.sign({data:decoded.data},"mk", { expiresIn: "5s" })
+                            const newUser = await user.findById(data.data._id)
+                            const { password, ...rest } = JSON.parse(JSON.stringify(newUser))
+                            const token =  jwt.sign({data:rest},"mk", { expiresIn: "2s" })
                             return res.status(200).json({
                                 message: "Refresh token thành công",
                                 token: token,
@@ -137,7 +139,6 @@ class AuthController {
         
     }
     logout(req, res,next) {
-        console.log(req.body)
         const refreshToken =req.body.refresh_token|| req.headers?.authorization?.split(' ')[1]|null
         List_Token.deleteOne({refresh_token: refreshToken})
         .then(()=> res.status(200).json({message:"Tài khoản của bạn đã được đăng xuất!"}))

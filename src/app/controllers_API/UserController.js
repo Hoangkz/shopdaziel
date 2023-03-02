@@ -1,84 +1,171 @@
-const {hashPassword,checkPassword} = require('../../util/mongoose');
-const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
+const { hashPassword, checkPassword } = require('../../util/mongoose');
 const User = require('../modals/user');
-const {MongooseToObject, mutipleMongooseToObject,mongooseToGetLish} = require('../../util/mongoose');
+const { MongooseToObject, mutipleMongooseToObject, mongooseToGetLish } = require('../../util/mongoose');
+const nodemailer = require("nodemailer");
 
-class UserController{
+class UserController {
 
-    showLishUser(req,res, next){
-        User.find({})
-            // res.json(req.params.id)
-            .then(user => {
-                return res.render('users/listUser',{
-                    user: mutipleMongooseToObject(user),
-                    data: res.data
-                });
+    async showLishUser(req, res, next) {
+        const admin = await User.findById(req.body.id)
+        let page =(parseInt(req.query.page)-1)||0;
+        let pageSize = 6
+        if(admin.role === 3){
+            User.find({},{ password: 0 }).skip(pageSize*page).limit(pageSize)
+                .then(async (user) => {
+                    const total = await User.countDocuments({})
+                    return res.status(200).json({
+                        user: mutipleMongooseToObject(user),
+                        message:"Success",
+                        pageLength: (Math.ceil((total)/pageSize)),
+                        currentPage:(page+1)
+                    });
+                })
+                .catch((error) => {
+                    res.status(500).json({
+                        message:"Lỗi server",
+                    })
+                })
+        }
+        else{
+            res.status(403).json({
+                message:"Bạn không đủ quyền hạn!",
             })
-            .catch(next) 
+        }
     }
-    changePassword(req,res, next){
+    changePassword(req, res, next) {
+        console.log('changePassword')
         let newPassword = req.body.newPassword;
         let password = req.body.password;
-        User.findById(req.params.id)
+        User.findById(req.body.id)
             .then(user => {
-                if(checkPassword(password,user.password)){
-                    if(newPassword.length>=5){
+                if (checkPassword(password, user.password)) {
+                    if (newPassword.length >= 5) {
                         user.password = hashPassword(newPassword)
                         user.save()
-                        return res.redirect('/auth/user')
+                        return res.status(200).json({
+                            message: "Thay đổi mật khẩu thành công"
+                        })
                     }
-                    else{
-                        return res.error();
-                    }
+                    return res.status(400).json({
+                        message: "Mật khẩu mới phải có ít nhất 5 ký tự"
+                    })
                 }
-                else{
-                    return res.error();
+                else {
+                    return res.status(400).json({
+                        message: "Mật khẩu cũ không chính xác!"
+                    })
                 }
-                
             })
-            .catch(next) 
+            .catch((error) => {
+                return res.status(500).json({
+                    message: "Lỗi server!"
+                })
+            })
     }
-    showUser(req,res, next){
+
+    showUser(req, res, next) {
         User.findById(req.params.id)
             // res.json(req.params.id)
             .then(user => {
-                return res.render('users/user',{
+                return res.render('users/user', {
                     user: MongooseToObject(user),
                     data: res.data
                 });
             })
-            .catch(next) 
+            .catch(next)
     }
-    deleteAccount(req,res, next){
-        User.delete({_id: req.params.id})
-        .then(()=> res.redirect('back'))
-        .catch(next)
+    deleteAccount(req, res, next) {
+        const list_id = req.body.listId.split(",")
+        User.delete({ _id: { $in: list_id } })
+            .then((data) => res.status(200).json({ message:"Xoá account thành công!"}))
+            .catch(error=>{res.status(500).json({ message:"Lỗi server"})})
     }
-    formUsers(req,res, next){
+    formUsers(req, res, next) {
         console.log(req.body)
-        switch(req.body.action){
+        switch (req.body.action) {
             //chuyển vào thùng rác
             case "delete":
-                User.delete({_id: {$in: req.body["userIds[]"]}})
-                    .then(()=> res.redirect('back'))
+                User.delete({ _id: { $in: req.body["userIds[]"] } })
+                    .then(() => res.redirect('back'))
                     .catch(next)
                 break;
             // Khôi phục
             case "fix":
-                User.restore({_id: {$in: req.body["userIds[]"]}})
-                    .then(()=> res.redirect('back'))
+                User.restore({ _id: { $in: req.body["userIds[]"] } })
+                    .then(() => res.redirect('back'))
                     .catch(next)
                 break;
             // xoá vĩnh viễn
             case "permanentlyDelete":
-                User.deleteMany({_id: {$in: req.body["userIds[]"]}})
-                    .then(()=> res.redirect('back'))
+                User.deleteMany({ _id: { $in: req.body["userIds[]"] } })
+                    .then(() => res.redirect('back'))
                     .catch(next)
-                break;  
+                break;
             default:
                 res.json(req.body);
         }
     }
+
+    updateUser(req, res, next) {
+        User.updateOne({ _id: req.body.id }, req.body)
+            .then(async () => {
+                // const user = await User.findOne({_id: req.body.id})
+                // const jsonUser = JSON.parse(JSON.stringify(user))
+                // const refresh_token = jwt.sign({ id: jsonUser._id,username: jsonUser.username,gender:jsonUser.gender}, "refresh", { expiresIn: "1d"})
+                // List_Token.find({ data: { $elemMatch: { _id:req.body.id}}})
+                // .then((data)=>{
+                //     console.log("vao 2")
+                // })
+                // .catch((data)=>{
+                //     console.log(data)
+                // })
+                res.status(200).json({
+                    // refresh_token:refresh_token,
+                    message: "Update user successfully!"
+                })
+            })
+            .catch((next) => {
+                res.status(400).json({ message: "Update user error!" })
+            })
+    }
+    async forgotPassword(req, res, next) {
+        const email = req.body.email
+        const username = req.body.account
+        const user = await User.findOne({ username: username, extname: email })
+        if (user) {
+            const newPassword = Math.random().toString(36).slice(-8);
+            const transporter = nodemailer.createTransport({
+                host: 'smtp.gmail.com',
+                port: 587,
+                secure: false,
+                requireTLS: true,
+                service: "gmail",
+                auth: {
+                    user: "20111061045@hunre.edu.vn",
+                    pass: "A12345678q",
+                },
+            });
+            const mailOptions = {
+                from: "20111061045@hunre.edu.vn",
+                to: email,
+                subject: "Your new password",
+                text: `Your new password is: ${newPassword}`,
+            };
+
+            transporter.sendMail(mailOptions, (error, info) => {
+                if (error) {
+                    res.status(500).json({ message: "Server đang quá tải, hãy thử lại sau!" });
+                } else {
+                    user.password = hashPassword(newPassword)
+                    user.save();
+                    res.status(200).json({ message: "Mật khẩu mới đã được gửi đến email của bạn!" })
+                }
+            });
+        }
+        else {
+            res.status(400).json({ message: "Email không hợp lệ!" })
+        }
+    }
+
 }
 module.exports = new UserController();

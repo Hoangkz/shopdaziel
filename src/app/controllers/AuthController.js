@@ -6,6 +6,8 @@ const checkuser = require('./checkuser');
 
 class AuthController{
     login(req,res,next){
+        console.log("vao day")
+
         res.render("auth/login",{
             layout:false,
             loginFalied:false
@@ -58,6 +60,7 @@ class AuthController{
     }
 
     setLogin(req,res,next){
+        console.log("vao day")
         let username = req.body.username;
         let password = req.body.password;
         user.findOne({ username: username})

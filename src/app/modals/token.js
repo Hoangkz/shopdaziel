@@ -4,7 +4,8 @@ const slug = require('mongoose-slug-generator');
 
 
 const Token = new Schema({
-    refresh_token: {type: String, required: true},
+  refresh_token: {type: String, required: true},
+  data: {type: Object, required: true},
 },{
   timestamps: true,
 });
