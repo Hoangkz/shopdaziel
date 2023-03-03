@@ -11,7 +11,7 @@ router.post('/delete-carts',buyItemController.DeleteCart);
 router.post('/cart-items',buyItemController.AddCartItems);
 router.post('/buys-carts',buyItemController.BuysCartItems);
 router.get('/order-carts',buyItemController.CartOrder);
-router.get('/admin-order-carts',checkAdmin,buyItemController.AdminCartOrder);
+router.post('/admin-order-carts',checkAdmin,buyItemController.AdminCartOrder);
 router.post('/ship-carts',checkAdmin,buyItemController.ShipCarts);
 router.post('/cancel-order-carts',buyItemController.CancelCartOrder);
 router.get('/list-carts',buyItemController.CartItems);
