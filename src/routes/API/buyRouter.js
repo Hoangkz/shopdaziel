@@ -4,7 +4,7 @@ const checkUser = require("../../app/controllers/checkuser")
 const express = require('express');
 const router = express.Router();
 
-const buyItemController = require('../../app/controllers/buyItemController');
+const buyItemController = require('../../app/controllers_API/buyItemController');
 
 
 //newcontroller.index

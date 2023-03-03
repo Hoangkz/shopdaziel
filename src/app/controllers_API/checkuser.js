@@ -2,7 +2,6 @@
 // const bodyParser = require('body-parser')
 const jwt = require('jsonwebtoken');
 const user = require('../modals/user')
-const cookieParser = require('cookie-parser')
 
 
 class getUser{
@@ -43,18 +42,48 @@ class getUser{
     }
     checkAdmin(req,res,next){
         try {
-            let role = res.data.role;
-            if(role===3){
-                next();
-            }
-            else{
-                res.redirect("back");
+            const authHeader = req.headers.authorization;
+            if (authHeader) {
+                const token = authHeader.split(' ')[1];
+                // Thực hiện xử lý với token
+                const decoded = jwt.decode(token);
+                if (decoded.data.role ===3){
+                    next()
+                }
+                else{
+                    res.status(403).json({message:'Bạn Không có quyền'});
+                }
+            } else {
+                res.status(401).json({message:'Authorization header is missing'});
             }
         } catch (error) {
-            res.redirect("back");
+            res.status(500).json({message:'Lỗi server'});
         }
         
     }
+
+    checkUser(req,res,next){
+        try {
+            const authHeader = req.headers.authorization;
+            if (authHeader) {
+                const token = authHeader.split(' ')[1];
+                // Thực hiện xử lý với token
+                const decoded = jwt.decode(token);
+                if (decoded){
+                    next()
+                }
+                else{
+                    res.status(403).json({message:'Hãy thực hiện đăng nhập'});
+                }
+            } else {
+                res.status(401).json({message:'Authorization header is missing'});
+            }
+        } catch (error) {
+            res.status(500).json({message:'Lỗi server'});
+        }
+        
+    }
+
     checkProfile(req,res,next){
         try {
             let checkuser = res.data.checkuser;

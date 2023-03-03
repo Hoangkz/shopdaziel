@@ -1,5 +1,6 @@
 
 const Item = require('../modals/Item');
+const User = require('../modals/user');
 const {MongooseToObject, mutipleMongooseToObject,mongooseToGetLish} = require('../../util/mongoose');
 
 class ItemController{
@@ -49,6 +50,61 @@ class ItemController{
             })  
         })
         .catch(()=> res.json({message:'error'})) 
+    }
+
+    List_Items(req,res,next){
+        
+        let page =(parseInt(req.query.page)-1)||0;
+        let pageSize = 6
+        Promise.all([Item.find({}),User.findById(req.body.id)])
+            .then(([items,admin]) =>{
+                if(admin){
+                    let newtotal = items.length
+                    const search = req.body.search||""
+                    if(search){
+                        items = items.filter((data,index) => data.name.toLowerCase().includes(search.toLowerCase()))
+                        newtotal = items.length
+                    }
+                    items = items.filter((data,index) =>index>=page*pageSize&&index<page*pageSize+pageSize)
+                    res.status(200).json({
+                        items: mutipleMongooseToObject(items),
+                        pageLength: (Math.ceil((newtotal)/pageSize)),
+                        currentPage:(page+1),
+                        message: "Lấy ra danh sách item page" +page+1
+                    })
+                }
+                else{
+                    res.status(403).json({message: "Bạn không có quyền truy cập"})
+                }
+            })
+            .catch((error)=>{res.status(500).json({message: "Lỗi server"})});
+        
+    }
+    Create_Items(req,res,next){
+        const item = new Item(req.body);
+        item.save()
+            .then(()=>res.status(200).json({ message:"Thêm sản phẩm thành công!"}))
+            .catch(()=>{res.status(500).json({ message:"Lỗi server!"})})
+    }
+
+    Update_Items(req,res,next){
+        const {id,...rest} =  req.body
+        Item.updateOne({_id:id}, rest)
+        .then(()=>res.status(200).json({ message:"Update sản phẩm thành công!"}))
+        .catch(()=>{res.status(500).json({ message:"Lỗi server!"})})
+    }
+
+    async Delete_Items(req, res, next) {
+        const list_id = req.body?.listId?.split(",")
+        const admin = await User.findById(req.body.id)
+        if(admin?.role===3){
+            Item.delete({ _id: { $in: list_id } })
+                .then((data) => res.status(200).json({ message:"Xoá vật phẩm thành công!"}))
+                .catch(error=>{res.status(500).json({ message:"Lỗi server"})})
+        }
+        else{
+            res.status(403).json({ message:"Bạn không có quyền xoá!"})
+        }
     }
 
     search(req, res,next) {
@@ -112,11 +168,7 @@ class ItemController{
             .catch(next)
 
     }
-    delete(req,res,next){
-        Item.delete({_id: req.params.id})
-            .then(()=> res.redirect('back'))
-            .catch(next)
-    }
+    
 
     permanentlyDelete(req,res,next){
         Item.deleteOne({_id: req.params.id})

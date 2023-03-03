@@ -11,8 +11,12 @@ class UserController {
         let pageSize = 6
         if(admin.role === 3){
             User.find({},{ password: 0 }).skip(pageSize*page).limit(pageSize)
-                .then(async (user) => {
+            .then(async (user) => {
+                    const search = req.body.search||""
                     const total = await User.countDocuments({})
+                    if(search){
+                        user = user.filter((data,index) => data.username.toLowerCase().includes(search.toLowerCase()))
+                    }
                     return res.status(200).json({
                         user: mutipleMongooseToObject(user),
                         message:"Success",
@@ -64,21 +68,31 @@ class UserController {
     }
 
     showUser(req, res, next) {
-        User.findById(req.params.id)
-            // res.json(req.params.id)
-            .then(user => {
-                return res.render('users/user', {
+        Promise.all([User.findById(req.body.user).select('-password'),User.findById(req.body.admin)])
+        .then(([user,admin])=>{
+            if(admin&&admin.role===3){
+                return res.status(200).json({
                     user: MongooseToObject(user),
-                    data: res.data
+                    message:"GET user thành công!"
                 });
-            })
-            .catch(next)
+            }
+            else{
+                return res.status(403).json({message:"Forbiđen!"});
+            }
+        })
+        .catch((error)=>res.status(500).json({message: "Lỗi server"}))
     }
-    deleteAccount(req, res, next) {
-        const list_id = req.body.listId.split(",")
-        User.delete({ _id: { $in: list_id } })
-            .then((data) => res.status(200).json({ message:"Xoá account thành công!"}))
-            .catch(error=>{res.status(500).json({ message:"Lỗi server"})})
+    async deleteAccount(req, res, next) {
+        const list_id = req.body?.listId?.split(",")
+        const admin = await User.findById(req.body.id)
+        if(admin?.role===3){
+            User.delete({ _id: { $in: list_id } })
+                .then((data) => res.status(200).json({ message:"Xoá account thành công!"}))
+                .catch(error=>{res.status(500).json({ message:"Lỗi server"})})
+        }
+        else{
+            res.status(403).json({ message:"Bạn không có quyền xoá!"})
+        }
     }
     formUsers(req, res, next) {
         console.log(req.body)
@@ -107,7 +121,8 @@ class UserController {
     }
 
     updateUser(req, res, next) {
-        User.updateOne({ _id: req.body.id }, req.body)
+        const { id, ...rest } = JSON.parse(JSON.stringify(req.body))
+        User.updateOne({ _id: id }, rest)
             .then(async () => {
                 // const user = await User.findOne({_id: req.body.id})
                 // const jsonUser = JSON.parse(JSON.stringify(user))
