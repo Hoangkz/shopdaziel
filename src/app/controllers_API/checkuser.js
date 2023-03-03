@@ -70,6 +70,7 @@ class getUser{
                 // Thực hiện xử lý với token
                 const decoded = jwt.decode(token);
                 if (decoded){
+                    res.data = decoded
                     next()
                 }
                 else{

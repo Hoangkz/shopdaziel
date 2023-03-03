@@ -1,5 +1,5 @@
 
-const checkUser = require("../../app/controllers/checkuser")
+const checkAdmin = require("../../app/controllers_API/checkuser").checkAdmin
 
 const express = require('express');
 const router = express.Router();
@@ -7,12 +7,13 @@ const router = express.Router();
 const buyItemController = require('../../app/controllers_API/buyItemController');
 
 
-//newcontroller.index
-// mua bán
-router.post('/items',buyItemController.AddCart);
-router.delete('/:id',buyItemController.delete);
-router.get('/cart',buyItemController.ShopCart);
-router.get('/cart-orders',buyItemController.OrdersCart);
-router.post('/formAction',buyItemController.formAction);
+router.post('/delete-carts',buyItemController.DeleteCart);
+router.post('/cart-items',buyItemController.AddCartItems);
+router.post('/buys-carts',buyItemController.BuysCartItems);
+router.get('/order-carts',buyItemController.CartOrder);
+router.get('/admin-order-carts',checkAdmin,buyItemController.AdminCartOrder);
+router.post('/ship-carts',checkAdmin,buyItemController.ShipCarts);
+router.post('/cancel-order-carts',buyItemController.CancelCartOrder);
+router.get('/list-carts',buyItemController.CartItems);
 module.exports = router;
 
