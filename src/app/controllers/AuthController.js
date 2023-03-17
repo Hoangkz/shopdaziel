@@ -6,7 +6,7 @@ const checkuser = require('./checkuser');
 
 class AuthController{
     login(req,res,next){
-        console.log("vao day")
+        // console.log("vao day")
 
         res.render("auth/login",{
             layout:false,
