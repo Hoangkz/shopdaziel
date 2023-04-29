@@ -12,6 +12,12 @@ router.post('/delete-user', UserController.deleteAccount);
 router.post('/update', UserController.updateUser);
 router.post('/changePassword', UserController.changePassword);
 
+/**
+ * @swagger
+ * tags:
+ *  name: Users
+ *  description: API for Users
+ */
 
 module.exports = router;
 

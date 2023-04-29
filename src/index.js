@@ -10,6 +10,9 @@ const path = require('path');
 const cors = require('cors');
 const bodyParser  = require('body-parser')
 const cookieParser = require('cookie-parser') 
+const swaggerUI = require("swagger-ui-express");
+const swaggerSpec = require("./swagger/swagger");
+
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
@@ -80,6 +83,11 @@ app.use(session({
 const db = require('./config/db')
 require('dotenv').config()
 db.connect();
+
+
+
+
+app.use("/api-swagger", swaggerUI.serve, swaggerUI.setup(swaggerSpec));
 
 app.listen(port, () => {
   console.log(`App listening on http://localhost:${port}`)

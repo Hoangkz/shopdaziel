@@ -15,5 +15,14 @@ router.post('/admin-order-carts',checkAdmin,buyItemController.AdminCartOrder);
 router.post('/ship-carts',checkAdmin,buyItemController.ShipCarts);
 router.post('/cancel-order-carts',buyItemController.CancelCartOrder);
 router.get('/list-carts',buyItemController.CartItems);
+
+
+/**
+ * @swagger
+ * tags:
+ *  name: Buy Item
+ *  description: API for Buy Item
+ */
+
 module.exports = router;
 

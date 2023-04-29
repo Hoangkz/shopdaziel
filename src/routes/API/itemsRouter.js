@@ -31,5 +31,12 @@ router.get('/searchClient', itemController.searchClient);
 router.get('/search', itemController.search);
 router.get('/:id', itemController.show);
 
+/**
+ * @swagger
+ * tags:
+ *  name: Items
+ *  description: API for Items
+ */
+
 module.exports = router;
 

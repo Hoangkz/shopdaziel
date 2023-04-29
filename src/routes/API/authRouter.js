@@ -4,13 +4,33 @@ const router = express.Router();
 
 const AuthController = require('../../app/controllers_API/AuthController');
 // đăng ký đăng nhập
-router.post('/refresh-token', AuthController.refreshToken);
 router.post('/logout', AuthController.logout);
 router.post('/token', AuthController.accessToken);
 router.post('/login', AuthController.setLogin);
 router.post('/signup', AuthController.saveAccount);
 router.post('/user/:id', AuthController.saveProfile);
+router.post('/refresh-token', AuthController.refreshToken);
 
+
+/**
+ * @swagger
+ * tags:
+ *  name: Auth
+ *  description: API for Auth
+ */
+/**
+ * @swagger
+ *  components:
+ *      schemas:    
+ *          User:
+ *              type: object
+ *              properties:     
+ *                  refresh-token: 
+ *                      type: string
+ *                      description: the refresh-token
+ *              required:
+ *                  -refresh-token
+ */ 
 
 module.exports = router;
 
