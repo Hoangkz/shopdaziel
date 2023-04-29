@@ -18,19 +18,7 @@ router.post('/refresh-token', AuthController.refreshToken);
  *  name: Auth
  *  description: API for Auth
  */
-/**
- * @swagger
- *  components:
- *      schemas:    
- *          User:
- *              type: object
- *              properties:     
- *                  refresh-token: 
- *                      type: string
- *                      description: the refresh-token
- *              required:
- *                  -refresh-token
- */ 
+
 
 module.exports = router;
 
