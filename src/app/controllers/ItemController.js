@@ -103,10 +103,11 @@ class ItemController {
 
     //POST /items/create, tạo database    
     store(req, res, next) {
-        let {img,...data} = req.body
-        const imagePath = req.file ? req.file.path : '';
-        data = {img:imagePath,...data}
-
+        let {...data} = req.body
+        // let imagePath = req.file ? req.file.path : '';
+        const img = "/uploads/"+ req.file.filename
+        data = {img:img,...data}
+        
         const item = new Item(data);
         item.save()
             .then(() => res.redirect('/me/stored/items'))

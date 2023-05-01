@@ -1,13 +1,15 @@
 const multer = require('multer');
+const moment = require('moment');
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, 'src/public/uploads/');
   },
   filename: function (req, file, cb) {
-    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
-    const extension = file.originalname.split('.').pop();
-    const filename = file.fieldname + '-' + uniqueSuffix + '.' + extension;
+    const originalName = file.originalname;
+    const timestamp = moment().format('YYYYMMDD-HHmmss');
+    const extension = originalName.substring(originalName.lastIndexOf('.') + 1);
+    const filename = originalName.replace(`.${extension}`, `-${timestamp}.${extension}`).replace(/ /g, "_");
     cb(null, filename);
   }
 });
