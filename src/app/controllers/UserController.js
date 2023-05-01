@@ -102,7 +102,14 @@ class UserController{
                 from: "20111061045@hunre.edu.vn",
                 to: email,
                 subject: "Your new password",
-                text: `Your new password is: ${newPassword}`,
+                html: `
+                <h3>Forgot Password</h3>
+                <p>Chào ${user.username},</p>
+                <p>Mật khẩu mới của bạn là: ${newPassword}</p>
+                <p>Vui lòng thay đổi mật khẩu của bạn sau khi đăng nhập vì mục đích bảo mật.</p>
+                <br>
+                <a href="http://localhost:8000/auth/login">Trở lại đăng nhập</a>
+              `,            
             };
 
             transporter.sendMail(mailOptions, (error, info) => {
