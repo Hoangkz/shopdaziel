@@ -1,6 +1,7 @@
 const express = require('express')
 const morgan = require('morgan')
 const app = express()
+require('dotenv').config();
 const port = process.env.PORT || 8000;
 const session = require('express-session');
 const passportSetup = require('./partpost');
@@ -13,7 +14,6 @@ const cookieParser = require('cookie-parser')
 const swaggerUI = require("swagger-ui-express");
 const swaggerSpec = require("./swagger/swagger");
 
-console.log(process.env.PORT)
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
