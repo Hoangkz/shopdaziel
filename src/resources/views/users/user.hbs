@@ -22,10 +22,10 @@
                             <p class="  " style="font-weight:500;color: rgba(0, 0, 0, 0.553);">Email</p >
                         </div>
                         <div class="d-flex flex-row-reverse">
-                            <p class="  " style="font-weight:500;color: rgba(0, 0, 0, 0.553);">Số điện thoại</p >
+                            <p class="  " style="font-weight:500;margin-top: 4px;color: rgba(0, 0, 0, 0.553);">Số điện thoại</p >
                         </div>
                         <div class="d-flex flex-row-reverse">
-                            <p class="  " style="font-weight:500;color: rgba(0, 0, 0, 0.553);">Giới tính</p >
+                            <p class="  " style="font-weight:500;margin-top: 16px;color: rgba(0, 0, 0, 0.553);">Giới tính</p >
                         </div>
                         <div class="d-flex flex-row-reverse">
                             <p class="  " style="font-weight:500;margin-top:18px;color: rgba(0, 0, 0, 0.553);">Loại tài khoản</p >
@@ -34,7 +34,7 @@
                             <p class="  " style="font-weight:500;margin-top:18px;color: rgba(0, 0, 0, 0.553);">Ngày sinh</p >
                         </div>
                         <div class="d-flex flex-row-reverse">
-                            <p class="  " style="font-weight:500;margin-top:-3px;color: rgba(0, 0, 0, 0.553);">Địa chỉ</p >
+                            <p class="  " style="font-weight:500;margin-top:2px;color: rgba(0, 0, 0, 0.553);">Địa chỉ</p >
                         </div>
                     </div>           
                 </div>
@@ -44,13 +44,13 @@
                             <h5 style="color: rgb(62, 56, 56);font-size:16px;margin-top:9px">{{user.username}}</h5>          
                         </div>
                         <div class="d-flex">
-                            <input id="fullname" class="inputFocusUser mt-2" name="fullname"value="{{user.fullname}}" disabled type="text"required style="color: rgb(62, 56, 56); margin-top:3px;height: 30px; width:60%" placeholder="Họ và tên">
+                            <input id="fullname" class="inputFocusUser mt-2" name="fullname"value="{{user.fullname}}" disabled type="text"required style="color: rgb(62, 56, 56); margin-top:3px;height: 38px; width:60%" placeholder="Họ và tên">
                         </div>
                         <div class="d-flex">
-                            <input id="extname" class=" inputFocusUser mt-2" name="extname"value="{{user.extname}}" disabled type="email"required style="color: rgb(62, 56, 56); margin-top:3px;height: 30px; width:60%" placeholder="Email">
+                            <input id="extname" class=" inputFocusUser mt-2" name="extname"value="{{user.extname}}" disabled type="email"required style="color: rgb(62, 56, 56); margin-top:3px;height: 38px; width:60%" placeholder="Email">
                         </div>
                         <div class="d-flex">
-                            <input id="tell" class=" inputFocusUser mt-2" name="tell"value="{{user.tell}}" type="text"disabled required style="color: rgb(62, 56, 56); margin-top:3px;height: 30px; width:60%" placeholder="Số điện thoại">
+                            <input id="tell" class=" inputFocusUser mt-2" name="tell"value="{{user.tell}}" type="text"disabled required style="color: rgb(62, 56, 56); margin-top:3px;height: 38px; width:60%" placeholder="Số điện thoại">
                         </div>
                         <div class="d-flex" style="padding-top:8px;">
                             <input class="checkGender inputFocusUser mt-2" disabled name="gender"value="nam" type="radio" style="color: rgb(62, 56, 56);height: 24px; width:10%">
@@ -68,10 +68,10 @@
                             </select>
                         </div>
                         <div class="d-flex">
-                            <input id="birthday" class=" inputFocusUser mt-2"name="birthday" type="date"min="01-01-1900" max="31-12-1960" disabled value="{{user.birthday}}" style="color: rgb(62, 56, 56); margin-top:3px;height: 30px; width:120px">
+                            <input id="birthday" class=" inputFocusUser mt-2"name="birthday" type="date"min="01-01-1900" max="31-12-1960" disabled value="{{user.birthday}}" style="color: rgb(62, 56, 56); margin-top:3px;height: 38px; width:120px">
                         </div>
                         <div class="d-flex">
-                            <input id="address" class=" inputFocusUser mt-2" name="address" type="text" value="{{user.address}}"disabled style="color: rgb(62, 56, 56); margin-top:8px;height: 30px; width:80%" required placeholder="Số nhà, tên đường, thôn/ấp, xã huyện, thành phố">
+                            <input id="address" class=" inputFocusUser mt-2" name="address" type="text" value="{{user.address}}"disabled style="color: rgb(62, 56, 56); margin-top:8px;height: 38px; width:80%" required placeholder="Số nhà, tên đường, thôn/ấp, xã huyện, thành phố">
                         </div>
                     </div>
                     <button class="btn btn-outline-primary btn-update-user" style="margin-left: 24px;margin-bottom: 50px;">Update</button>

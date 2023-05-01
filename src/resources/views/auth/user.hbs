@@ -1,79 +1,143 @@
 <main>
+    <style>
+        .inputFocusUser:focus {
+            outline: none;
+            border: 2px solid red;
+        }
+
+        .btn-outline-Save {
+            color: #fe6433;
+            background-color: transparent;
+            background-image: none;
+            border-color: #fe6433;
+        }
+
+        .btn-outline-Save:hover {
+            color: #fff;
+            background-color: #fe6433;
+            border-color: #fe6433;
+        }
+
+        .btn-outline-Save:focus,
+        .btn-outline-Save.focus {
+            box-shadow: 0 0 0 0.2rem #fe62338d;
+        }
+
+        .btn-outline-Save.disabled,
+        .btn-outline-Save:disabled {
+            color: #fe6433;
+            background-color: transparent;
+        }
+
+        .btn-outline-Save:not(:disabled):not(.disabled):active,
+        .btn-outline-Save:not(:disabled):not(.disabled).active,
+        .show>.btn-outline-Save.dropdown-toggle {
+            color: #fff;
+            background-color: #fe6433;
+            border-color: #fe6433;
+        }
+
+        .btn-outline-Save:not(:disabled):not(.disabled):active:focus,
+        .btn-outline-Save:not(:disabled):not(.disabled).active:focus,
+        .show>.btn-outline-Save.dropdown-toggle:focus {
+            box-shadow: 0 0 0 0.2rem #fe62338d;
+        }
+    </style>
+    
     <div class="mt-5 mb-5">
-        <div class="card card-courses-item"style="position: relative;"> 
+        <div class="card card-courses-item" style="position: relative;">
             <div>
-                <div style="margin:24px;"> 
-                        <h5 style="text-align: left; margin:24px 24px 0; font-weight: 400;">Hồ sơ của tôi</h5> 
-                        <p style="margin-left: 24px ;font-weight: 400;font-size: 14px">Quản lý thông tin hồ sơ để bảo mật tài khoản</p>
-                        <div style="width:80%; height:0.6px;background-color:rgb(234, 222, 222);margin-left:9%"></div>
+                <div style="margin:24px;">
+                    <h5 style="text-align: left; margin:24px 24px 0; font-weight: 400;">Hồ sơ của tôi</h5>
+                    <p style="margin-left: 24px ;font-weight: 400;font-size: 14px">Quản lý thông tin hồ sơ để bảo mật
+                        tài khoản</p>
+                    <div style="width:80%; height:0.6px;background-color:rgb(234, 222, 222);margin-left:9%"></div>
                 </div>
             </div>
-            
-            <button class="btn btn-primary"style="position: absolute;top:100px;right: 20%;z-index: 1;"data-toggle="modal" data-target="#exampleModalChangePass">Đổi mật khẩu</button>
-            <div class="row m-0 " >
-                <div class="col p-0 m-0 " style="background-color:rgb(255, 250, 250);">     
-                    <div style="margin:24px 0 24px;"> 
+
+            <button class="btn btn-primary" style="position: absolute;top:100px;right: 20%;z-index: 1;"
+                data-toggle="modal" data-target="#exampleModalChangePass">Đổi mật khẩu</button>
+            <div class="row m-0 ">
+                <div class="col p-0 m-0 " style="background-color:rgb(255, 250, 250);">
+                    <div style="margin:24px 0 24px;">
                         <div class="d-flex flex-row-reverse ">
-                            <p class="mt-2 " style="font-weight:500;color: rgba(0, 0, 0, 0.553);">Tên đăng nhập</p >
+                            <p class="mt-2 " style="font-weight:500;color: rgba(0, 0, 0, 0.553);">Tên đăng nhập</p>
                         </div>
                         <div class="d-flex flex-row-reverse">
-                            <p class="" style="font-weight:500;color: rgba(0, 0, 0, 0.553);" >Họ và tên</p >
+                            <p class="" style="font-weight:500;color: rgba(0, 0, 0, 0.553);">Họ và tên</p>
                         </div>
                         <div class="d-flex flex-row-reverse">
-                            <p class="  " style="font-weight:500;color: rgba(0, 0, 0, 0.553);">Email</p >
+                            <p class="  " style="font-weight:500;margin-top: 6px;color: rgba(0, 0, 0, 0.553);">Email</p>
                         </div>
                         <div class="d-flex flex-row-reverse">
-                            <p class="  " style="font-weight:500;color: rgba(0, 0, 0, 0.553);">Số điện thoại</p >
+                            <p class="  " style="font-weight:500;color: rgba(0, 0, 0, 0.553);">Số điện thoại</p>
                         </div>
                         <div class="d-flex flex-row-reverse">
-                            <p class="  " style="font-weight:500;color: rgba(0, 0, 0, 0.553);">Giới tính</p >
+                            <p class="  " style="font-weight:500;margin-top: 16px;color: rgba(0, 0, 0, 0.553);">Giới tính</p>
                         </div>
                         <div class="d-flex flex-row-reverse">
-                            <p class="  " style="font-weight:500;margin-top:18px;color: rgba(0, 0, 0, 0.553);">Ngày sinh</p >
+                            <p class="  " style="font-weight:500;margin-top:18px;color: rgba(0, 0, 0, 0.553);">Ngày sinh
+                            </p>
                         </div>
                         <div class="d-flex flex-row-reverse">
-                            <p class="  " style="font-weight:500;margin-top:-3px;color: rgba(0, 0, 0, 0.553);">Địa chỉ</p >
+                            <p class="  " style="font-weight:500;margin-top:-3px;color: rgba(0, 0, 0, 0.553);">Địa chỉ
+                            </p>
                         </div>
-                    </div>           
+                    </div>
                 </div>
-                <div class="col-9 p-0 m-0 " style="background-color:rgb(255, 250, 250);">     
+                <div class="col-9 p-0 m-0 " style="background-color:rgb(255, 250, 250);">
                     <form action="/auth/user/{{data.id}}" method="POST">
-                        <div style="margin:24px;"> 
+                        <div style="margin:24px;">
                             <div class="d-flex">
-                                <h5 style="color: rgb(62, 56, 56);font-size:16px;margin-top:9px">{{data.username}}</h5>          
+                                <h5 style="color: rgb(62, 56, 56);font-size:16px;margin-top:9px">{{data.username}}</h5>
                             </div>
                             <div class="d-flex">
-                                <input class="inputFocusUser mt-2" name="fullname"value="{{data.fullname}}" type="text"required style="color: rgb(62, 56, 56); margin-top:3px;height: 30px; width:60%" placeholder="Họ và tên">
+                                <input class="inputFocusUser mt-2" name="fullname" value="{{data.fullname}}" type="text"
+                                    required style="color: rgb(62, 56, 56); margin-top:3px;height: 38px; width:60%"
+                                    placeholder="Họ và tên">
                             </div>
                             <div class="d-flex">
-                                <input class=" inputFocusUser mt-2" name="extname"value="{{data.extname}}" type="email"required style="color: rgb(62, 56, 56); margin-top:3px;height: 30px; width:60%" placeholder="Email">
+                                <input class=" inputFocusUser mt-2" name="extname" value="{{data.extname}}" type="email"
+                                    required style="color: rgb(62, 56, 56); margin-top:3px;height: 38px; width:60%"
+                                    placeholder="Email">
                             </div>
                             <div class="d-flex">
-                                <input class=" inputFocusUser mt-2" name="tell"value="{{data.tell}}" type="text"required style="color: rgb(62, 56, 56); margin-top:3px;height: 30px; width:60%" placeholder="Số điện thoại">
+                                <input class=" inputFocusUser mt-2" name="tell" value="{{data.tell}}" type="text"
+                                    required style="color: rgb(62, 56, 56); margin-top:3px;height: 38px; width:60%"
+                                    placeholder="Số điện thoại">
                             </div>
                             <div class="d-flex" style="padding-top:8px;">
-                                <input class="checkGender inputFocusUser mt-2" name="gender"value="nam" type="radio" style="color: rgb(62, 56, 56);height: 24px; width:10%">
+                                <input class="checkGender inputFocusUser mt-2" name="gender" value="nam" type="radio"
+                                    style="color: rgb(62, 56, 56);height: 24px; width:10%">
                                 <p style="margin-top:10px">Nam</p>
-                                <input class="checkGender inputFocusUser mt-2" name="gender"value="nữ" type="radio" style="color: rgb(62, 56, 56);height: 24px; width:10%">
+                                <input class="checkGender inputFocusUser mt-2" name="gender" value="nữ" type="radio"
+                                    style="color: rgb(62, 56, 56);height: 24px; width:10%">
                                 <p style="margin-top:10px">Nữ</p>
-                                <input class="checkGender inputFocusUser mt-2" name="gender"value="khác" type="radio" style="color: rgb(62, 56, 56);height: 24px; width:10%">
+                                <input class="checkGender inputFocusUser mt-2" name="gender" value="khác" type="radio"
+                                    style="color: rgb(62, 56, 56);height: 24px; width:10%">
                                 <p style="margin-top:10px">Khác</p>
                             </div>
                             <div class="d-flex">
-                                <input id="daten" class=" inputFocusUser mt-2" name="birthday" type="date"min="1900-01-01" max="2060-01-01" value="{{data.birthday}}" style="color: rgb(62, 56, 56); margin-top:3px;height: 30px; width:120px">
+                                <input id="daten" class=" inputFocusUser mt-2" name="birthday" type="date"
+                                    min="1900-01-01" max="2060-01-01" value="{{data.birthday}}"
+                                    style="color: rgb(62, 56, 56); margin-top:3px;height: 38px; width:120px">
                             </div>
                             <div class="d-flex">
-                                <input class=" inputFocusUser mt-2" name="address" type="text" value="{{data.address}}" style="color: rgb(62, 56, 56); margin-top:8px;height: 30px; width:80%" required placeholder="Số nhà, tên đường, thôn/ấp, xã huyện, thành phố">
+                                <input class=" inputFocusUser mt-2" name="address" type="text" value="{{data.address}}"
+                                    style="color: rgb(62, 56, 56); margin-top:8px;height: 38px; width:80%" required
+                                    placeholder="Số nhà, tên đường, thôn/ấp, xã huyện, thành phố">
                             </div>
-                        </div> 
-                        <button type="submit" class="btn btn-outline-Save" style="margin-left: 24px;margin-bottom: 50px;">Lưu lại</button>
+                        </div>
+                        <button type="submit" class="btn btn-outline-Save"
+                            style="margin-left: 24px;margin-bottom: 50px;">Lưu lại</button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
 </main>
-<div class="modal fade" id="exampleModalChangePass" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="exampleModalChangePass" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -85,26 +149,36 @@
             <div class="modal-body">
                 <div style="margin-bottom: 16px;">
                     <div style="position: relative;">
-                        <p class="mt-2" style="margin-bottom: 0;font-weight:500;color: rgba(0, 0, 0, 0.553);">Mật khẩu</p>
-                        <input id="password" style="width: 100%;" type="password"name="password" required>
-                        <span style="padding: 2px;cursor: pointer;position:absolute; top:58%; right:2%;font-size:16px"><i id="show-btn1"class="far fa-eye"></i></span>
+                        <p class="mt-2" style="margin-bottom: 0;font-weight:500;color: rgba(0, 0, 0, 0.553);">Mật khẩu
+                        </p>
+                        <input id="password" style="width: 100%;" type="password" name="password" required>
+                        <span
+                            style="padding: 2px;cursor: pointer;position:absolute; top:58%; right:2%;font-size:16px"><i
+                                id="show-btn1" class="far fa-eye"></i></span>
                     </div>
                     <div style="position: relative;">
-                        <p class="mt-2" style="margin-bottom: 0;font-weight:500;color: rgba(0, 0, 0, 0.553);">Mật khẩu Mới</p>
-                        <input id="newPassword" style="width: 100%;"name="newPassword" type="password"required>
-                        <span style="padding: 2px;cursor: pointer;position:absolute; top:58%; right:2%;font-size:16px"><i id="show-btn2"class="far fa-eye"></i></span>
+                        <p class="mt-2" style="margin-bottom: 0;font-weight:500;color: rgba(0, 0, 0, 0.553);">Mật khẩu
+                            Mới</p>
+                        <input id="newPassword" style="width: 100%;" name="newPassword" type="password" required>
+                        <span
+                            style="padding: 2px;cursor: pointer;position:absolute; top:58%; right:2%;font-size:16px"><i
+                                id="show-btn2" class="far fa-eye"></i></span>
                     </div>
                     <div style="position: relative;">
-                        <p class="mt-2" style="margin-bottom: 0;font-weight:500;color: rgba(0, 0, 0, 0.553);">Nhập lại khẩu Mới</p>
-                        <input id="changeNewPassword" style="width: 100%;" type="password"required>
-                        <span style="padding: 2px;cursor: pointer;position:absolute; top:58%; right:2%;font-size:16px"><i id="show-btn3"class="far fa-eye"></i></span>
+                        <p class="mt-2" style="margin-bottom: 0;font-weight:500;color: rgba(0, 0, 0, 0.553);">Nhập lại
+                            khẩu Mới</p>
+                        <input id="changeNewPassword" style="width: 100%;" type="password" required>
+                        <span
+                            style="padding: 2px;cursor: pointer;position:absolute; top:58%; right:2%;font-size:16px"><i
+                                id="show-btn3" class="far fa-eye"></i></span>
                     </div>
                 </div>
-                
+
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary mr-3" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary changepassword"data-id="{{data.id}}"disabled>Save</button>
+                <button type="button" class="btn btn-primary changepassword" data-id="{{data.id}}"
+                    disabled>Save</button>
             </div>
         </div>
     </div>
@@ -112,12 +186,12 @@
 <script>
     const passField1 = document.getElementById("password");
     const showBtn1 = document.getElementById("show-btn1");
-    showBtn1.onclick = (()=>{
-        if(passField1.type === "password"){
+    showBtn1.onclick = (() => {
+        if (passField1.type === "password") {
             passField1.type = "text";
             showBtn1.classList.toggle("fa-eye");
             showBtn1.classList.toggle("fa-eye-slash");
-        }else{
+        } else {
             passField1.type = "password";
             showBtn1.classList.toggle("fa-eye");
             showBtn1.classList.toggle("fa-eye-slash");
@@ -125,12 +199,12 @@
     });
     const passField2 = document.getElementById("newPassword");
     const showBtn2 = document.getElementById("show-btn2");
-    showBtn2.onclick = (()=>{
-        if(passField2.type === "password"){
+    showBtn2.onclick = (() => {
+        if (passField2.type === "password") {
             passField2.type = "text";
             showBtn2.classList.toggle("fa-eye");
             showBtn2.classList.toggle("fa-eye-slash");
-        }else{
+        } else {
             passField2.type = "password";
             showBtn2.classList.toggle("fa-eye");
             showBtn2.classList.toggle("fa-eye-slash");
@@ -138,12 +212,12 @@
     });
     const passField3 = document.getElementById("changeNewPassword");
     const showBtn3 = document.getElementById("show-btn3");
-    showBtn3.onclick = (()=>{
-        if(passField3.type === "password"){
+    showBtn3.onclick = (() => {
+        if (passField3.type === "password") {
             passField3.type = "text";
             showBtn3.classList.toggle("fa-eye");
             showBtn3.classList.toggle("fa-eye-slash");
-        }else{
+        } else {
             passField3.type = "password";
             showBtn3.classList.toggle("fa-eye");
             showBtn3.classList.toggle("fa-eye-slash");
@@ -154,37 +228,37 @@
     let passwordSignup1 = document.getElementById("newPassword")
     let passwordSignup2 = document.getElementById("changeNewPassword")
     let password = document.getElementById("password")
-    passwordSignup1.addEventListener("keyup", function(e) {
-        if (passwordSignup1.value !== passwordSignup2.value||passwordSignup1.value==""||passwordSignup2.value==""||passwordSignup1.value.length<5||passwordSignup2.value.length<5) {
-            $(".changepassword").attr("disabled",true)
+    passwordSignup1.addEventListener("keyup", function (e) {
+        if (passwordSignup1.value !== passwordSignup2.value || passwordSignup1.value == "" || passwordSignup2.value == "" || passwordSignup1.value.length < 5 || passwordSignup2.value.length < 5) {
+            $(".changepassword").attr("disabled", true)
         }
-        else{
-            $(".changepassword").attr("disabled",false)
-        } 
+        else {
+            $(".changepassword").attr("disabled", false)
+        }
     })
-    passwordSignup2.addEventListener("keyup", function(e) {
-        if (passwordSignup1.value !== passwordSignup2.value||passwordSignup1.value==""||passwordSignup2.value==""||passwordSignup1.value.length<5||passwordSignup2.value.length<5) {
-            $(".changepassword").attr("disabled",true)
+    passwordSignup2.addEventListener("keyup", function (e) {
+        if (passwordSignup1.value !== passwordSignup2.value || passwordSignup1.value == "" || passwordSignup2.value == "" || passwordSignup1.value.length < 5 || passwordSignup2.value.length < 5) {
+            $(".changepassword").attr("disabled", true)
         }
-        else{
-            $(".changepassword").attr("disabled",false)
+        else {
+            $(".changepassword").attr("disabled", false)
         }
     })
 </script>
 <script>
-    function closeModal(){        
+    function closeModal() {
         $('#exampleModalChangePass').modal("hide")
     }
 
-    document.addEventListener("DOMContentLoaded", function(){  
-        $(".changepassword").click(function(e){
-            let dataid=$(".changepassword").attr("data-id")
+    document.addEventListener("DOMContentLoaded", function () {
+        $(".changepassword").click(function (e) {
+            let dataid = $(".changepassword").attr("data-id")
             let password = $("#password").val()
             let newPassword = $("#newPassword").val()
             $.ajax({
                 url: `/users/changePassword/${dataid}`,
                 type: "POST",
-                data:{password: password, newPassword: newPassword},
+                data: { password: password, newPassword: newPassword },
                 success: (data) => {
                     Toastify({
                         text: "Thay đổi mật khẩu thành công",
@@ -202,8 +276,8 @@
                         style: {
                             background: "linear-gradient(to right, green, green)",
                         },
-                        onClick: function(){
-                            
+                        onClick: function () {
+
                         } // Callback after click
                     }).showToast();
                     closeModal()
@@ -225,58 +299,20 @@
                         style: {
                             background: "linear-gradient(to right, red, red)",
                         },
-                        onClick: function(){} // Callback after click
+                        onClick: function () { } // Callback after click
                     }).showToast();
                 },
             })
         })
     })
 </script>
-<style>
-    .inputFocusUser:focus{
-        outline: none;
-        border: 2px solid red;
-    }
-    .btn-outline-Save {
-        color: #fe6433;
-        background-color: transparent;
-        background-image: none;
-        border-color: #fe6433;
-    }
-    .btn-outline-Save:hover {
-        color: #fff;
-        background-color: #fe6433;
-        border-color: #fe6433;
-    }
 
-    .btn-outline-Save:focus, .btn-outline-Save.focus {
-        box-shadow: 0 0 0 0.2rem #fe62338d;
-    }
-
-    .btn-outline-Save.disabled, .btn-outline-Save:disabled {
-        color: #fe6433;
-        background-color: transparent;
-    }
-
-    .btn-outline-Save:not(:disabled):not(.disabled):active, .btn-outline-Save:not(:disabled):not(.disabled).active,
-    .show > .btn-outline-Save.dropdown-toggle {
-        color: #fff;
-        background-color: #fe6433;
-        border-color: #fe6433;
-    }
-
-    .btn-outline-Save:not(:disabled):not(.disabled):active:focus, .btn-outline-Save:not(:disabled):not(.disabled).active:focus,
-    .show > .btn-outline-Save.dropdown-toggle:focus {
-        box-shadow: 0 0 0 0.2rem #fe62338d;
-    }
-</style>
 <script>
-    let checkGender="{{data.gender}}";
+    let checkGender = "{{data.gender}}";
     let isCheckGender = document.getElementsByClassName("checkGender")
-    for (let key in isCheckGender){
-        if(isCheckGender[key].value===checkGender){
-            isCheckGender[key].setAttribute("checked",true)
+    for (let key in isCheckGender) {
+        if (isCheckGender[key].value === checkGender) {
+            isCheckGender[key].setAttribute("checked", true)
         }
     }
 </script>
-
