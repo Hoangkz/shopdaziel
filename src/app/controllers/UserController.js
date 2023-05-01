@@ -3,6 +3,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const User = require('../modals/user');
 const {MongooseToObject, mutipleMongooseToObject,mongooseToGetLish} = require('../../util/mongoose');
+const nodemailer = require("nodemailer");
 
 class UserController{
 
@@ -79,6 +80,50 @@ class UserController{
             default:
                 res.json(req.body);
         }
+    }
+    async forgotPassword(req, res, next) {
+        const email = req.body.email
+        const username = req.body.account
+        const user = await User.findOne({ username: username, extname: email })
+        if (user) {
+            const newPassword = Math.random().toString(36).slice(-8);
+            const transporter = nodemailer.createTransport({
+                host: 'smtp.gmail.com',
+                port: 587,
+                secure: false,
+                requireTLS: true,
+                service: "gmail",
+                auth: {
+                    user: "20111061045@hunre.edu.vn",
+                    pass: "A12345678q",
+                },
+            });
+            const mailOptions = {
+                from: "20111061045@hunre.edu.vn",
+                to: email,
+                subject: "Your new password",
+                text: `Your new password is: ${newPassword}`,
+            };
+
+            transporter.sendMail(mailOptions, (error, info) => {
+                if (error) {
+                    res.status(500).json({ message: "Server đang quá tải, hãy thử lại sau!" });
+                } else {
+                    user.password = hashPassword(newPassword)
+                    user.save();
+                    res.status(200).json({ message: "Mật khẩu mới đã được gửi đến email của bạn!" })
+                }
+            });
+        }
+        else {
+            res.status(400).json({ message: "Email không hợp lệ!" })
+        }
+    }
+
+    getForgotPassword(req,res, next){
+        return res.render('users/forgotpassword',{
+            layout:false
+        });
     }
 }
 module.exports = new UserController();

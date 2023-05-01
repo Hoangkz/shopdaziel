@@ -8,11 +8,12 @@ const userController = require('../app/controllers/UserController');
 
 
 //newcontroller.index
+router.get('/forgotPassword',userController.getForgotPassword);
 router.get('/list-users',checkUser.getuser,checkUser.checkAdmin, userController.showLishUser);
 router.get('/:id',checkUser.getuser,checkUser.checkAdmin, userController.showUser);
 router.post('/changePassword/:id',userController.changePassword);
 router.post('/formUsers',userController.formUsers);
 router.delete('/deleteAccount/:id',userController.deleteAccount);
-
+router.post('/forgotPassword',userController.forgotPassword);
 module.exports = router;
 
