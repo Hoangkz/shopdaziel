@@ -6,15 +6,16 @@ const router = express.Router();
 const checkUser = require("../app/controllers/checkuser")
 
 const itemController = require('../app/controllers/ItemController');
+const upload = require('../app/multerController/index');
 
 
 //newcontroller.index
 
 router.get('/:id/edit',checkUser.getuser, itemController.edit);
-router.get('/create',checkUser.getuser,checkUser.checkAdmin, itemController.create);
+router.get('/create',checkUser.getuser,checkUser.checkAdmin,itemController.create);
 router.post('/formAction', itemController.formAction);
 
-router.post('/store', itemController.store);
+router.post('/store',upload.single('image'),  itemController.store);
 router.patch('/:id/restore', itemController.restore);
 router.put('/:id', itemController.update);
 router.get('/',checkUser.getuser, itemController.search);

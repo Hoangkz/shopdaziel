@@ -103,27 +103,14 @@ class ItemController {
 
     //POST /items/create, tạo database    
     store(req, res, next) {
+        let {img,...data} = req.body
+        const imagePath = req.file ? req.file.path : '';
+        data = {img:imagePath,...data}
 
-        upload.single('image')(req, res, function (err) {
-            if (err) {
-                // Xử lý lỗi nếu có
-                return next(err);
-            }
-
-            // Lấy đường dẫn tệp tin ảnh từ req.file (nếu tệp tin ảnh đã được tải lên)
-            const imagePath = req.file ? req.file.path : '';
-            console.log(imagePath)
-            // Tạo một đối tượng Item với dữ liệu từ req.body và đường dẫn tệp tin ảnh
-            const item = new Item({
-                ...req.body,
-                img: imagePath
-            });
-
-            // Lưu đối tượng Item vào cơ sở dữ liệu
-            item.save()
-                .then(() => res.redirect('/me/stored/items'))
-                .catch(next);
-        });
+        const item = new Item(data);
+        item.save()
+            .then(() => res.redirect('/me/stored/items'))
+            .catch(next);
     }
 
 
