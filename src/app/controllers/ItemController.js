@@ -71,7 +71,11 @@ class ItemController {
 
     //PUT /items/:id (update)
     update(req, res, next) {
-        Item.updateOne({ _id: req.params.id }, req.body)
+        let {...data} = req.body
+        const img = "/uploads/"+ req.file.filename
+        data = {img:img,...data}
+
+        Item.updateOne({ _id: req.params.id }, data)
             // redirect chuyển sang trang ....
             .then(() => res.redirect('/me/stored/items'))
             .catch(next)
@@ -104,7 +108,6 @@ class ItemController {
     //POST /items/create, tạo database    
     store(req, res, next) {
         let {...data} = req.body
-        // let imagePath = req.file ? req.file.path : '';
         const img = "/uploads/"+ req.file.filename
         data = {img:img,...data}
         

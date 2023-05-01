@@ -27,7 +27,7 @@
         <th scope="col">Ngày sinh</th>
         <th scope="col">Email</th>
         <th scope="col">Số điện thoại</th>
-        <th scope="col">Loại tài khoản</th>
+        <th scope="col">Role</th>
         <th scope="col" class="text-center">Thao tác</th>
         <th scope="col"></th>
       </tr>
@@ -49,11 +49,11 @@
 
         <td style="padding-top:15px">{{this.fullname}}</td>
         <td style="padding-top:15px">{{date1 this.birthday}}</td>
-        <td style="padding-top:15px">{{this.extname}}</td>
+        <td style="padding-top:15px;">{{this.extname}}</td>
         <td style="padding-top:15px">{{this.tell}}</td>
         <td class="userRole" style="padding-top:15px" value="{{this.role}}"></td>
 
-        <td class="text-center">
+        <td class="text-center" style="width: 110px;">
           <a href="/users/{{this._id}}" class="btn btn-success">
             <i class="fa-solid fa-screwdriver-wrench"></i>
           </a>
@@ -110,6 +110,7 @@
 
 {{!-- delete form--}}
 <form method="POST" name="delete-form"></form>
+
 
 <script>
   document.addEventListener("DOMContentLoaded", function () {
@@ -213,7 +214,6 @@
                 Toastify({
                     text: text,
                     duration: 2000,
-                    destination: "http://localhost:3000/",
                     newWindow: true,
                     //close: true,
                     offset: {
@@ -237,3 +237,4 @@
       })
     })
 </script>
+

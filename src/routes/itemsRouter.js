@@ -17,7 +17,7 @@ router.post('/formAction', itemController.formAction);
 
 router.post('/store',upload.single('image'),  itemController.store);
 router.patch('/:id/restore', itemController.restore);
-router.put('/:id', itemController.update);
+router.put('/:id',upload.single('image'), itemController.update);
 router.get('/',checkUser.getuser, itemController.search);
 
 router.delete('/:id/permanentlyDelete',checkUser.checkAdmin, itemController.permanentlyDelete);

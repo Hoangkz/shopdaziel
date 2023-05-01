@@ -14,7 +14,7 @@
 
         <div class="form-group">
             <label for="description">Mô tả</label>
-            <textarea id="description" class="form-control" name="description" rows="3" required></textarea>
+            <textarea id="description" class="form-control" name="description" rows="1" required></textarea>
         </div>
         <div class="form-group">
             <label for="loai">Loại sản phẩm</label>
@@ -41,7 +41,10 @@
                 </select>
             </div>
         </div>
-
+        <div class="form-group">
+            <label for="img">Link ảnh</label>
+            <input style="display: block;" id="img" name="image" type="file" accept="image/*" required>
+        </div>
         <div class="form-group">
             <label for="gia">Đơn giá</label>
             <input type="number" min="0" class="form-control" id="gia" name="gia" required>
@@ -50,10 +53,7 @@
             <label for="soluong">Số lượng</label>
             <input type="number" min="0" class="form-control" id="soluong" name="soluong" required>
         </div>
-        <div class="form-group">
-            <label for="img">Link ảnh</label>
-            <input style="display: block;" id="img" name="image" type="file" accept="image/*" required>
-        </div>
+        
         <div style="margin-top: 30px;" >
             <button type="submit" class="btn btn-primary">Thêm sản phẩm</button>
             <a href="/me/stored/items" class="btn btn-secondary text-light">Trở lại</a>

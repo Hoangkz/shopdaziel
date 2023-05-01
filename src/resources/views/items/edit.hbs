@@ -1,15 +1,21 @@
+<style>
+    label{
+        margin-bottom: 0;
+    }
+</style>
+
 <div class="mt-4 w-75 container">
     {{!-- {{#each courses}} --}}
     <h3 class="text-info">{{item.name}}</h3>
-    <form class="mt-4" method="POST" action="/items/{{item._id}}?_method=PUT">
+    <form class="mt-4" method="POST" action="/items/{{item._id}}?_method=PUT" enctype="multipart/form-data">
         <div class="form-group">
             <label for="name">Tên sản phẩm</label>
-            <input type="teaxt" class="form-control" value="{{item.name}}" id="name" name = "name">
+            <input type="teaxt" class="form-control" value="{{item.name}}" id="name" name = "name" required>
         </div>
 
         <div class="form-group">
             <label for="description">Mô tả</label>
-            <input type="text" class="form-control" value="{{item.description}}" id="description" name = "description">
+            <textarea class="form-control" id="description" name = "description" rows="1" required>{{item.description}}</textarea>
         </div>
 
         <div class="form-group">
@@ -43,16 +49,16 @@
         </div>
 
         <div class="form-group">
-            <label for="img">link img</label>
-            <input type="text" class="form-control" value="{{item.img}}" id="img" name = "img">
+            <label for="img">Ảnh sản phẩm</label>
+            <input style="display: block;" id="img" name="image" type="file" accept="image/*" required>
         </div>
         <div class="form-group">
             <label for="gia">Đơn giá</label>
-            <input type="text" class="form-control" id="gia" name = "gia" value="{{item.gia}}">
+            <input type="number" min="1" class="form-control" id="gia" name = "gia" value="{{item.gia}}" required>
         </div>
         <div class="form-group">
             <label for="soluong">Số lượng</label>
-            <input type="text" class="form-control" id="soluong" name = "soluong"value="{{item.soluong}}">
+            <input type="number" min="1" class="form-control" id="soluong" name = "soluong"value="{{item.soluong}}" required>
         </div>
         
         <button type="submit" class="btn btn-primary">Lưu lại</button>
