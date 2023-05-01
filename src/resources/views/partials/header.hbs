@@ -1,105 +1,5 @@
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 
-
-<header id="header_nav" style="width: 100%;  background-image: linear-gradient(0, #fe6433, #f53e2d);">
-    <div class="container" style="height: 100%">
-        <div class="d-flex justify-content-between">
-            <div class="navbar navbar-expand-lg">
-                <div class="collapse navbar-collapse form-Search ml-4" id="navbarSupportedContent">
-                    <ul class="navbar-nav mr-auto">
-                        <li class="nav-item active">
-                            <a class="nav-link hover" href="/">Home</a>
-                        </li>
-                        <li class="nav-item active nav-link ">Tải ứng dụng</li>
-                        
-                        <li class="nav-item active nav-link d-flex justify-content-between"style="padding:9px">
-                            <div class="mr-1">Kết nối</div>
-                            <a class="mr-1" href="https://www.facebook.com/"><i class="ti fa-brands fa-facebook "></i></a>
-                            <a class="" href="https://mail.google.com/" ><i class="ti fa-brands fa-google " ></i></a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="navbar navbar-expand-lg">
-                <div class="collapse navbar-collapse form-Search ml-4" id="navbarSupportedContent">
-                    <ul id="navUser" class="navbar-nav mr-auto">
-                        <li class="nav-item active">
-                            <a class="nav-link hover" href="/">Thông báo</a>
-                        </li>
-                        <li class="nav-item active">
-                            <a class="nav-link hover" href="/">Hỗ trợ</a>
-                        </li>
-                        <script>
-                            let navUser =document.getElementById("navUser")
-                            let aUserName = "{{data.username}}"
-                            if(aUserName ==="false"){
-                                navUser.innerHTML = navUser.innerHTML+`<li class="nav-item active nav-link hover">
-                                                                            <a class="" href="/auth/signup">Đăng ký</a>
-                                                                        </li>
-                                                                        <li class="nav-item active nav-link hover">
-                                                                            <a class="" href="/auth/login">Đăng nhập</a>
-                                                                        </li>`
-                            }
-                            else{
-                                navUser.innerHTML = navUser.innerHTML+`<li class=" nav-item active liUserName " >
-                                                                            <strong class="aUserName hover">{{data.username}}</strong>
-                                                                            <div id="headerUserName" class="header__notify"></div>
-                                                                        </li>`
-                            }
-                        </script>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="collapsenavbar-collapse w-100 d-flex justify-content-between ">
-            <a href="/">
-                <i class="fa-solid fa-bag-shopping" style="color: #fff; font-size:48px"></i>
-            </a>
-            <a href="/" class="a-header">
-                <h1 class="mt-1 mb-1 ml-3" style="color: #fff;">Dalziel</h1>
-            </a>
-            <form class="form-inline collapsenavbar-collapse w-100 mt-1 ml-5 mb-3" style="position: relative;"action="/search" method="GET" >
-                <input id="id-form-search"  name ="q" class="form-control collapsenavbar-collapse w-75"style=" height: 40px;font-size:1.1rem;"autocomplete="off"  type="text" placeholder="Search" aria-label="Search">
-                <div id="idSuggestion" class ="suggestion displayNone" style="position: absolute; top: 40px; left:-24%;right:1%;width: 74.8%;">
-                    <div class="nav-suggestion" >
-                        <li id="header-suggestion" class="para-suggestion background-ddd"></li>
-                    </div>
-                    <div style="overflow: scroll !important;;max-height: 300px;">
-                        <section id="ul-Suggestion" class="m-0 p-0"></section>
-                    </div>
-                </div>
-
-                <button type="submit" id="button-search" class="btn btn-outline-danger border border-white ml-2"style="border: 2px;height: 40px; color: #fff; font-size: 0.8rem">Search</button>
-            </form>
-            <div class="mt-3 d-flex justify-content-between">
-                <a href="/buy/cart" class="font-buy hover  mr-3">
-                    <i class="fa-solid fa-cart-shopping ml-3" style="font-size: 1.6rem"></i>
-                </a>
-                <div id="font_user" class="font-buy ml-1"style="cursor: pointer; ">
-                     
-                    <div id="font_user--header" class="header__notify"></div>  
-                    <script>
-                            let font_User =document.getElementById("font_user")
-                            let UserName = "{{data.username}}"
-                            if(aUserName ==="false"){
-                                font_User.innerHTML = font_User.innerHTML+`<li class="nav-item active nav-link hover">
-                                                                            <i class="fa-regular fa-user" style="font-size: 1.6rem;margin-top:-12px"></i>
-                                                                        </li>
-                                                                        `
-                            }
-                            else{
-                                font_User.innerHTML = font_User.innerHTML+`<li class="nav-item active liUserName"style="margin-top:-2px">
-                                                                                <a class="hover aUserName " >{{data.username}}</a>
-                                                                                <div id="font_user--header" class="header__notify"></div>
-                                                                            </li>`
-                            }
-                    </script>         
-                </div>
-            </div>
-        </div>
-        
-    </div>      
-</header>
 <style>
     
     @media only screen and (min-width:992px) {
@@ -225,93 +125,6 @@
 
     }
 </style>
-
-
-
-<form id="formLogOut" action="/auth/logout" method="POST"></form>
-{{!-- script header__notify-link --}}
-<script>
-    let fontUserHeader =document.getElementById("font_user--header")
-    let headerUserName = document.getElementById("headerUserName");
-    let role ={{data.role}}
-    if(role===0){
-        let d =`
-                <ul class="header__notify-list">
-                    <li class="header__notify-item header__notify-item--viewed">
-                        <a href="/auth/login" class="header__notify-link">Đăng nhập</a>
-                    </li>
-                    <li class="header__notify-item header__notify-item--viewed">
-                        <a href="/auth/signup" class="header__notify-link">Đăng ký</a>
-                    </li>
-                </ul>` 
-        fontUserHeader.innerHTML=d 
-    }
-    else if (role===1){
-        let a=  `
-                <ul class="header__notify-list">
-                    <li class="header__notify-item header__notify-item--viewed">
-                        <a href="/auth/user" class="header__notify-link">Tài khoản</a>
-                    </li>
-                    <li class="header__notify-item header__notify-item--viewed">
-                        <a href="/buy/cart" class="header__notify-link">Giỏ hàng của tôi</a>
-                    </li>
-                    <li class="header__notify-item header__notify-item--viewed">
-                        <a href="/buy/cart-orders" class="header__notify-link">Đơn hàng của tôi</a>
-                    </li>
-                    <li class="header__notify-item header__notify-item--viewed">
-                        <p class="logout header__notify-link" style="cursor: pointer;">Đăng xuất</p>
-                    </li>
-                </ul>   `
-        headerUserName.innerHTML=a
-        fontUserHeader.innerHTML=a
-    }
-    else if(role===2){
-        let b =`
-                <ul class="header__notify-list">
-                    <li class="header__notify-item header__notify-item--viewed">
-                        <a href="/auth/user" class="header__notify-link">Tài khoản</a>
-                    </li>
-                    <li class="header__notify-item header__notify-item--viewed">
-                        <a href="/buy/cart-orders" class="header__notify-link">Quản lý đơn hàng</a>
-                    </li>
-                    <li class="header__notify-item header__notify-item--viewed">
-                        <p  class="logout header__notify-link" style="cursor: pointer;">Đăng xuất</p>
-                    </li>
-                </ul>   `
-        headerUserName.innerHTML=b
-        fontUserHeader.innerHTML=b
-    }
-    else if(role===3){
-        let c =`
-                <ul class="header__notify-list">
-                    <li class="header__notify-item header__notify-item--viewed">
-                        <a href="/auth/user" class="header__notify-link">Tài khoản</a>
-                    </li>
-                    <li class="header__notify-item header__notify-item--viewed">
-                        <a href="/buy/cart-orders" class="header__notify-link">Quản lý đơn hàng</a>
-                    </li>
-                    <li class="header__notify-item header__notify-item--viewed">
-                        <a href="/users/list-users" class="header__notify-link">Danh sách Account</a>
-                    </li>
-                    <li class="header__notify-item header__notify-item--viewed">
-                        <a href="/me/stored/items" class="header__notify-link">Danh sách sản phẩm</a>
-                    </li>
-                    <li class="header__notify-item header__notify-item--viewed">
-                        <p  class="logout header__notify-link" style="cursor: pointer;">Đăng xuất</p>
-                    </li>
-                </ul>` 
-        headerUserName.innerHTML=c
-        fontUserHeader.innerHTML=c 
-    }
-    let formLogOut = document.getElementById("formLogOut")
-    let logout =document.getElementsByClassName("logout");
-    logout[0].onclick = function(e) {
-        formLogOut.submit()
-    }
-    logout[1].onclick = function(e) {
-        formLogOut.submit()
-    }
-</script>
 <style>
     #id-form-search {
         border: 1px solid #ccc;
@@ -399,6 +212,193 @@
         }
     }
 </style>
+<header id="header_nav" style="width: 100%;  background-image: linear-gradient(0, #fe6433, #f53e2d);">
+    <div class="container" style="height: 100%">
+        <div class="d-flex justify-content-between">
+            <div class="navbar navbar-expand-lg">
+                <div class="collapse navbar-collapse form-Search ml-4" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link hover" href="/">Home</a>
+                        </li>
+                        <li class="nav-item active nav-link ">Tải ứng dụng</li>
+                        
+                        <li class="nav-item active nav-link d-flex justify-content-between"style="padding:9px">
+                            <div class="mr-1">Kết nối</div>
+                            <a class="mr-1" href="https://www.facebook.com/"><i class="ti fa-brands fa-facebook "></i></a>
+                            <a class="" href="https://mail.google.com/" ><i class="ti fa-brands fa-google " ></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="navbar navbar-expand-lg">
+                <div class="collapse navbar-collapse form-Search ml-4" id="navbarSupportedContent">
+                    <ul id="navUser" class="navbar-nav mr-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link hover" href="/">Thông báo</a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link hover" href="/">Hỗ trợ</a>
+                        </li>
+                        <script>
+                            let navUser =document.getElementById("navUser")
+                            let aUserName = "{{data.username}}"
+                            if(aUserName ==="false"){
+                                navUser.innerHTML = navUser.innerHTML+`<li class="nav-item active nav-link hover">
+                                                                            <a class="" href="/auth/signup">Đăng ký</a>
+                                                                        </li>
+                                                                        <li class="nav-item active nav-link hover">
+                                                                            <a class="" href="/auth/login">Đăng nhập</a>
+                                                                        </li>`
+                            }
+                            else{
+                                navUser.innerHTML = navUser.innerHTML+`<li class=" nav-item active liUserName " >
+                                                                            <strong class="aUserName hover">{{data.username}}</strong>
+                                                                            <div id="headerUserName" class="header__notify"></div>
+                                                                        </li>`
+                            }
+                        </script>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="collapsenavbar-collapse w-100 d-flex justify-content-between ">
+            <a href="/">
+                <i class="fa-solid fa-bag-shopping" style="color: #fff; font-size:48px"></i>
+            </a>
+            <a href="/" class="a-header">
+                <h1 class="mt-1 mb-1 ml-3" style="color: #fff;">Dalziel</h1>
+            </a>
+            <form class="form-inline collapsenavbar-collapse w-100 mt-1 ml-5 mb-3" style="position: relative;"action="/search" method="GET" >
+                <input id="id-form-search"  name ="q" class="form-control collapsenavbar-collapse w-75"style="margin-top:0;height: 40px;font-size:1.1rem;"autocomplete="off"  type="text" placeholder="Search" aria-label="Search">
+                <div id="idSuggestion" class ="suggestion displayNone" style="position: absolute; top: 40px; left:-24%;right:1%;width: 74.8%;">
+                    <div class="nav-suggestion" >
+                        <li id="header-suggestion" class="para-suggestion background-ddd"></li>
+                    </div>
+                    <div style="overflow: scroll !important;;max-height: 300px;">
+                        <section id="ul-Suggestion" class="m-0 p-0"></section>
+                    </div>
+                </div>
+
+                <button type="submit" id="button-search" class="btn btn-outline-danger border border-white ml-2"style="border: 2px;height: 40px; color: #fff; font-size: 0.8rem">Search</button>
+            </form>
+            <div class="mt-3 d-flex justify-content-between">
+                <a href="/buy/cart" class="font-buy hover  mr-3">
+                    <i class="fa-solid fa-cart-shopping ml-3" style="font-size: 1.6rem"></i>
+                </a>
+                <div id="font_user" class="font-buy ml-1"style="cursor: pointer; ">
+                     
+                    <div id="font_user--header" class="header__notify"></div>  
+                    <script>
+                            let font_User =document.getElementById("font_user")
+                            let UserName = "{{data.username}}"
+                            if(aUserName ==="false"){
+                                font_User.innerHTML = font_User.innerHTML+`<li class="nav-item active nav-link hover">
+                                                                            <i class="fa-regular fa-user" style="font-size: 1.6rem;margin-top:-12px"></i>
+                                                                        </li>
+                                                                        `
+                            }
+                            else{
+                                font_User.innerHTML = font_User.innerHTML+`<li class="nav-item active liUserName"style="margin-top:-2px">
+                                                                                <a class="hover aUserName " >{{data.username}}</a>
+                                                                                <div id="font_user--header" class="header__notify"></div>
+                                                                            </li>`
+                            }
+                    </script>         
+                </div>
+            </div>
+        </div>
+        
+    </div>      
+</header>
+
+
+
+<form id="formLogOut" action="/auth/logout" method="POST"></form>
+{{!-- script header__notify-link --}}
+<script>
+    let fontUserHeader =document.getElementById("font_user--header")
+    let headerUserName = document.getElementById("headerUserName");
+    let role ={{data.role}}
+    if(role===0){
+        let d =`
+                <ul class="header__notify-list">
+                    <li class="header__notify-item header__notify-item--viewed">
+                        <a href="/auth/login" class="header__notify-link">Đăng nhập</a>
+                    </li>
+                    <li class="header__notify-item header__notify-item--viewed">
+                        <a href="/auth/signup" class="header__notify-link">Đăng ký</a>
+                    </li>
+                </ul>` 
+        fontUserHeader.innerHTML=d 
+    }
+    else if (role===1){
+        let a=  `
+                <ul class="header__notify-list">
+                    <li class="header__notify-item header__notify-item--viewed">
+                        <a href="/auth/user" class="header__notify-link">Tài khoản</a>
+                    </li>
+                    <li class="header__notify-item header__notify-item--viewed">
+                        <a href="/buy/cart" class="header__notify-link">Giỏ hàng của tôi</a>
+                    </li>
+                    <li class="header__notify-item header__notify-item--viewed">
+                        <a href="/buy/cart-orders" class="header__notify-link">Đơn hàng của tôi</a>
+                    </li>
+                    <li class="header__notify-item header__notify-item--viewed">
+                        <p class="logout header__notify-link" style="cursor: pointer;">Đăng xuất</p>
+                    </li>
+                </ul>   `
+        headerUserName.innerHTML=a
+        fontUserHeader.innerHTML=a
+    }
+    else if(role===2){
+        let b =`
+                <ul class="header__notify-list">
+                    <li class="header__notify-item header__notify-item--viewed">
+                        <a href="/auth/user" class="header__notify-link">Tài khoản</a>
+                    </li>
+                    <li class="header__notify-item header__notify-item--viewed">
+                        <a href="/buy/cart-orders" class="header__notify-link">Quản lý đơn hàng</a>
+                    </li>
+                    <li class="header__notify-item header__notify-item--viewed">
+                        <p  class="logout header__notify-link" style="cursor: pointer;">Đăng xuất</p>
+                    </li>
+                </ul>   `
+        headerUserName.innerHTML=b
+        fontUserHeader.innerHTML=b
+    }
+    else if(role===3){
+        let c =`
+                <ul class="header__notify-list">
+                    <li class="header__notify-item header__notify-item--viewed">
+                        <a href="/auth/user" class="header__notify-link">Tài khoản</a>
+                    </li>
+                    <li class="header__notify-item header__notify-item--viewed">
+                        <a href="/buy/cart-orders" class="header__notify-link">Quản lý đơn hàng</a>
+                    </li>
+                    <li class="header__notify-item header__notify-item--viewed">
+                        <a href="/users/list-users" class="header__notify-link">Danh sách Account</a>
+                    </li>
+                    <li class="header__notify-item header__notify-item--viewed">
+                        <a href="/me/stored/items" class="header__notify-link">Danh sách sản phẩm</a>
+                    </li>
+                    <li class="header__notify-item header__notify-item--viewed">
+                        <p  class="logout header__notify-link" style="cursor: pointer;">Đăng xuất</p>
+                    </li>
+                </ul>` 
+        headerUserName.innerHTML=c
+        fontUserHeader.innerHTML=c 
+    }
+    let formLogOut = document.getElementById("formLogOut")
+    let logout =document.getElementsByClassName("logout");
+    logout[0].onclick = function(e) {
+        formLogOut.submit()
+    }
+    logout[1].onclick = function(e) {
+        formLogOut.submit()
+    }
+</script>
+
 
 
 </script>
