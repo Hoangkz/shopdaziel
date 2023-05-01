@@ -13,7 +13,7 @@ const cookieParser = require('cookie-parser')
 const swaggerUI = require("swagger-ui-express");
 const swaggerSpec = require("./swagger/swagger");
 
-
+console.log(process.env.PORT)
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
