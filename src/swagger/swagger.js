@@ -14,10 +14,10 @@ const option = {
         }]
     },
     apis: [
-        path.join(dirname, '/routes/API/authRouter.js'),
-        path.join(dirname, '/routes/API/userRouter.js'),
-        path.join(dirname, '/routes/API/itemsRouter.js'),
-        path.join(dirname, '/routes/API/buyRouter.js'),
+        path.join(dirname, '/routes/authRouter.js'),
+        path.join(dirname, '/routes/userRouter.js'),
+        path.join(dirname, '/routes/itemsRouter.js'),
+        path.join(dirname, '/routes/buyRouter.js'),
     ]
 }
 const swaggerSpec = swaggerJsDoc(option);
