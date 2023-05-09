@@ -114,8 +114,19 @@ class buyItemController{
     OrdersCart(req, res, next){
         //promise
         if (res.data.role==3){
-            BuyItem.find({buy:true}).sort({updatedAt: 'desc'})
-            .then(async(List_buyItems)=>{
+            let page =(parseInt(req.query.page)-1)||0;
+            let pageSize = 5
+            let search = req.query.search?.trim();
+            let regex = search ? new RegExp(search, 'i') : '';
+            let query = search ? {
+                $and: [
+                  { buy: true },
+                  { status: { $regex: regex } }
+                ]
+              } : { buy: true };
+            console.log(query)
+            Promise.all([BuyItem.find(query).sort({updatedAt: 'desc'}).skip(pageSize*page).limit(pageSize),BuyItem.countDocuments(query)])
+            .then(async([List_buyItems,total])=>{
                 let list_cart =[]
                 for(let i=0; i<List_buyItems.length;i++){
                     let cart = await Item.findById(List_buyItems[i]?.id_item)
@@ -139,13 +150,18 @@ class buyItemController{
                 // })
                 await res.render('items/cart-orders',{
                     data: res.data,
-                    list_cart:list_cart
+                    list_cart:list_cart,
+                    pageLength: (Math.ceil((total)/pageSize)),
+                    currentPage:(page+1),
+                    search
                 })
             })
         }
         else{
-            BuyItem.find({$and:[{id_user:res.data.id} ,{buy:true}]}).sort({updatedAt: 'desc'})
-            .then(async(List_buyItems)=>{
+            let page =(parseInt(req.query.page)-1)||0;
+            let pageSize = 5
+            Promise.all([BuyItem.find({$and:[{id_user:res.data.id} ,{buy:true}]}).sort({updatedAt: 'desc'}).skip(pageSize*page).limit(pageSize),BuyItem.countDocuments({$and:[{id_user:res.data.id} ,{buy:true}]})])
+            .then(async([List_buyItems,total])=>{
                 let list_cart =[]
                 for(let i=0; i<List_buyItems.length;i++){
                     let cart = await Item.findById(List_buyItems[i]?.id_item)
@@ -164,7 +180,9 @@ class buyItemController{
                 // })
                 await res.render('items/cart-orders',{
                     data: res.data,
-                    list_cart:list_cart
+                    list_cart:list_cart,
+                    pageLength: (Math.ceil((total)/pageSize)),
+                    currentPage:(page+1)
                 })
             })
         }

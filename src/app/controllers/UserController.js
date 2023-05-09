@@ -1,19 +1,37 @@
 const {hashPassword,checkPassword} = require('../../util/mongoose');
-const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
 const User = require('../modals/user');
-const {MongooseToObject, mutipleMongooseToObject,mongooseToGetLish} = require('../../util/mongoose');
+const {MongooseToObject, mutipleMongooseToObject} = require('../../util/mongoose');
 const nodemailer = require("nodemailer");
 
 class UserController{
 
     showLishUser(req,res, next){
-        User.find({})
+        let page =(parseInt(req.query.page)-1)||0;
+        let pageSize = 5
+        let search = req.query.search?.trim();
+        let query;
+        let regex = search ? new RegExp(search, 'i') : '';
+        if(search == "khách hàng"||search == "Khách hàng"){
+            query = search ? {role:1} : {};
+        }
+        else if(search == "Nhân viên"||search == "nhân viên"){
+            query = search ? {role:2} : {};
+        }
+        else if(search == "admin"||search == "Admin"){
+            query = search ? {role:3} : {};
+        }
+        else{
+            query = search ? {$or: [{username: { $regex: regex }},{fullname: { $regex: regex }},{extname: { $regex: regex }},{tell: { $regex: regex }}] } : {};
+        }
+        Promise.all([User.find(query).sort({updatedAt: 'desc'}).skip(pageSize*page).limit(pageSize),User.countDocuments(query)])
             // res.json(req.params.id)
-            .then(user => {
+            .then(([user,total]) => {
                 return res.render('users/listUser',{
                     user: mutipleMongooseToObject(user),
-                    data: res.data
+                    data: res.data,
+                    pageLength: (Math.ceil((total)/pageSize)),
+                    currentPage:(page+1),
+                    search
                 });
             })
             .catch(next) 

@@ -44,11 +44,19 @@ class MeController{
     }
 
     trashItem(req,res,next){
-        Item.findDeleted({}).sort({updatedAt: 'desc'})
+        let page =(parseInt(req.query.page)-1)||0;
+        let pageSize = 5
+        let search = req.query.search;
+        let regex = search ? new RegExp(search, 'i') : '';
+        let query = search ? { name: { $regex: regex } } : {};
+        Promise.all([Item.findDeleted(query).sort({updatedAt: 'desc'}).skip(pageSize*page).limit(pageSize),Item.countDocumentsDeleted(query)])
             // render ra file trash-courses.hbs
-            .then((items)=> res.render('items/trash-items',{
+            .then(([items,total])=> res.render('items/trash-items',{
                 items: mutipleMongooseToObject(items),
-                data:res.data
+                data:res.data,
+                pageLength: (Math.ceil((total)/pageSize)),
+                currentPage:(page+1),
+                search
             }))
             .catch(next)
     }
