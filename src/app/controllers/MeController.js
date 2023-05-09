@@ -8,13 +8,21 @@ class MeController{
     // [get] /me/stored/courses /: slug
     //deletedAt = null là điều kiện khi xoá xẽ không xoá hẳn trong database
     storedItem(req,res, next){
+        let page =(parseInt(req.query.page)-1)||0;
+        let pageSize = 5
+        let search = req.query.search;
+        let regex = search ? new RegExp(search, 'i') : '';
 
-        Promise.all([Item.find({}),Item.countDocumentsDeleted()])
-            .then(([items, deleteCount]) =>
+        let query = search ? { name: { $regex: regex } } : {};
+        Promise.all([Item.find(query).sort({updatedAt: 'desc'}).skip(pageSize*page).limit(pageSize),Item.countDocumentsDeleted(),Item.countDocuments(query)])
+            .then(([items, deleteCount,total]) =>
                 res.render("items/me",{
                     deleteCount,
                     items: mutipleMongooseToObject(items),
-                    data:res.data
+                    data:res.data,
+                    pageLength: (Math.ceil((total)/pageSize)),
+                    currentPage:(page+1),
+                    search
                 })
             )
             .catch(next);
@@ -36,7 +44,7 @@ class MeController{
     }
 
     trashItem(req,res,next){
-        Item.findDeleted({})
+        Item.findDeleted({}).sort({updatedAt: 'desc'})
             // render ra file trash-courses.hbs
             .then((items)=> res.render('items/trash-items',{
                 items: mutipleMongooseToObject(items),

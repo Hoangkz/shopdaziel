@@ -6,15 +6,14 @@ const {MongooseToObject, mutipleMongooseToObject,mongooseToGetLish} = require('.
 const { restore } = require('./ItemController');
 class buyItemController{
 
-    // [get] /home
     AddCart(req, res, next){
         if(req.body.id_buy){
             BuyItem.updateOne({_id: req.body.id_buy}, {buy:true,status:"Chờ giao hàng"})
             .then((data)=>{
-                return res.json({text:"Mua vật phẩm thành công!",bg:"linear-gradient(to right, blue, blue)"})
+                return res.json({text:"Mua vật phẩm thành công!",bg:"linear-gradient(to right, green, green)"})
             })
             .catch((error)=>{
-                return res.json({text:"Mua vật phẩm không công!",bg:"linear-gradient(to right, red, red)"})
+                return res.status(400).json({text:"Mua vật phẩm không công!",bg:"linear-gradient(to right, red, red)"})
             })
         }
         else{
@@ -24,16 +23,19 @@ class buyItemController{
                 .then(()=>{
     
                     if(req.body.buy){
-                        res.json({text:"Mua vật phẩm thành công!",bg:"linear-gradient(to right, blue, blue)"})
+                        res.status(200).json({text:"Mua vật phẩm thành công!",bg:"linear-gradient(to right, green, green)"})
                     }
                     else{
-                        res.json({text:"Thêm vật phẩm vào giỏ hàng thành công!",bg:"linear-gradient(to right, green, green)"})
+                        res.status(201).json({text:"Thêm vật phẩm vào giỏ hàng thành công!",bg:"linear-gradient(to right, green, green)"})
                     }
                 
                 })
+                .catch(()=>{
+                    res.status(500).json({text:"Lỗi server",bg:"linear-gradient(to right, red, red)"})
+                })
             }
             else{
-                res.json({text:"Hãy đăng nhập để thực hiện chức năng này!",bg:"linear-gradient(to right, red, red)"});
+                res.status(400).json({text:"Hãy đăng nhập để thực hiện chức năng này!",bg:"linear-gradient(to right, red, red)"});
             }
         }
     }
@@ -85,7 +87,7 @@ class buyItemController{
     }
     ShopCart(req, res, next){
         //promise
-        BuyItem.find({$and:[{id_user:res.data.id} ,{buy:false}]})
+        BuyItem.find({$and:[{id_user:res.data.id} ,{buy:false}]}).sort({updatedAt: 'desc'})
         .then(async(List_buyItems)=>{
             let list_cart =[]
             for(let i=0; i<List_buyItems.length;i++){
@@ -112,7 +114,7 @@ class buyItemController{
     OrdersCart(req, res, next){
         //promise
         if (res.data.role==3){
-            BuyItem.find({buy:true})
+            BuyItem.find({buy:true}).sort({updatedAt: 'desc'})
             .then(async(List_buyItems)=>{
                 let list_cart =[]
                 for(let i=0; i<List_buyItems.length;i++){
@@ -142,7 +144,7 @@ class buyItemController{
             })
         }
         else{
-            BuyItem.find({$and:[{id_user:res.data.id} ,{buy:true}]})
+            BuyItem.find({$and:[{id_user:res.data.id} ,{buy:true}]}).sort({updatedAt: 'desc'})
             .then(async(List_buyItems)=>{
                 let list_cart =[]
                 for(let i=0; i<List_buyItems.length;i++){

@@ -75,15 +75,15 @@ class ItemController {
         name = name.trim();
         data = {name,...data}
 
-        if(req.file.filename){
+        if(req.file?.filename){
             const img = "/uploads/"+ req.file.filename
-            data[img] = img
+            data = {img: img,...data}
         }
 
-        Item.updateOne({ _id: req.params.id }, {name,data})
+        Item.updateOne({ _id: req.params.id }, data)
             // redirect chuyển sang trang ....
-            .then(() => res.redirect('/me/stored/items'))
-            .catch(next)
+            .then(() => res.status(200).json({message:"Update sản phẩm thành công!"}))
+            .catch(()=>res.status(500).json({message:"lỗi server"}))
     }
 
     //PATCH /items/:id (restore)
@@ -119,8 +119,8 @@ class ItemController {
         
         const item = new Item(data);
         item.save()
-            .then(() => res.redirect('/me/stored/items'))
-            .catch(next);
+            .then(() => res.status(200).json({message:"Thêm vật phẩm thành công!"}))
+            .catch(()=>{res.status(500).json({message:"Lỗi server"})});
     }
 
 

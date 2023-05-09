@@ -85,9 +85,11 @@
         font-size: 1rem; 
         padding: 8px 20px;
         margin: 0;
-        z-index: 100;
     }
-
+    .header__notify-item{
+        position: relative;
+        z-index: 1;
+    }
     .header__notify-item:hover {
         background-color: #ebebeb;
 
@@ -391,11 +393,13 @@
     }
     let formLogOut = document.getElementById("formLogOut")
     let logout =document.getElementsByClassName("logout");
-    logout[0].onclick = function(e) {
-        formLogOut.submit()
-    }
-    logout[1].onclick = function(e) {
-        formLogOut.submit()
+    if(logout.length>0){
+        logout[0].onclick = function(e) {
+            formLogOut.submit()
+        }
+        logout[1].onclick = function(e) {
+            formLogOut.submit()
+        }
     }
 </script>
 

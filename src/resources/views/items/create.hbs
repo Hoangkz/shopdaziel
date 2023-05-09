@@ -6,7 +6,7 @@
 
 <div class="mt-16 w-75 container" style="padding-bottom:16px;">
     <h3>Đăng Sản Phẩm</h3>
-    <form method="POST" action="/items/store" enctype="multipart/form-data">
+    <form id="formCreate" method="POST" action="/items/store" enctype="multipart/form-data">
         <div class="form-group ">
             <label for="name">Tên sản phẩm</label>
             <input type="text" class="form-control" id="name" name="name" required>
@@ -63,4 +63,61 @@
 
 <script>
     $("#name").focus()
+</script>
+
+<script>
+    $("#formCreate").submit(e=>{
+        e.preventDefault();
+        let form = document.getElementById("formCreate");
+        let formData = new FormData(form);
+        $.ajax({
+            type: "POST",
+            url:`/items/store`,
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function (data) {
+                Toastify({
+                    text: "Thêm vật phẩm thành công!",
+                    duration: 2000,
+                    newWindow: true,
+                    //close: true,
+                    offset: {
+                    x: 50, // horizontal axis - can be a number or a string indicating unity. eg: '2em'
+                    y: 10, // vertical axis - can be a number or a string indicating unity. eg: '2em'
+                    },
+                    gravity: "top", // `top` or `bottom`
+                    position: "center", // `left`, `center` or `right`
+                    stopOnFocus: true, // Prevents dismissing of toast on hover
+                    style: {
+                    background: "linear-gradient(to right, green, green)",
+                    },
+                    onClick: function () { }, // Callback after click
+                }).showToast();
+                setTimeout(()=>{
+                    window.location.href = "/me/stored/items"
+                },2000)
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                Toastify({
+                    text: "Đã xảy ra lỗi, hãy thử lại sai!",
+                    duration: 2000,
+                    destination: "http://localhost:3000/",
+                    newWindow: true,
+                    //close: true,
+                    offset: {
+                    x: 50, // horizontal axis - can be a number or a string indicating unity. eg: '2em'
+                    y: 10, // vertical axis - can be a number or a string indicating unity. eg: '2em'
+                    },
+                    gravity: "top", // `top` or `bottom`
+                    position: "center", // `left`, `center` or `right`
+                    stopOnFocus: true, // Prevents dismissing of toast on hover
+                    style: {
+                    background: "linear-gradient(to right, red, red)",
+                    },
+                    onClick: function () { }, // Callback after click
+                }).showToast();
+            },
+        })
+    })
 </script>

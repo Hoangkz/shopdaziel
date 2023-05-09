@@ -7,7 +7,7 @@
 <div class="mt-4 w-75 container">
     {{!-- {{#each courses}} --}}
     <h3 class="text-info">{{item.name}}</h3>
-    <form class="mt-4" method="POST" action="/items/{{item._id}}?_method=PUT" enctype="multipart/form-data">
+    <form id="formEdit" class="mt-4" data-id="{{item._id}}"enctype="multipart/form-data">
         <div class="form-group">
             <label for="name">Tên sản phẩm</label>
             <input type="teaxt" class="form-control" value="{{item.name}}" id="name" name = "name" required>
@@ -50,7 +50,7 @@
 
         <div class="form-group">
             <label for="img">Ảnh sản phẩm</label>
-            <input style="display: block;" id="img" name="image" type="file" accept="image/*" required>
+            <input style="display: block;" id="img" name="image" type="file" accept="image/*">
         </div>
         <div class="form-group">
             <label for="gia">Đơn giá</label>
@@ -65,6 +65,63 @@
          <a href="/me/stored/items" class="btn btn-secondary text-light">Trở lại</a>
     </form>
     {{!-- {{/each}} --}}
+    <script>
+        const id =$("#formEdit")[0].getAttribute("data-id")
+        $("#formEdit").submit(e=>{
+            e.preventDefault();
+            let form = document.getElementById("formEdit");
+            let formData = new FormData(form);
+            $.ajax({
+                type: "POST",
+                url:`/items/${id}?_method=PUT`,
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function (data) {
+                    Toastify({
+                        text: "Update vật phẩm thành công!",
+                        duration: 2000,
+                        newWindow: true,
+                        //close: true,
+                        offset: {
+                        x: 50, // horizontal axis - can be a number or a string indicating unity. eg: '2em'
+                        y: 10, // vertical axis - can be a number or a string indicating unity. eg: '2em'
+                        },
+                        gravity: "top", // `top` or `bottom`
+                        position: "center", // `left`, `center` or `right`
+                        stopOnFocus: true, // Prevents dismissing of toast on hover
+                        style: {
+                        background: "linear-gradient(to right, green, green)",
+                        },
+                        onClick: function () { }, // Callback after click
+                    }).showToast();
+                    setTimeout(()=>{
+                        window.location.href = "/me/stored/items"
+                    },2000)
+                },
+                error: function (xhr, textStatus, errorThrown) {
+                    Toastify({
+                        text: "Đã xảy ra lỗi, hãy thử lại sai!",
+                        duration: 2000,
+                        destination: "http://localhost:3000/",
+                        newWindow: true,
+                        //close: true,
+                        offset: {
+                        x: 50, // horizontal axis - can be a number or a string indicating unity. eg: '2em'
+                        y: 10, // vertical axis - can be a number or a string indicating unity. eg: '2em'
+                        },
+                        gravity: "top", // `top` or `bottom`
+                        position: "center", // `left`, `center` or `right`
+                        stopOnFocus: true, // Prevents dismissing of toast on hover
+                        style: {
+                        background: "linear-gradient(to right, red, red)",
+                        },
+                        onClick: function () { }, // Callback after click
+                    }).showToast();
+                },
+            })
+        })
+    </script>
 </div>
 
 

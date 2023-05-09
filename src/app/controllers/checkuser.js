@@ -29,7 +29,7 @@ class getUser{
                 next();
             })
             .catch(error=>{
-                res.json("sai")
+                res.status(500).json("Lỗi server")
             })  
         } catch (error) {
             let data2 ={
@@ -57,11 +57,14 @@ class getUser{
     checkProfile(req,res,next){
         try {
             let checkuser = res.data.checkuser;
-            if(checkuser==1){
+            let fullname = res.data.fullname
+            let address = res.data.address
+            let tell= res.data.tell
+            if(checkuser==1&&fullname&&address&&tell){
                 next();
             }
             else{
-                res.json({error:"error"})
+                res.status(403).json({text:"Hãy nhập thông tin cá nhân",url:"/auth/user"})
             }
         } catch (error) {
             res.json({error:"error"})
@@ -76,11 +79,10 @@ class getUser{
                 next();
             })
             .catch(error=>{
-                res.json("sai")
+                res.status(500).json("Lỗi server")
             })  
         } catch (error) {
-            // res.json("sai")
-            res.redirect("/auth/login")
+            res.status(404).json({text:"Hãy đăng nhập để thực hiện chức năng này",url:"/auth/login"})
         }   
     }
 }
