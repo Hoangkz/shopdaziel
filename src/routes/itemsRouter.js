@@ -11,16 +11,16 @@ const upload = require('../app/multerController/index');
 
 //newcontroller.index
 
-router.get('/:id/edit',checkUser.getuser, itemController.edit);
+router.get('/:id/edit',checkUser.getuser,checkUser.checkAdmin, itemController.edit);
 router.get('/create',checkUser.getuser,checkUser.checkAdmin,itemController.create);
-router.post('/formAction', itemController.formAction);
+router.post('/formAction',checkUser.getuser,checkUser.checkAdmin, itemController.formAction);
 
-router.post('/store',upload.single('image'),  itemController.store);
-router.patch('/:id/restore', itemController.restore);
-router.put('/:id',upload.single('image'), itemController.update);
+router.post('/store',checkUser.getuser,checkUser.checkAdmin,upload.single('image'),  itemController.store);
+router.patch('/:id/restore',checkUser.getuser,checkUser.checkAdmin, itemController.restore);
+router.put('/:id',checkUser.getuser,checkUser.checkAdmin,upload.single('image'), itemController.update);
 
-router.delete('/:id/permanentlyDelete',checkUser.checkAdmin, itemController.permanentlyDelete);
-router.delete('/:id',checkUser.checkAdmin, itemController.delete);
+router.delete('/:id/permanentlyDelete',checkUser.getuser,checkUser.checkAdmin, itemController.permanentlyDelete);
+router.delete('/:id',checkUser.getuser,checkUser.checkAdmin, itemController.delete);
 
 
 router.get('/danhsachItem/items', itemController.listItems);
