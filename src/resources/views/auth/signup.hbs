@@ -279,6 +279,7 @@
 
 
     signup.addEventListener("click", function (e) {
+        e.preventDefault()
         if (passwordSignup1.value === passwordSignup2.value && passwordSignup1.value && passwordSignup2.value) {
             let authFormSign = document.getElementById("authFormSign");
             authFormSign.action = '/auth/signup' + '?_method=POST'
