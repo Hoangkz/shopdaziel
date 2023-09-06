@@ -13,7 +13,7 @@ const router = express.Router();
 router.use('/auth',authRouter)
 router.use('/user',userRouter)
 router.use('/items',itemsRouter)
-router.use('/buys',checkUser,buyRouter)
+router.use('/buys',buyRouter)
 router.use('/',homeRouter)
 module.exports = router;
 

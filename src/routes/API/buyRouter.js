@@ -16,6 +16,8 @@ router.post('/ship-carts',checkAdmin,buyItemController.ShipCarts);
 router.post('/cancel-order-carts',buyItemController.CancelCartOrder);
 router.get('/list-carts',buyItemController.CartItems);
 
+router.get('/momo',buyItemController.getQRCodeMoMo);
+router.get('/bidv',buyItemController.getQRCodeBIDV);
 
 /**
  * @swagger
