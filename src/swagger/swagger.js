@@ -9,15 +9,9 @@ const option = {
             description: 'API',
             version: '1.0.0'
         },
-        servers: [{
-            url: 'http://localhost:8000'
-        }]
+        basePath: '/api'
     },
-    apis: [
-        path.join(dirname, '/routes/authRouter.js'),
-        path.join(dirname, '/routes/userRouter.js'),
-        path.join(dirname, '/routes/itemsRouter.js'),
-        path.join(dirname, '/routes/buyRouter.js'),
+    apis: [`${dirname}/routes/API/*.js`,
     ]
 }
 const swaggerSpec = swaggerJsDoc(option);
