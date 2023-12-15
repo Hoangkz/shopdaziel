@@ -9,10 +9,11 @@ const option = {
             description: 'API',
             version: '1.0.0'
         },
-        basePath: '/api'
+        servers: [{
+            url: 'http://localhost:3000'
+        }]
     },
-    apis: [`${dirname}/routes/API/*.js`,
-    ]
+    apis: [`${dirname}/routes/API/*.js`]
 }
 const swaggerSpec = swaggerJsDoc(option);
 

@@ -23,14 +23,12 @@ class AuthController {
     //     }
     // }
     //đăng ký
-
     
     saveAccount(req, res, next) {
         console.log(req.body)
 
         let username = req.body.username;
         let password = req.body.password
-        console.log(username, password)
         const newUser = new user({ username: username, password: hashPassword(password) });
         user.findOne({ username: username })
             .then(data => {
